@@ -5,12 +5,13 @@ import com.AAACE.RUTidy.Users.User;
 import com.AAACE.RUTidy.Users.Admin;
 
 
-import java.lang.reflect.Array;
+
 import java.util.ArrayList;
 
 
 public class Group {
     /**
+     * @author Alessandro Gonzaga [amg573]
      * This is the Group class. It contains the following fields:
      * <ul>
      * <li>name</li>

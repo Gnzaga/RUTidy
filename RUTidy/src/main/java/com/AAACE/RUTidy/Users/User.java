@@ -1,8 +1,12 @@
+
+
+
 package com.AAACE.RUTidy.Users;
 
 public class User {
 
     /**
+     * @author Alessandro Gonzaga [amg573]
      * This is the User class. It contains the following fields:
      * <ul>
      * <li>firstName</li>

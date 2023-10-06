@@ -28,7 +28,7 @@ public class Admin extends User{
         super(name, email, password, username);
         this.permissionLevel = 0;
     }
-    Admin
+    
     //getters and setters
 
     /**
