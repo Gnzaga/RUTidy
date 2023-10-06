@@ -1,12 +1,13 @@
-
-
-
 package com.AAACE.RUTidy.Users;
 
-public class User {
+import java.util.ArrayList;
+import java.util.UUID;
 
-    /**
-     * @author Alessandro Gonzaga [amg573]
+import com.AAACE.RUTidy.Groups.Group;
+
+
+/**
+     * 
      * This is the User class. It contains the following fields:
      * <ul>
      * <li>firstName</li>
@@ -14,35 +15,45 @@ public class User {
      * <li>email</li>
      * <li>password</li>
      * <li>username</li>
-     * <li>permissionLevel</li>
      * </ul>
      * 
      * @param name
      * @param email
      * @param password
      * @param username
-     */  
-  
+     * 
+     * @author Alessandro Gonzaga [amg573]
+*/  
+
+public class User {
+
+    
     private String name;
     private String email;
     private String password;
     private String username;
-    private int permissionLevel; //0 for admin, 1 for user with manage, 2 for user without manage
-
-    //how can I handle a user being in multiple groups?
-    //-> I can have a list of groups that the user is in
-    //and then I can have a list of users in the group
-    //but what about different permission levels for each group?
-    //-> I can have a list of permission levels for each group
+    private int userID;
+    private ArrayList<Group> groups;
+    private ArrayList<String> pendingInvitations;
+  
     
-
+    /**
+     * This is the constructor for the User class.
+     * 
+     * @param name
+     * @param email
+     * @param password
+     * @param username
+     */
 
     public User(String name, String email, String password, String username){
         this.name = name;
         this.email = email;
         this.password = password;
         this.username = username;
-        this.permissionLevel = 2;
+        this.userID = UUID.randomUUID().hashCode();
+        this.groups = new ArrayList<Group>();
+        this.pendingInvitations = new ArrayList<String>();
     }
 
     //getters and setters
@@ -84,13 +95,35 @@ public class User {
     }
 
     /**
-     * This is the getter for the permissionLevel field.
+     * This is the getter for the userID field.
      *
-     * @return int permissionLevel
+     * @return int userID
      */
-    public int getPermissionLevel(){
-        return this.permissionLevel;
+
+    public int getUserID(){
+        return this.userID;
     }
+
+    /**
+     * This is the getter for the groups field.
+     *
+     * @return ArrayList<Group> groups
+     */
+
+    public ArrayList<Group> getGroups(){
+        return this.groups;
+    }
+
+    /**
+     * This is the getter for the pendingInvitations field.
+     *
+     * @return ArrayList<String> pendingInvitations
+     */
+
+    public ArrayList<String> getPendingInvitations(){
+        return this.pendingInvitations;
+    }
+
 
     /**
      *  This is the setter for the name field.
@@ -129,13 +162,34 @@ public class User {
     }
 
     /**
-     *  This is the setter for the permissionLevel field.
-     * @param permissionLevel
+     *  This is the method add a group to the list of joined groups.
+     * @param group
      */
 
-    public void setPermissionLevel(int permissionLevel){
-        this.permissionLevel = permissionLevel;
+    public void addGroup(Group group){
+        this.groups.add(group);
     }
+
+    /**
+     *  This is the method to remove a group from the list of joined groups.
+     * @param group
+     */
+
+    public void removeGroup(Group group){
+        this.groups.remove(group);
+    }
+
+    /**
+     * This is the method to create your own group
+     * @param name
+     */
+
+    public void createGroup(String name){
+        Group group = new Group(name, User.this );
+        this.groups.add(group);
+    }
+
+
 
     /**
      * This is the toString method for the User class.
