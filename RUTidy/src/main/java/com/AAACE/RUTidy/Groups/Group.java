@@ -3,9 +3,6 @@ package com.AAACE.RUTidy.Groups;
 //imports:
 import com.AAACE.RUTidy.Users.User;
 
-
-
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.UUID;
@@ -19,38 +16,80 @@ import java.util.UUID;
      * <li>admin</li>
      * </ul>
      * 
-     * @param name
-     * @param members
-     * @param admin
+     * @param name String
+     * @param members ArrayList<User>
+     * @param admin User
      * @author Alessandro Gonzaga [amg573]
      */
+
 public class Group {
 
-
+    /**
+     * These are the fields for the status of the invitation.
+     */
     final String NOT_SENT = "not sent";
     final String SENT = "sent";
     final String ACCEPTED = "accepted";
     final String REJECTED = "rejected";
 
-
+    /**
+     * This is the field for the groupID.
+     * It is generated upon the creation of agroup
+     */
     private int groupID;
     
+    /**
+     * This is the field for the name of the group.
+     * 
+     * This is the name of the group, it can be the same as other group names
+     */
     private String name;
 
+    /**
+     * This is the field for the members of the group.
+     * 
+     * This is a list of the members of the group, containing the owner
+     */
     private ArrayList<User> members;
 
+    /**
+     * This is the field for the pending members of the group.
+     * 
+     * when members are added they will be removed from this list
+     */
     private ArrayList<String> pendingMembers;
 
+
+    /**
+     * This is the field for the invitations sent to the group.
+     * 
+     */
     private HashMap<String, String> sentInvitations;
 
-    private User admin;
-
+    /**
+     * This is the field for the admin of the group.
+     */
+    private User owner;
+    
+    /**
+     * This is the field for the admin of the group.
+     *
+     * 0 for admin, 1 for user with manage, 2 for user without manage
+     */
     private HashMap<User, Integer> permissionLevels; //0 for admin, 1 for user with manage, 2 for user without manage
 
-    public Group(String name, ArrayList<User> members, User admin){
+    /**
+     * This is the constructor for the Group class.
+     * 
+     * @param name String
+     * @param members ArrayList<User> 
+     * @param admin User
+     */
+
+    public Group(String name, ArrayList<User> members, User owner){
         this.name = name;
         this.members = members;
-        this.admin = admin;
+        this.owner = owner;
         this.groupID = UUID.randomUUID().hashCode();
         this.pendingMembers = new ArrayList<String>();
         this.sentInvitations = new HashMap<String, String>();
@@ -58,20 +97,26 @@ public class Group {
 
     }
 
-    public Group(String name, User admin){
+
+    /**
+     * This is the constructor for the Group class.
+     * 
+     * @param name String
+     * @param owner User
+     */
+    public Group(String name, User owner){
         this.name = name;
-        this.admin = admin;
+        this.owner = owner;
         this.members = new ArrayList<User>();
-        this.members.add(admin);
+        this.members.add(owner);
         this.pendingMembers = new ArrayList<String>();
         this.sentInvitations = new HashMap<String, String>();
         this.permissionLevels = new HashMap<User, Integer>();
-        this.permissionLevels.put(admin, 0);
+        this.permissionLevels.put(owner, 0);
         this.groupID = UUID.randomUUID().hashCode();
-
     }
 
-    //getters and setters
+
 
     /**
      * This is the getter for the name field.
@@ -94,13 +139,13 @@ public class Group {
     }
 
     /**
-     * This is the getter for the admin field.
+     * This is the getter for the owner field.
      * 
-     * @return String admin
+     * @return User owner
      */
 
-    public User getAdmin(){
-        return this.admin;
+    public User getOwner(){
+        return this.owner;
     }
 
     /**
@@ -136,7 +181,7 @@ public class Group {
     /**
      * This is the setter for the name field.
      * 
-     * @param name
+     * @param name String
      */
 
     public void setName(String name){
@@ -146,7 +191,7 @@ public class Group {
     /**
      * This is the setter for the members field.
      * 
-     * @param members
+     * @param members ArrayList<User>
      */
 
     public void setMembers(ArrayList<User> members){
@@ -156,9 +201,13 @@ public class Group {
     /**
      * This is the method to add members to the group.
      * 
-     * @param member
+     * @param member User
      */
     public void addMember(User member){
+        if(this.members.contains(member)){
+            System.out.println("This user is already a member of this group.");
+            return;
+        }
         this.members.add(member);
         this.permissionLevels.put(member, 2);
     }
@@ -166,7 +215,7 @@ public class Group {
     /**
      * This is the method to grant a member admin privileges.
      * 
-     * @param member
+     * @param member User
      */
     public void grantAdmin(User member){
         if(this.members.contains(member)){
@@ -180,8 +229,9 @@ public class Group {
     /**
      * This is the method to grant a member manage privileges.
      * 
-     * @param member
+     * @param member User
      */
+     
     public void grantManage(User member){
         if(this.members.contains(member)){
             this.permissionLevels.put(member, 1);
@@ -196,7 +246,7 @@ public class Group {
     /**
      * This is the method to invite a member to the group
      * 
-     * @param memberEmail
+     * @param memberEmail String
      *
      */
     public void inviteMember(String memberEmail){
@@ -207,13 +257,26 @@ public class Group {
     /**
      * This is the method to accept a member to the group
      * 
-     * @param memberEmail
-     * @param member
+     * @param memberEmail String
+     * @param member User
      *
      */
-    public void acceptInvitation(String memberEmail, User member){
-        this.pendingMembers.remove(memberEmail);
-        this.sentInvitations.put(memberEmail, ACCEPTED);
+    public void acceptInvitation(User member){
+        if(sentInvitations.get(member.getEmail()) != SENT ||
+            !this.pendingMembers.contains(member.getEmail())){
+            System.out.println("This user has not been invited to this group.");
+            return;
+        }
+        else if(sentInvitations.get(member.getEmail()) == ACCEPTED){
+            System.out.println("This user has already accepted the invitation.");
+            return;
+        }
+        else if(sentInvitations.get(member.getEmail()) == REJECTED){
+            System.out.println("This user has already rejected the invitation.");
+            return;
+        }
+        this.pendingMembers.remove(member.getEmail());
+        this.sentInvitations.put(member.getEmail(), ACCEPTED);
         this.members.add(member);
     }
 
@@ -245,18 +308,30 @@ public class Group {
      *
      */
     public void removeMember(User member){
-        this.members.remove(member);
+        if(members.contains(member)){
+            this.members.remove(member);
+            this.permissionLevels.remove(member);
+        }
+        else{
+            System.out.println("{member} is not a member of this group.");
+        }
     }
     
     /**
-     * This is the setter for the admin field.
+     * This is the setter for the owner field
      * 
-     * @param admin
+     * @param owner
      */
-
-    public void setAdmin(User admin){
-        this.admin = admin;
+    public void setOwner(User owner){
+        if(this.members.contains(owner)){
+            this.owner = owner;
+        }
+        else{
+            System.out.println("{owner} is not a member of this group.");
+        }
     }
+
+
 
     /**
      * This is the toString method for the Group class.
@@ -265,7 +340,7 @@ public class Group {
      */
 
     public String toString(){
-        return "Group: " + this.name + "\nMembers: " + this.members + "\nAdmin: " + this.admin;
+        return "Group: " + this.name + "\nMembers: " + this.members + "\nOwner: " + this.owner;
     }
 
 
