@@ -35,10 +35,17 @@ public class ConnectToDB {
         System.out.println("\nThe pass check is : " + a);
 
         User temp = new User("Kyle Joe", "ky@gmail", "54", "kyler10");
-        db.addUser(temp);   
+        //db.addUser(temp);   
+        System.out.println("Email temp@temp exist in db: " + db.isEmailInUse("temp@temp"));
+        System.out.println("Email tememp exist in db: " + db.isEmailInUse("tememp"));
+
+        System.out.println("Username ari12 exist in db: " + db.isUsernameInUse("ari12"));
+        System.out.println("Username tememp exist in db: " + db.isUsernameInUse("tememp"));
+        
       
     }
     */
+    
     //returns an arraylists of all the users in the DB
     public ArrayList<User> getAllUsers() throws Exception
     {
@@ -113,6 +120,44 @@ public class ConnectToDB {
         st.executeUpdate();
         st.close();
         } 
+        catch (SQLException se)
+        {
+         // log exception
+         throw se;
+        }
+    }
+    // returns true if given email is in already in DB false otherwise
+    public boolean isEmailInUse(String email) throws SQLException
+    {
+        try
+        {
+            Statement statement = conn.createStatement();
+            ResultSet result = statement.executeQuery("SELECT * FROM Users WHERE Email = '" + email + "'");
+            if(result.next())
+            {
+                return true;
+            }
+            else return false;
+        }
+        catch (SQLException se)
+        {
+         // log exception
+         throw se;
+        }
+    }
+    // returns true if given username is in DB false otherwise
+    public boolean isUsernameInUse(String username) throws SQLException
+    {
+        try
+        {
+            Statement statement = conn.createStatement();
+            ResultSet result = statement.executeQuery("SELECT * FROM Users WHERE Username = '" + username + "'");
+            if(result.next())
+            {
+                return true;
+            }
+            else return false;
+        }
         catch (SQLException se)
         {
          // log exception
