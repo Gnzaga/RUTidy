@@ -15,7 +15,11 @@ export default function Login(props){
             setError("Please enter both a username and password!");
             return;
         }
-
+        const response = await fetch("http://localhost:8080/user/login", {
+            method: "POST",
+            headers: {"Content-Type": "application/json"},
+            body: JSON.stringify({username, password})
+        });
         setUsername("");
         setPassword("");
     }

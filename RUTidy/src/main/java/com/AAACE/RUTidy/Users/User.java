@@ -3,7 +3,13 @@ package com.AAACE.RUTidy.Users;
 import java.util.ArrayList;
 import java.util.UUID;
 
-import com.AAACE.RUTidy.Groups.Group;
+//import com.AAACE.RUTidy.Groups.Group;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 
 
 /**
@@ -25,17 +31,30 @@ import com.AAACE.RUTidy.Groups.Group;
      * @author Alessandro Gonzaga [amg573]
 */  
 
+@Entity
+@Table(name = "Users")
 public class User {
 
-    
+    @Column(name = "name", length=255)
     private String name;
+
+    @Column(name = "email", length=255)
     private String email;
+
+    @Column(name = "password", length=255)
     private String password;
+
+    @Column(name = "username", length=25)
     private String username;
+    
+    @Id
+    @Column(name = "userID", length=255)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int userID;
-    private ArrayList<Group> groups;
-    private ArrayList<String> pendingInvitations;
-  
+    
+    //private ArrayList<Group> groups;
+    //private ArrayList<String> pendingInvitations;
+
     
     /**
      * This is the constructor for the User class.
@@ -46,14 +65,16 @@ public class User {
      * @param username
      */
 
+
+
     public User(String name, String email, String password, String username){
         this.name = name;
         this.email = email;
         this.password = password;
         this.username = username;
         this.userID = UUID.randomUUID().hashCode();
-        this.groups = new ArrayList<Group>();
-        this.pendingInvitations = new ArrayList<String>();
+        //this.groups = new ArrayList<Group>();
+        //this.pendingInvitations = new ArrayList<String>();
     }
 
     //getters and setters
@@ -108,22 +129,23 @@ public class User {
      * This is the getter for the groups field.
      *
      * @return ArrayList<Group> groups
-     */
+     
 
     public ArrayList<Group> getGroups(){
         return this.groups;
     }
-
+    */
     /**
      * This is the getter for the pendingInvitations field.
      *
      * @return ArrayList<String> pendingInvitations
      */
 
+     /**
     public ArrayList<String> getPendingInvitations(){
         return this.pendingInvitations;
     }
-
+    */
 
     /**
      *  This is the setter for the name field.
@@ -164,7 +186,7 @@ public class User {
     /**
      *  This is the method add a group to the list of joined groups.
      * @param group
-     */
+     
 
     public void addGroup(Group group){
         this.groups.add(group);
@@ -173,22 +195,23 @@ public class User {
     /**
      *  This is the method to remove a group from the list of joined groups.
      * @param group
-     */
+     
 
     public void removeGroup(Group group){
         this.groups.remove(group);
     }
+    */
 
     /**
      * This is the method to create your own group
      * @param name
-     */
+     
 
     public void createGroup(String name){
         Group group = new Group(name, User.this );
         this.groups.add(group);
     }
-
+    */
 
 
     /**

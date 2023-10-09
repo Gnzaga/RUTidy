@@ -1,4 +1,3 @@
-package com.AAACE.RUTidy.Groups;
 
 //imports:
 import com.AAACE.RUTidy.Users.User;
