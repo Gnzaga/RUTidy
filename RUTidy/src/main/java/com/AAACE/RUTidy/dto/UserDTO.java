@@ -1,4 +1,4 @@
-package com.AAACE.RUTidy.Users;
+package com.AAACE.RUTidy.dto;
 
 public class UserDTO {
     private int userID;

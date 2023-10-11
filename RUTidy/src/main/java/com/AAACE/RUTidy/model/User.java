@@ -1,4 +1,4 @@
-package com.AAACE.RUTidy.Users;
+package com.AAACE.RUTidy.model;
 
 import java.util.ArrayList;
 import java.util.UUID;
