@@ -17,12 +17,16 @@ public class UserImplementation implements UserService{
     
     @Autowired
     private UserRepository userRepository;
-    
-    //TODO: Implement password hashing
+
     @Autowired
     private PasswordEncoder passwordEncoder;
 
-    public String addUser(UserDTO userDTO) {
+//TODO: There is little distinction betweeen the handling of emails and usernames. This should be fixed. or at least commented on
+    public LoginResponse addUser(UserDTO userDTO) {
+
+        if(userRepository.findByEmail(userDTO.getEmail()).isPresent()) {
+            return new LoginResponse("Email already in use", null);
+        }
 
         User user = new User(
             userDTO.getName(),
@@ -31,23 +35,30 @@ public class UserImplementation implements UserService{
             userDTO.getUsername()
         );
 
-
+        System.out.println(user.getPassword());
         userRepository.save(user);
-        return user.getName();
+        return new LoginResponse("Account Created!", user);
     }
 
     UserDTO userDTO;
 
   
     public LoginResponse login(LoginDTO loginDTO) {
-        Optional<User> optionalUser = userRepository.findByUsernameAndPassword(loginDTO.getEmail(), loginDTO.getPassword());
-        
+        Optional<User> optionalUser = userRepository.findByEmail(loginDTO.getEmail());
+        System.out.println("Login PW: " + loginDTO.getPassword());
+        if(optionalUser.isEmpty()) {
+            optionalUser = userRepository.findByUsername(loginDTO.getEmail());
+        }
+
         if (optionalUser.isEmpty()) {
+
             return new LoginResponse("User not found", null);
         }
         User user = optionalUser.get();
         if (this.passwordEncoder.matches(loginDTO.getPassword(), user.getPassword())) {
+
             return new LoginResponse("Login successful", user);
+
         }
         return new LoginResponse("Incorrect password", null);
     }

@@ -1,11 +1,17 @@
 package com.AAACE.RUTidy.dto;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
+
 public class UserDTO {
     private int userID;
     private String name;
     private String email;
     private String password;
     private String username;
+    
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     public UserDTO() {
     }
@@ -14,7 +20,7 @@ public class UserDTO {
         this.userID = userID;
         this.name = name;
         this.email = email;
-        this.password = password;
+        this.password =this.passwordEncoder.encode(password);
         this.username = username;
     }
 

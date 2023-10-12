@@ -76,6 +76,17 @@ public class User {
         //this.groups = new ArrayList<Group>();
         //this.pendingInvitations = new ArrayList<String>();
     }
+    //default constructor
+
+    public User(){
+        this.name = "";
+        this.email = "";
+        this.password = "";
+        this.username = "";
+        this.userID = UUID.randomUUID().hashCode();
+        //this.groups = new ArrayList<Group>();
+        //this.pendingInvitations = new ArrayList<String>();
+    }
 
     //getters and setters
 

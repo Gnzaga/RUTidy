@@ -3,8 +3,9 @@ package com.AAACE.RUTidy.service;
 import com.AAACE.RUTidy.dto.LoginDTO;
 import com.AAACE.RUTidy.dto.LoginResponse;
 import com.AAACE.RUTidy.dto.UserDTO;
+import com.mysql.jdbc.log.Log;
 
 public interface UserService {
-    String addUser(UserDTO user);
+    LoginResponse addUser(UserDTO user);
     LoginResponse login(LoginDTO login);
 }
