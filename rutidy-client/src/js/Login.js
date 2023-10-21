@@ -26,14 +26,14 @@ export default function Login(props){
             }
 
             sessionStorage.setItem("name", user.name);
-            sessionStorage.setItem("email", user.password);
+            sessionStorage.setItem("email", user.email);
             sessionStorage.setItem("username", user.username)
             sessionStorage.setItem("userID", user.userID);
 
             setError("");
             setUsername("");
             setPassword("");
-            // navigate("/home");
+            navigate("/profile");
 
             console.log("name: " + sessionStorage.getItem("name"));
         })
