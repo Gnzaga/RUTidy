@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 import {useNavigate} from "react-router-dom";
-import "../css/Login.css";
+import "../css/Profile.css";
 import axios from "axios";
 
 
@@ -14,17 +14,39 @@ export default function Profile(props){
 
     return (
         <div className = "profilePage">
-            <h1>Sign up</h1>
-                <label for="profileUsername">Username:</label>
-                <input className = "profileUsername" value = {username} type="username"></input>
+            <div className = "profileForm">
+            <h1>Profile Information</h1>
+            <br></br>
+            <table className="profileTable">
+                    <tr>
+                        <td className="profileTD">
+                            <label>Username:</label>
+                        </td>
+                        <td className="profileTDLeft">
+                            <label>{username}</label>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td className="profileTD">
+                            <label>Email:</label>
+                        </td>
+                        <td className="profileTDLeft">
+                            <label>{email}</label>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td className="profileTD">
+                            <label>Name:</label>
+                        </td>
+                        <td className="profileTDLeft">
+                            <label>{name}</label>
+                        </td>
+                    </tr>
+                </table>
                 <br></br>
-                <label for="profileEmail">Email:</label>
-                <input value = {email} className = "profileEmail" type = "email"></input>
-                <br></br>
-                <label for="profileName">Name:</label>
-                <input value = {name} className = "profileName" placeholder = "name"></input>
-                <p onClick = {() => navigate("/")}className = "editProfile">Click here to edit profile information or set a new password!</p>
+                <p onClick = {() => navigate("/editProfile")}className = "editProfile">Click here to edit profile information or set a new password!</p>
                 {error !== "" && <h3 className = "errorMessage">{error}</h3>}
+            </div>
         </div>
     );
 }
