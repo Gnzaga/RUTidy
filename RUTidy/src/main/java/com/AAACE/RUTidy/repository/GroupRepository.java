@@ -17,9 +17,5 @@ public interface GroupRepository extends JpaRepository <Group, Integer> {
     //find all group of name
     List<Group> findByName(String name);
 
-    //find all groups of admin
-    List<Group> findByAdmin(int adminID);
-
-    //find all groups of member
-    List<Group> findByMembers(int memberID);
+    
 }

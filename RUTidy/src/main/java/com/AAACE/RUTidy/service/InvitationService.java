@@ -2,9 +2,6 @@ package com.AAACE.RUTidy.service;
 
 import com.AAACE.RUTidy.model.Invitation;
 
-import com.AAACE.RUTidy.dto.LoginDTO;
-import com.AAACE.RUTidy.dto.LoginResponse;
-import com.AAACE.RUTidy.dto.UserDTO;
 import com.mysql.jdbc.log.Log;
 
 import java.util.List;
