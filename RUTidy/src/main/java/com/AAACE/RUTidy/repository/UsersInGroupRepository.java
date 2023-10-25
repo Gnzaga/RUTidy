@@ -7,7 +7,6 @@ import org.springframework.stereotype.Repository;
 
 import com.AAACE.RUTidy.model.UsersInGroup;
 
-import java.util.Optional;
 import java.util.List;
 
 @EnableJpaRepositories
@@ -15,5 +14,5 @@ import java.util.List;
 public interface UsersInGroupRepository extends JpaRepository<UsersInGroup, Integer> {
     List<UsersInGroup> findByGroupGroupID(int groupID);
     List<UsersInGroup> findByUserUserID(int userID);
-    List<UsersInGroup> findByGroupGroupIDAndUserUserID(int groupID, int userID);
+    List<UsersInGroup> findByGroupIDAndUserID(int groupID, int userID);
 }

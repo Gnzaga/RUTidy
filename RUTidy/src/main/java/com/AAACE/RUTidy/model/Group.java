@@ -82,7 +82,6 @@ public class Group {
     public Group(String name, ArrayList<User> members, User owner){
         this.name = name;
         this.owner = owner;
-        this.groupID = UUID.randomUUID().hashCode();
     }
 
 
@@ -95,7 +94,6 @@ public class Group {
     public Group(String name, User owner){
         this.name = name;
         this.owner = owner;
-        this.groupID = UUID.randomUUID().hashCode();
     }
 
 

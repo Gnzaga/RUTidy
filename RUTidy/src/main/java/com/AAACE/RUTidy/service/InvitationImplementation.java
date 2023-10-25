@@ -30,7 +30,7 @@ public class InvitationImplementation implements InvitationService{
     }
 
     public List<Invitation> getGroupsInvitations(int groupID) {
-        return invitationRepository.(groupID);
+        return invitationRepository.findByGroupID(groupID);
     }
 
     public Invitation addInvitation(Invitation invitation) {

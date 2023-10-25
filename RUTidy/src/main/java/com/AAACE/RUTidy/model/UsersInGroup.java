@@ -87,6 +87,14 @@ public class UsersInGroup {
         return this.group;
     }
 
+    public int getRoles(){
+        return this.roles;
+    }
+
+    public void setRoles(int roles){
+        this.roles = roles;
+    }
+
     /**
      * This is the toString method for the Group class.
      * 

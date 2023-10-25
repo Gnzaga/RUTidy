@@ -33,7 +33,7 @@ export default function Login(props){
             setError("");
             setUsername("");
             setPassword("");
-            // navigate("/home");
+            navigate("/home");
 
             console.log("name: " + sessionStorage.getItem("name"));
         })
