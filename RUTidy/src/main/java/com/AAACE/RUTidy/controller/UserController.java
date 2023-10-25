@@ -1,10 +1,15 @@
-package com.AAACE.RUTidy.Users;
+package com.AAACE.RUTidy.controller;
 
 
-import com.AAACE.RUTidy.Controllers.LoginResponse;  
+import com.AAACE.RUTidy.dto.LoginDTO;
+import com.AAACE.RUTidy.dto.LoginResponse;
+import com.AAACE.RUTidy.dto.UserDTO;
+import com.AAACE.RUTidy.service.UserService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -12,14 +17,14 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 @RestController
 @CrossOrigin
-@RequestMapping("/user")
+@RequestMapping(value = "/user", method={RequestMethod.GET , RequestMethod.POST} )
 public class UserController {
 
-    //@Autowired
+    @Autowired
     private UserService userService;
 
     @PostMapping(path = "/save")
-    public String saveUser(@RequestBody UserDTO userDTO) {
+    public LoginResponse saveUser(@RequestBody UserDTO userDTO) {
         return userService.addUser(userDTO);
     }  
 

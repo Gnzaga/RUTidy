@@ -1,6 +1,6 @@
-package com.AAACE.RUTidy.Controllers;
+package com.AAACE.RUTidy.dto;
 
-import com.AAACE.RUTidy.Users.User;
+import com.AAACE.RUTidy.model.User;
 public class LoginResponse {
     String message;
     User user;

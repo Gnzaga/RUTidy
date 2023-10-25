@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import Login from "./js/Login";
 import Signup from "./js/Signup";
+import Home from "./js/Home";
 import {BrowserRouter, Routes, Route} from "react-router-dom";
 
 
@@ -11,6 +12,7 @@ root.render(
     <Routes>
       <Route path = "/" element = {<Login />}></Route>
       <Route path = "/signup" element = {<Signup />}></Route>
+      <Route path = "/home" element = {<Home/>}></Route>
     </Routes>
   </BrowserRouter>
 );

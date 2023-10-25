@@ -1,6 +1,7 @@
-package com.AAACE.RUTidy.Users;
+package com.AAACE.RUTidy.dto;
 
-
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 /**
  * This is the DTO for the login request.
  * 
@@ -9,12 +10,15 @@ public class LoginDTO {
     private String email;
     private String password;
 
+  
+
     public LoginDTO() {
     }
 
     public LoginDTO(String email, String password) {
         this.email = email;
         this.password = password;
+        System.out.println("LoginDTO PW: " + this.password);
     }
 
     /**
@@ -24,16 +28,6 @@ public class LoginDTO {
      */
     public String getEmail(){
         return this.email;
-    }
-
-    /**
-     * This is the setter for the email field.
-     * 
-     * @param email
-     */
-
-    public void setEmail(String email){
-        this.email = email;
     }
 
     /**

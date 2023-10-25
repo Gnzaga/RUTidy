@@ -1,5 +1,6 @@
 import React, {useState} from "react";
 import {useNavigate} from "react-router-dom";
+import axios from "axios";
 import "../css/Login.css";
 
 
@@ -15,13 +16,31 @@ export default function Login(props){
             setError("Please enter both a username and password!");
             return;
         }
-        const response = await fetch("http://localhost:8080/user/login", {
-            method: "POST",
-            headers: {"Content-Type": "application/json"},
-            body: JSON.stringify({username, password})
-        });
-        setUsername("");
-        setPassword("");
+        
+        axios.post("http://cs431-01.cs.rutgers.edu:8080/user/login", {"email": username, password})
+        .then((response) => {
+            const {message, user} = response.data;
+            if (message !== "Login successful") { 
+                setError(message);
+                return;
+            }
+
+            sessionStorage.setItem("name", user.name);
+            sessionStorage.setItem("email", user.password);
+            sessionStorage.setItem("username", user.username)
+            sessionStorage.setItem("userID", user.userID);
+
+            setError("");
+            setUsername("");
+            setPassword("");
+            navigate("/home");
+
+            console.log("name: " + sessionStorage.getItem("name"));
+        })
+        .catch((error) => {
+            setError("An unexpecter error occured!");
+            return;
+        })
     }
 
     return (

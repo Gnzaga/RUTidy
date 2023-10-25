@@ -45,7 +45,15 @@
 
 .loginUsername { 
     margin-top: 30px;
-    margin-bottom: 30px;
+    margin-bottom: 10px;
+}
+
+.loginPassword { 
+    margin-bottom: 10px;
+}
+
+.signUpEmail { 
+    margin-bottom: 10px;
 }
 
 .signUp { 

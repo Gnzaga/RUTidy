@@ -1,20 +1,24 @@
-package com.AAACE.RUTidy.Users;
+package com.AAACE.RUTidy.dto;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 public class UserDTO {
-    private int userID;
     private String name;
     private String email;
     private String password;
     private String username;
+    
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     public UserDTO() {
     }
 
-    public UserDTO(int userID, String name, String email, String password, String username) {
-        this.userID = userID;
+    public UserDTO(String name, String email, String password, String username) {
         this.name = name;
         this.email = email;
-        this.password = password;
+        this.password =this.passwordEncoder.encode(password);
         this.username = username;
     }
 
@@ -90,17 +94,6 @@ public class UserDTO {
     public void setUsername(String username){
         this.username = username;
     }
-
-    /**
-     * This is the getter for the userID field.
-     * 
-     * @return int userID
-     */
-    public int getUserID(){
-        return this.userID;
-    }
-
-    // no setter for user id
 
 
     

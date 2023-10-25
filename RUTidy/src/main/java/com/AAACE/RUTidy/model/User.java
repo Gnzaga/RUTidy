@@ -1,5 +1,6 @@
-package com.AAACE.RUTidy.Users;
+package com.AAACE.RUTidy.model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.UUID;
 
@@ -33,15 +34,15 @@ import jakarta.persistence.GenerationType;
 
 @Entity
 @Table(name = "Users")
-public class User {
+public class User implements Serializable{
 
-    @Column(name = "name", length=255)
+    @Column(name = "`name`", length=255)
     private String name;
 
     @Column(name = "email", length=255)
     private String email;
 
-    @Column(name = "password", length=255)
+    @Column(name = "`password`", length=255)
     private String password;
 
     @Column(name = "username", length=25)
@@ -72,6 +73,17 @@ public class User {
         this.email = email;
         this.password = password;
         this.username = username;
+        this.userID = UUID.randomUUID().hashCode();
+        //this.groups = new ArrayList<Group>();
+        //this.pendingInvitations = new ArrayList<String>();
+    }
+    //default constructor
+
+    public User(){
+        this.name = "";
+        this.email = "";
+        this.password = "";
+        this.username = "";
         this.userID = UUID.randomUUID().hashCode();
         //this.groups = new ArrayList<Group>();
         //this.pendingInvitations = new ArrayList<String>();
@@ -181,6 +193,14 @@ public class User {
 
     public void setUsername(String username){
         this.username = username;
+    }
+
+    /**
+     * Setter for id
+     * @param id new id
+     */
+    public void setId(int id){
+        this.userID = id;
     }
 
     /**
