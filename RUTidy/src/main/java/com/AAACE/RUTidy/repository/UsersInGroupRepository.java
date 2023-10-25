@@ -13,7 +13,7 @@ import java.util.List;
 @EnableJpaRepositories
 @Repository
 public interface UsersInGroupRepository extends JpaRepository<UsersInGroup, Integer> {
-    List<UsersInGroup> findByGroupGroupID(int groupID);
+    List<UsersInGroup> findByGroupID(int groupID);
     List<UsersInGroup> findByUserUserID(int userID);
-    List<UsersInGroup> findByGroupGroupIDAndUserUserID(int groupID, int userID);
+    List<UsersInGroup> findByGroupIDAndUserUserID(int groupID, int userID);
 }
