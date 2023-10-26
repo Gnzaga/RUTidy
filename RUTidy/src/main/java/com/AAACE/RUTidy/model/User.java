@@ -50,8 +50,8 @@ public class User implements Serializable{
     
     @Id
     @Column(name = "userID", length=255)
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private int userID;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int ID;
     
     //private ArrayList<Group> groups;
     //private ArrayList<String> pendingInvitations;
@@ -73,7 +73,7 @@ public class User implements Serializable{
         this.email = email;
         this.password = password;
         this.username = username;
-        this.userID = UUID.randomUUID().hashCode();
+        this.ID = UUID.randomUUID().hashCode();
         //this.groups = new ArrayList<Group>();
         //this.pendingInvitations = new ArrayList<String>();
     }
@@ -84,7 +84,7 @@ public class User implements Serializable{
         this.email = "";
         this.password = "";
         this.username = "";
-        this.userID = UUID.randomUUID().hashCode();
+        this.ID = UUID.randomUUID().hashCode();
         //this.groups = new ArrayList<Group>();
         //this.pendingInvitations = new ArrayList<String>();
     }
@@ -134,7 +134,7 @@ public class User implements Serializable{
      */
 
     public int getUserID(){
-        return this.userID;
+        return this.ID;
     }
 
     /**
@@ -200,7 +200,7 @@ public class User implements Serializable{
      * @param id new id
      */
     public void setId(int id){
-        this.userID = id;
+        this.ID = id;
     }
 
     /**

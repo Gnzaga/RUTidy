@@ -12,7 +12,7 @@ import java.util.List;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToMany;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import jakarta.persistence.Column;
 import jakarta.persistence.OneToMany;
@@ -20,6 +20,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
+import jakarta.persistence.FetchType;
 
     /**
 
@@ -40,20 +41,20 @@ import jakarta.persistence.GenerationType;
 public class UsersInGroup {
 
     @Id
-    @Column
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "UIGroupID", length=255)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int UIGroupID;
 
-    @ManyToOne
-    @JoinColumn(name = "groupID")
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name = "groupID", referencedColumnName = "groupID")
     private Group group;
 
     @Column(name = "roles", length=255)
-    private int roles; //0 = user, 1 = user with manage, 2 = admin
+    private int roles;
 
 
-    @ManyToOne
-    @JoinColumn(name = "userID")
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name = "userID", referencedColumnName = "userID")
     private User user;
     
 
@@ -72,14 +73,12 @@ public class UsersInGroup {
 
     /**
      * This is the default constructor for the Group class.
-     */ 
-
-    public UsersInGroup(){
-        this.group = null;
-        this.user = null;
+     */
+    public UsersInGroup() {
+        this.group = new Group();
+        this.user = new User();
         this.UIGroupID = UUID.randomUUID().hashCode();
     }
-
 
 
 

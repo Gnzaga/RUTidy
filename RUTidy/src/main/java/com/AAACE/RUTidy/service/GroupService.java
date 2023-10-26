@@ -71,17 +71,15 @@ public class GroupService {
         User owner = optionalUser.get();
 
         //create group object
-        Group newGroup = new Group(
-            groupDTO.getName(),
-            owner
-        );
+        Group newGroup = new Group(groupDTO.getName(),owner);
+
+        //save group to DB
+        
+        groupRepository.save(newGroup);
 
         UsersInGroup userInGroup = new UsersInGroup( newGroup, owner );
 
-
-        //save group to DB
-        this.usersGroupRepository.save(userInGroup);
-        this.groupRepository.save(newGroup);
+        //usersGroupRepository.save(userInGroup);
 
         return new Response("group_created", newGroup);
 

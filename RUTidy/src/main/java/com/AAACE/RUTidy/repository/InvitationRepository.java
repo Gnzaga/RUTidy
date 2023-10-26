@@ -21,6 +21,6 @@ public interface InvitationRepository extends JpaRepository<Invitation, Integer>
     //gets specific invite
     Optional<Invitation> findByEmailAndGroup(String email, Group group);
 
-    void deleteInvitation(Invitation invitation);
+    void deleteByInvitationID(int invitationID);
 
 }
