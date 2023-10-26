@@ -27,7 +27,9 @@ public class UserImplementation implements UserService{
         if(userRepository.findByEmail(userDTO.getEmail()).isPresent()) {
             return new LoginResponse("Email already in use", null);
         }
-
+        if(userRepository.findByUsername(userDTO.getUsername()).isPresent()) {
+            return new LoginResponse("Username already in use", null);
+        }
 
         User user = new User(
             userDTO.getName(),
@@ -48,6 +50,7 @@ public class UserImplementation implements UserService{
         Optional<User> optionalUser = userRepository.findByEmail(loginDTO.getEmail());
         System.out.println("Login username: " + loginDTO.getEmail());
         System.out.println("Login PW: " + loginDTO.getPassword());
+        
         if(optionalUser.isEmpty()) {
             optionalUser = userRepository.findByUsername(loginDTO.getEmail());
         }
