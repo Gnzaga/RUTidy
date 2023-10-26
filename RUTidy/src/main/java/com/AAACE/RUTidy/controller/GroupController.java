@@ -38,12 +38,7 @@ public class GroupController {
     public Response addUserToGroup(@RequestBody UserInGroupDTO userInGroupDTO) {
         return usersInGroupService.addUserToGroup(userInGroupDTO);
     }
-    //create a post test for this add to group function:
-    // {
-    //     "email": "test@test",
-    //     "password": "test",
-    //     "groupID": 1
-    // }
+
 
    
 

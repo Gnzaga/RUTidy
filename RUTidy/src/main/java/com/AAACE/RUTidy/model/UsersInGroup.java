@@ -76,7 +76,7 @@ public class UsersInGroup {
 
     public UsersInGroup(){
         this.group = null;
-        this,.user = null;
+        this.user = null;
         this.UIGroupID = UUID.randomUUID().hashCode();
     }
 
