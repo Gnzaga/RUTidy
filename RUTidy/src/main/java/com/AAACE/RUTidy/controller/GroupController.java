@@ -1,13 +1,9 @@
 package com.AAACE.RUTidy.controller;
 
 
-import com.AAACE.RUTidy.dto.LoginDTO;
-import com.AAACE.RUTidy.dto.LoginResponse;
-import com.AAACE.RUTidy.dto.Response;
-import com.AAACE.RUTidy.dto.UserDTO;
-import com.AAACE.RUTidy.service.UserService;
-import com.AAACE.RUTidy.dto.GroupDTO;
-import com.AAACE.RUTidy.service.GroupService;
+import com.AAACE.RUTidy.dto.*;
+import com.AAACE.RUTidy.service.*;
+import com.AAACE.RUTidy.model.*;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,10 +26,27 @@ public class GroupController {
     @Autowired
     private GroupService groupService;
 
+    @Autowired
+    private UsersInGroupService usersInGroupService;
+
     @PostMapping(path = "/create")
     public Response createGroup(@RequestBody GroupDTO groupDTO) {
         return groupService.createGroup(groupDTO);
     }  
+
+    @PostMapping(path = "/addToGroup")
+    public Response addUserToGroup(@RequestBody UserInGroupDTO userInGroupDTO) {
+        return usersInGroupService.addUserToGroup(userInGroupDTO);
+    }
+    //create a post test for this add to group function:
+    // {
+    //     "email": "test@test",
+    //     "password": "test",
+    //     "groupID": 1
+    // }
+
+   
+
 /** 
     @PostMapping(path = "/login")
     public LoginResponse login(@RequestBody LoginDTO loginDTO) {

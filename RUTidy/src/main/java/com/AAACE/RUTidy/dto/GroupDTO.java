@@ -6,6 +6,11 @@ public class GroupDTO{
     
     private String name;
     private int ownerID;
+    /**
+     * This is the groupID field.
+     * -1 indicates no groupID given
+     */
+    private int groupID;
     
     /**
      * This is the constructor for the GroupDTO class.
@@ -15,8 +20,24 @@ public class GroupDTO{
     public GroupDTO(String name, int ownerID){
         this.name = name;
         this.ownerID = ownerID;
+        this.groupID = -1;
     }
 
+    /**
+     * This is the constructor for the GroupDTO class.
+     * @param name
+     * @param ownerID
+     * @param groupID
+     */
+    public GroupDTO(String name, int ownerID, int groupID){
+        this.name = name;
+        this.ownerID = ownerID;
+        this.groupID = groupID;
+    }
+
+    /**
+     * This is the default constructor for the GroupDTO class.
+     */
     public GroupDTO() {
     }
 
@@ -57,7 +78,12 @@ public class GroupDTO{
         this.ownerID = ownerID;
     }
 
-
-
-
+    /**
+     * This is the getter for the groupID field.
+     * 
+     * @return int groupID
+     */
+    public int getGroupID(){
+        return this.groupID;
+    }
 }
