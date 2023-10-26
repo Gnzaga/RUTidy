@@ -33,7 +33,6 @@ import jakarta.persistence.GenerationType;
      * @param name String
      * @param members ArrayList<User>
      * @param admin User
-     * @author Alessandro Gonzaga [amg573]
      */
 @Entity
 @Table(name = "Groups")
@@ -50,8 +49,8 @@ public class Group {
      */
     @Id
     @Column(name = "groupID", length=255)
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private int groupID;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int ID;
     
     /**
      * This is the field for the name of the group.
@@ -82,6 +81,8 @@ public class Group {
     public Group(String name, ArrayList<User> members, User owner){
         this.name = name;
         this.owner = owner;
+        this.ID = UUID.randomUUID().hashCode();
+
     }
 
 
@@ -94,6 +95,17 @@ public class Group {
     public Group(String name, User owner){
         this.name = name;
         this.owner = owner;
+        this.ID = UUID.randomUUID().hashCode();
+    }
+
+    /**
+     * This is the default constructor for the Group class.
+     * 
+     */
+    public Group(){
+        this.name = "";
+        this.owner = null;
+        this.ID = UUID.randomUUID().hashCode();
     }
 
 
@@ -134,8 +146,8 @@ public class Group {
      * @return int groupID
      */
 
-    public int getGroupID(){
-        return this.groupID;
+    public int getID(){
+        return this.ID;
     }
 
 

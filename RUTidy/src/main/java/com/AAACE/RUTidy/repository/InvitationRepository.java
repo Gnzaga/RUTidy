@@ -1,9 +1,11 @@
 package com.AAACE.RUTidy.repository;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.stereotype.Repository;
 
 import com.AAACE.RUTidy.model.Invitation;
+import com.AAACE.RUTidy.model.Group;
 
 import java.util.Optional;
 import java.util.List;
@@ -17,8 +19,8 @@ public interface InvitationRepository extends JpaRepository<Invitation, Integer>
     List<Invitation> findByGroupID(int groupID);
 
     //gets specific invite
-    Optional<Invitation> findByEmailAndGroup(String email, int groupID);
+    Optional<Invitation> findByEmailAndGroup(String email, Group group);
 
-    void deleteInvitation(String email, int groupID);
+    void deleteInvitation(Invitation invitation);
 
 }

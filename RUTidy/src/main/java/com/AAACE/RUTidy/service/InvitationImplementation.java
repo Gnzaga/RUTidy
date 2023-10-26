@@ -2,8 +2,11 @@ package com.AAACE.RUTidy.service;
 
 import org.springframework.stereotype.Service;
 
+import com.AAACE.RUTidy.repository.GroupRepository;
 import com.AAACE.RUTidy.repository.InvitationRepository;
 import com.AAACE.RUTidy.model.Invitation;
+import com.AAACE.RUTidy.model.Group;
+import com.AAACE.RUTidy.dto.Response;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,8 +20,18 @@ public class InvitationImplementation implements InvitationService{
     @Autowired
     private InvitationRepository invitationRepository;
 
+    @Autowired
+    private GroupRepository groupRepository;
+
     public Invitation getInvitation(String email, int groupID) {
-        Optional<Invitation> optionalInvitation = invitationRepository.findByEmailAndGroup(email, groupID);
+        Optional<Group> optionalGroup = groupRepository.findByID(groupID);
+        if(optionalGroup.isEmpty()) {
+            return null;
+        }
+        Group group = optionalGroup.get();
+
+        Optional<Invitation> optionalInvitation = invitationRepository.findByEmailAndGroup(email, group);
+
         if(optionalInvitation.isEmpty()) {
             return null;
         }
@@ -40,10 +53,11 @@ public class InvitationImplementation implements InvitationService{
     public Invitation updateInvitation(Invitation invitation) {
         return invitationRepository.save(invitation);
     }
-
-    public void deleteInvitation(String email, int groupID) {
-        invitationRepository.deleteInvitation(email, groupID);
+/**
+    public void deleteInvitation(Invitation invitationID) {
+        invitationRepository.deleteInvitation(invitationID);
     }
+    */
 
 
 

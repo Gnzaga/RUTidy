@@ -49,7 +49,7 @@ public class UsersInGroup {
     private Group group;
 
     @Column(name = "roles", length=255)
-    private int roles;
+    private int roles; //0 = user, 1 = user with manage, 2 = admin
 
 
     @ManyToOne
@@ -69,6 +69,17 @@ public class UsersInGroup {
         this.user = user;
         this.UIGroupID = UUID.randomUUID().hashCode();
     }
+
+    /**
+     * This is the default constructor for the Group class.
+     */ 
+
+    public UsersInGroup(){
+        this.group = null;
+        this.user = null;
+        this.UIGroupID = UUID.randomUUID().hashCode();
+    }
+
 
 
 

@@ -32,6 +32,8 @@ public class GroupController {
         return new ResponseEntity<List<Group>>(groups, HttpStatus.ACCEPTED);
     }
 
+    
+
     @GetMapping("/in")
     public ResponseEntity<List<UsersInGroup>> getGroupsIn(@RequestParam int userID){
         List<UsersInGroup> list = this.service.getGroupsIn(userID);

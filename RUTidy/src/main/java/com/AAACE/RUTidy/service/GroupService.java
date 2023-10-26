@@ -1,11 +1,14 @@
 package com.AAACE.RUTidy.service;
 
+
 import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.AAACE.RUTidy.dto.GroupDTO;
+import com.AAACE.RUTidy.dto.Response;
 import com.AAACE.RUTidy.model.Group;
 import com.AAACE.RUTidy.model.User;
 import com.AAACE.RUTidy.model.UsersInGroup;
@@ -26,7 +29,7 @@ public class GroupService {
     private UserRepository userRepository;
 
     public List<UsersInGroup> getGroupsIn(int userID){
-        List<UsersInGroup> list = this.usersGroupRepository.findByUserUserID(userID);
+        List<UsersInGroup> list = this.usersGroupRepository.findByUserID(userID);
         return list;
     }
 
@@ -38,7 +41,7 @@ public class GroupService {
         Optional<User> user = this.userRepository.findById(userID);
         if (user.isEmpty()) return "User not found!";
 
-        Optional<Group> group = this.groupRepository.findByGroupID(groupID);
+        Optional<Group> group = this.groupRepository.findByID(groupID);
         if (group.isEmpty()) return "No group found!";
 
         if (this.usersGroupRepository.findByGroupIDAndUserID(groupID, userID) != null){
@@ -55,5 +58,34 @@ public class GroupService {
     public void leaveGroup(int UIGroupID){
         this.usersGroupRepository.deleteById(UIGroupID);
     }
+
+    public Response createGroup(GroupDTO groupDTO){
+        //search for the user in the DB
+        Optional<User> optionalUser = userRepository.findByID(groupDTO.getOwnerID());
+        
+        //ensures user exists ( they should, but just in case)
+        if( optionalUser.isEmpty() ){
+            return new Response("User not found", null);
+        }
+        //create user object
+        User owner = optionalUser.get();
+
+        //create group object
+        Group newGroup = new Group(
+            groupDTO.getName(),
+            owner
+        );
+
+        UsersInGroup userInGroup = new UsersInGroup( newGroup, owner );
+
+
+        //save group to DB
+        this.usersGroupRepository.save(userInGroup);
+        this.groupRepository.save(newGroup);
+
+        return new Response("group_created", newGroup);
+
+    }
     
 }
+
