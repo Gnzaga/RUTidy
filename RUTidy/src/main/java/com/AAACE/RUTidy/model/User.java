@@ -1,7 +1,5 @@
 package com.AAACE.RUTidy.model;
 
-import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.UUID;
 
 //import com.AAACE.RUTidy.Groups.Group;

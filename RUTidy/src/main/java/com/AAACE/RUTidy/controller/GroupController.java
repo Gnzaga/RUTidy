@@ -28,11 +28,13 @@ public class GroupController {
     @Autowired
     private UsersInGroupService usersInGroupService;
 
+    /* to be used when invitations are implemented properly
     @Autowired
     private InvitationService invitationService;
+    */
 
 // EXAMPLE
-/// /group/name?groupName={groupName}
+// /group/name?groupName={groupName}
     @GetMapping("/name")
     public ResponseEntity<List<Group>> getGroupsByName(@RequestParam String groupName){
         List<Group> groups = this.service.findGroupByName(groupName);

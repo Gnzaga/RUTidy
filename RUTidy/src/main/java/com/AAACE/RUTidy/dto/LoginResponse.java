@@ -18,9 +18,7 @@ public class LoginResponse {
     }
     public User getUser() {
         return user;
-    }
-    public void setStatus(User status) {
-        this.user = user;
-    }
+   }
+ 
    
 }

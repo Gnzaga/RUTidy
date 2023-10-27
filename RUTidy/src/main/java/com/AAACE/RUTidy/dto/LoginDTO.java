@@ -1,7 +1,4 @@
 package com.AAACE.RUTidy.dto;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.password.PasswordEncoder;
 /**
  * This is the DTO for the login request.
  * 

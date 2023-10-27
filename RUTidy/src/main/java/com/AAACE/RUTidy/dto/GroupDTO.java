@@ -1,7 +1,4 @@
 package com.AAACE.RUTidy.dto;
-
-import org.springframework.beans.factory.annotation.Autowired;
-
 public class GroupDTO{
     
     private String name;
