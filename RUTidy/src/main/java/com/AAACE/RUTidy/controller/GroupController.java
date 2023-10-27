@@ -74,6 +74,15 @@ public class GroupController {
         }
     }
 
+    @GetMapping("/listUsersinGroup")
+    public ResponseEntity<List<User>> getUsersInGroup(@RequestParam int groupID){
+        List<User> list = this.service.findUsersInGroup(groupID);
+
+        if (list.size() == 0 || list == null){
+            return new ResponseEntity<List<User>>(list, HttpStatus.BAD_REQUEST);
+        }
+        return new ResponseEntity<List<User>>(list, HttpStatus.ACCEPTED);
+    }
     /* EXAMPLE:
     {
         "name" : "{GroupName}",
@@ -95,5 +104,6 @@ public class GroupController {
     public Response addUserToGroup(@RequestBody UserInGroupDTO userInGroupDTO) {
         return usersInGroupService.addUserToGroup(userInGroupDTO);
     }
+
 
 }

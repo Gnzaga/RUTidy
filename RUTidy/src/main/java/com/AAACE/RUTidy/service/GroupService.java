@@ -3,6 +3,7 @@ package com.AAACE.RUTidy.service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -38,6 +39,14 @@ public class GroupService {
 
     public List<Group> findGroupByName(String name){
         return this.groupRepository.findByName(name);
+    }
+
+    public List<User> findUsersInGroup(int groupID){
+        List<UsersInGroup> usersInGroup = this.usersGroupRepository.findByGroupGroupID(groupID);
+
+     return usersInGroup.stream().map(UsersInGroup::getUser).collect(Collectors.toList());
+
+        
     }
 
     public String joinGroup(int groupID, int userID){
@@ -91,6 +100,8 @@ public class GroupService {
         return new Response("group_created", newGroup);
 
     }
+
+
     
 }
 
