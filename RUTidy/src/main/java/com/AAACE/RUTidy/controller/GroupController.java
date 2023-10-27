@@ -73,8 +73,9 @@ public class GroupController {
             return new Response("Error!", null);
         }
     }
-
-    @GetMapping("/listUsersinGroup")
+// EXAMPLE
+// http://localhost:8080/group/listUsersInGroup?groupID={GROUPID}
+    @GetMapping("/listUsersInGroup")
     public ResponseEntity<List<User>> getUsersInGroup(@RequestParam int groupID){
         List<User> list = this.service.findUsersInGroup(groupID);
 
