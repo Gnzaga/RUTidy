@@ -17,7 +17,7 @@ export default function Login(props){
             return;
         }
         
-        axios.post("http://cs431-01.cs.rutgers.edu:8080/user/login", {"email": username, password})
+        axios.post("http://localhost:8080/user/login", {"email": username, password})
         .then((response) => {
             const {message, user} = response.data;
             if (message !== "Login successful") { 
@@ -26,14 +26,14 @@ export default function Login(props){
             }
 
             sessionStorage.setItem("name", user.name);
-            sessionStorage.setItem("email", user.email);
+            sessionStorage.setItem("email", user.password);
             sessionStorage.setItem("username", user.username)
             sessionStorage.setItem("userID", user.userID);
 
             setError("");
             setUsername("");
             setPassword("");
-            navigate("/profile");
+            navigate("/home");
 
             console.log("name: " + sessionStorage.getItem("name"));
         })
