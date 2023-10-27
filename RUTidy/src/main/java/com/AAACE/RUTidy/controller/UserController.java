@@ -34,7 +34,11 @@ public class UserController {
         return loginResponse;
     }
 
-
+    @PostMapping(path = "/update")
+    public LoginResponse updateUser(@RequestBody UserDTO userDTO, int userID) {
+        LoginResponse loginResponse = userService.updateUser(userDTO, userID);
+        return loginResponse;
+    }
     
 
 }

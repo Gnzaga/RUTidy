@@ -67,4 +67,23 @@ public class UserImplementation implements UserService{
         }
         return new LoginResponse("Incorrect password", null);
     }
+
+    public LoginResponse updateUser(UserDTO userDTO, int userID) {
+        if(userRepository.findByEmail(userDTO.getEmail()).get().getUserID() != userID) {
+            return new LoginResponse("Email already in use", null);
+        }
+        if(userRepository.findByUsername(userDTO.getUsername()).get().getUserID() != userID) {
+            return new LoginResponse("Username already in use", null);
+        }
+
+        User user = new User(
+            userDTO.getName(),
+            userDTO.getEmail(),
+            this.passwordEncoder.encode(userDTO.getPassword()),
+            userDTO.getUsername()
+        );
+
+        userRepository.save(user);
+        return new LoginResponse("Account Updated!", user);
+    }
 }

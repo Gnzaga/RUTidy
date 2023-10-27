@@ -24,22 +24,23 @@ export default function EditProfile(props){
             return;
         }
 
-        //must edit to update info
-
-        /*axios.post("http://cs431-01.cs.rutgers.edu:8080/editprofile/user/save", {username, password, name, email})
+        axios.post("http://cs431-01.cs.rutgers.edu:8080/editprofile/user/update", {username, password, name, email}, sessionStorage.getItem("userID"))
         .then((response) => { 
             const {message} = response.data;
-            if (message !== "Account Created!"){
+            if (message !== "Account Updated!"){
                 setError(message);
                 return;
             }
-            navigate("/");
+            sessionStorage.setItem("name", user.name);
+            sessionStorage.setItem("email", user.email);
+            sessionStorage.setItem("username", user.username);
+
+            navigate("/profile");
         })
         .catch((error) => { 
             setError("An unexpected error occured!");
             return;
         })
-        */
         
     }
 
