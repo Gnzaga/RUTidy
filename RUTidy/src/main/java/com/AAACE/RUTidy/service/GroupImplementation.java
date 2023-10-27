@@ -56,6 +56,11 @@ public class GroupImplementation implements GroupService {
         return list;
     }
 
+    public List<UsersInGroup> getUsersIn(int groupID){
+        List<UsersInGroup> list = usersInGroupRepository.findByGroupID(groupID);
+        return list;
+    }
+
     public List<Group> findGroupByName(String name){
         return this.groupRepository.findByName(name);
     }

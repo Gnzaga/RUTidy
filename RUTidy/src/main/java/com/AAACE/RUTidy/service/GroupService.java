@@ -19,6 +19,7 @@ public interface GroupService {
     Response createGroup(GroupDTO group);
     Response updateUserPermission(UserInGroupDTO userInGroupDTO, int role);
     List<UsersInGroup> getGroupsIn(int userID);
+    List<UsersInGroup> getUsersIn(int groupID);
     List<Group> findGroupByName(String name);
     String joinGroup(int groupID, int userID);
     void leaveGroup(int UIGroupID);

@@ -66,6 +66,15 @@ public class GroupController {
         return new ResponseEntity<List<UsersInGroup>>(list, HttpStatus.ACCEPTED);
     }
 
+    @GetMapping("/usersIn")
+    public ResponseEntity<List<UsersInGroup>> getUsersIn(@RequestParam int groupID){
+        List<UsersInGroup> list = groupService.getUsersIn(groupID);
+        if (list.size() == 0 || list == null){
+            return new ResponseEntity<List<UsersInGroup>>(list, HttpStatus.BAD_REQUEST);
+        }
+        return new ResponseEntity<List<UsersInGroup>>(list, HttpStatus.ACCEPTED);
+    }
+
     @PutMapping("/join")
     public ResponseEntity<String> joinGroup(@RequestParam int groupID, @RequestParam int userID){
         String message = groupService.joinGroup(groupID, userID);
