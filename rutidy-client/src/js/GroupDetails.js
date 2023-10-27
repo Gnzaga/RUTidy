@@ -7,7 +7,7 @@ export default function GroupDetails(props){
     const [newRoles, setNewRoles] = useState("");
     const [currentRole, setCurrentRole] = useState("");
 
-    const [userInGroup, setuserInGroup] = useState("");
+    const [usersInGroup, setusersInGroup] = useState("");
     const [group, setGroup] = useState("");
 
     const handleRoleChange = (UIGroupID, newRoles) => {
@@ -24,6 +24,17 @@ export default function GroupDetails(props){
         })
     }
 
+    useEffect(() => {
+        axios.get("http://localhost:8080/group/usersIn", null, {params: {"groupID": sessionStorage.getItem("groupID")}})
+        .then((response) => {
+            const usersInGroup = response.data;
+        })
+        .catch((error) => {
+            setusersInGroup([]);
+        })
+
+    }, []);
+
     return(
         <div className='groupDetails'>
             <div className='groupDetailsForm'>
@@ -38,7 +49,7 @@ export default function GroupDetails(props){
                         </tr>
                     </thead>
                     <tbody>
-                        {userInGroup.map((user) => (
+                        {usersInGroup.map((user) => (
                             <tr key={user.id}>
                                 <td>{user.name}</td>
                                 <td>
