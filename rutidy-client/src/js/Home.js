@@ -43,7 +43,7 @@ export default function Home (){
 
         await axios.delete("http://localhost:8080/group/leave", null, {params: {"UIGroupID": id}})
         .then((response) => {
-            setPopUpSuccess(true);
+            setPopUpMessage(true);
             setPopUpMessage("Successfully left group!");
         })
         .catch((error) => {
@@ -95,7 +95,6 @@ export default function Home (){
                 <div className = "homeNavigationButtonDiv">
                     <button onClick = {() => navigate("/edit/profile")}>Edit Profile</button>
                     <button onClick = {() => navigate("/create/group")}>Create Group</button>
-                    <button onClick = {() => navigate("/groupdetails")}>Group Details</button>
                 </div>
                 <h2 onClick = {handleLogout} className = "homeLogout">logout</h2>
             </div>
@@ -106,6 +105,7 @@ export default function Home (){
                     return (
                         <div className = "homePageGroupDiv">
                             <h3 className = "homeGroupName">{group.name}</h3>
+                            <button onClick = {() => navigate("/groupdetails")}>Group Details</button>
                             <p>Leave group</p>
                         </div>
                     )

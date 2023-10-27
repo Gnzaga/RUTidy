@@ -3,12 +3,23 @@ import axios from 'axios';
 import "../css/GroupDetails.css";
 
 export default function GroupDetails(props){
+
+    const [userID, setUserID] = useState(sessionStorage.getItem("userID"));
     const [error, setError] = useState("");
     const [newRoles, setNewRoles] = useState("");
-    const [currentRole, setCurrentRole] = useState("");
 
-    const [usersInGroup, setusersInGroup] = useState("");
-    const [group, setGroup] = useState("");
+    const [usersInGroup, setUsersInGroup] = useState([]);
+    const [group, setGroup] = useState([]);
+
+    useEffect(() => {
+        axios.get("http://localhost:8080/group/usersIn", null, {params: {"groupID": sessionStorage.getItem("groupID")}})
+        .then((response) => {
+            const usersInGroup = response.data;
+        })
+        .catch((error) => {
+            setUsersInGroup([]);
+        })
+    }, []);
 
     const handleRoleChange = (UIGroupID, newRoles) => {
 
@@ -24,17 +35,6 @@ export default function GroupDetails(props){
         })
     }
 
-    useEffect(() => {
-        axios.get("http://localhost:8080/group/usersIn", null, {params: {"groupID": sessionStorage.getItem("groupID")}})
-        .then((response) => {
-            const usersInGroup = response.data;
-        })
-        .catch((error) => {
-            setusersInGroup([]);
-        })
-
-    }, []);
-
     return(
         <div className='groupDetails'>
             <div className='groupDetailsForm'>
@@ -45,7 +45,7 @@ export default function GroupDetails(props){
                         <tr>
                             <th>Name</th>
                             <th>Role</th>
-                            {currentRole === 0 && <th>Change Role</th>}
+                            <th>Change Role</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -53,17 +53,15 @@ export default function GroupDetails(props){
                             <tr key={user.id}>
                                 <td>{user.name}</td>
                                 <td>
-                                {currentRole === 0 && (
-                                    <form method="post" onSubmit={(e) => handleRoleChange(user.id, e.target.value)}>
-                                        <select value={newRoles} onChange = {(e) => setNewRoles(e.target.value)}>
-                                        <option value="0">Admin</option>
-                                        <option value="1">Manage</option>
-                                        <option value="2">Member</option>
-                                    </select>
-                                    <button type="submit">Save Roles</button>
-                                    {error !== "" && <h3 className = "errorMessage">{error}</h3>}
-                                    </form>  
-                                )}
+                                <form method="post" onSubmit={(e) => handleRoleChange(user.id, e.target.value)}>
+                                    <select value={newRoles} onChange = {(e) => setNewRoles(e.target.value)}>
+                                    <option value="0">Admin</option>
+                                    <option value="1">Manage</option>
+                                    <option value="2">Member</option>
+                                </select>
+                                <button type="submit">Save Roles</button>
+                                {error !== "" && <h3 className = "errorMessage">{error}</h3>}
+                                </form> 
                                 </td>
                                 <td>
                                 </td>
