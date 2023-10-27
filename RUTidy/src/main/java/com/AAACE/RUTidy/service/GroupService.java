@@ -29,7 +29,10 @@ public class GroupService {
     private UserRepository userRepository;
 
     public List<UsersInGroup> getGroupsIn(int userID){
-        List<UsersInGroup> list = this.usersGroupRepository.findByUserID(userID);
+        List<UsersInGroup> list = this.usersGroupRepository.findByUserUserID(userID);
+        for(int i = 0; i < list.size(); i++){
+            System.out.println(list.get(i).getGroup().getName());
+        }
         return list;
     }
 
@@ -41,10 +44,10 @@ public class GroupService {
         Optional<User> user = this.userRepository.findById(userID);
         if (user.isEmpty()) return "User not found!";
 
-        Optional<Group> group = this.groupRepository.findByID(groupID);
+        Optional<Group> group = this.groupRepository.findByGroupID(groupID);
         if (group.isEmpty()) return "No group found!";
 
-        if (this.usersGroupRepository.findByGroupIDAndUserID(groupID, userID) != null){
+        if (this.usersGroupRepository.findByGroupGroupIDAndUserUserID(groupID, userID) != null){
             return "User already in group!";
         }
 
@@ -61,9 +64,14 @@ public class GroupService {
 
     public Response createGroup(GroupDTO groupDTO){
         //search for the user in the DB
-        Optional<User> optionalUser = userRepository.findByID(groupDTO.getOwnerID());
+        System.out.println(groupDTO.getGroupID());
+        System.out.println(groupDTO.getName());
+        System.out.println(groupDTO.getOwnerID());
+
+        Optional<User> optionalUser = userRepository.findByUserID(groupDTO.getOwnerID());
         
         //ensures user exists ( they should, but just in case)
+        System.out.println(optionalUser);
         if( optionalUser.isEmpty() ){
             return new Response("User not found", null);
         }
@@ -71,16 +79,15 @@ public class GroupService {
         User owner = optionalUser.get();
 
         //create group object
-        Group newGroup = new Group(groupDTO.getName(),owner);
+        Group newGroup = new Group(
+            groupDTO.getName(),
+            owner
+        );
 
         //save group to DB
-        
         groupRepository.save(newGroup);
-
-        UsersInGroup userInGroup = new UsersInGroup( newGroup, owner );
-
-        //usersGroupRepository.save(userInGroup);
-
+        UsersInGroup temp = new UsersInGroup(newGroup,owner);
+        usersGroupRepository.save(temp);
         return new Response("group_created", newGroup);
 
     }

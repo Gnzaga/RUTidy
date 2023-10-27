@@ -24,7 +24,7 @@ public class InvitationImplementation implements InvitationService{
     private GroupRepository groupRepository;
 
     public Invitation getInvitation(String email, int groupID) {
-        Optional<Group> optionalGroup = groupRepository.findByID(groupID);
+        Optional<Group> optionalGroup = groupRepository.findByGroupID(groupID);
         if(optionalGroup.isEmpty()) {
             return null;
         }

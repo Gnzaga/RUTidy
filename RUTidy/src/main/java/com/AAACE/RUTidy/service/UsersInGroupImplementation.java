@@ -32,8 +32,8 @@ public class UsersInGroupImplementation implements UsersInGroupService{
         int userID = userInGroupDTO.getUserID();
         int groupID = userInGroupDTO.getGroupID();
         //check if user and group exist
-        Optional<User> optionalUser = userRepository.findByID(userID);
-        Optional<Group> optionalGroup = groupRepository.findByID(groupID);
+        Optional<User> optionalUser = userRepository.findByUserID(userID);
+        Optional<Group> optionalGroup = groupRepository.findByGroupID(groupID);
 
         if(optionalUser.isEmpty()){
             return new Response("User not found", null);
@@ -47,7 +47,7 @@ public class UsersInGroupImplementation implements UsersInGroupService{
         Group group = optionalGroup.get();
 
         //check if user is already in group
-        Optional<UsersInGroup> optionalUsersInGroup = usersInGroupRepository.findByGroupIDAndUserID(group.getGroupID(), user.getUserID());
+        Optional<UsersInGroup> optionalUsersInGroup = usersInGroupRepository.findByGroupGroupIDAndUserUserID(group.getGroupID(), user.getUserID());
 
         if(optionalUsersInGroup.isPresent()){
             return new Response("User already in group", null);

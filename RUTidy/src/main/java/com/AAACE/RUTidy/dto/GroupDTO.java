@@ -29,11 +29,13 @@ public class GroupDTO{
      * @param ownerID
      * @param groupID
      */
+    /** 
     public GroupDTO(String name, int ownerID, int groupID){
         this.name = name;
         this.ownerID = ownerID;
         this.groupID = groupID;
     }
+    */
 
     /**
      * This is the default constructor for the GroupDTO class.

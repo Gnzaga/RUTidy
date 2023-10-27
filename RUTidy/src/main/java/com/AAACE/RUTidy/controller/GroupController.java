@@ -31,18 +31,21 @@ public class GroupController {
     @Autowired
     private InvitationService invitationService;
 
-
+// EXAMPLE
+/// /group/name?groupName={groupName}
     @GetMapping("/name")
     public ResponseEntity<List<Group>> getGroupsByName(@RequestParam String groupName){
         List<Group> groups = this.service.findGroupByName(groupName);
         if (groups.size() == 0 || groups == null){
             return new ResponseEntity<List<Group>>(groups, HttpStatus.BAD_REQUEST);
         }
+
         return new ResponseEntity<List<Group>>(groups, HttpStatus.ACCEPTED);
     }
 
     
-
+// EXAMPLE
+// /group/in?userID={userID}
     @GetMapping("/in")
     public ResponseEntity<List<UsersInGroup>> getGroupsIn(@RequestParam int userID){
         List<UsersInGroup> list = this.service.getGroupsIn(userID);
@@ -51,24 +54,43 @@ public class GroupController {
         }
         return new ResponseEntity<List<UsersInGroup>>(list, HttpStatus.ACCEPTED);
     }
-
-
+// EXAMPLE
+// http://localhost:8080/group/join?groupID={GROUPID}&userID={USERID}
     @PutMapping("/join")
     public ResponseEntity<String> joinGroup(@RequestParam int groupID, @RequestParam int userID){
         String message = this.service.joinGroup(groupID, userID);
         return new ResponseEntity<String>(message, HttpStatus.ACCEPTED);
     }
-
+// EXAMPLE
+// http://localhost:8080/group/leave?UIGroupID={UIGROUPID}
     @DeleteMapping("/leave")
-    public void leaveGroup(@RequestParam int UIGroupID){
-        this.service.leaveGroup(UIGroupID);
+    public Response leaveGroup(@RequestParam int UIGroupID){
+        try{
+            this.service.leaveGroup(UIGroupID);
+            return new Response("Success!", null);
+        } 
+        catch (Exception e){
+            return new Response("Error!", null);
+        }
     }
 
+    /* EXAMPLE:
+    {
+        "name" : "{GroupName}",
+        "ownerID" : {OwnerID}
+    }
+    */
     @PostMapping(path = "/create")
     public Response createGroup(@RequestBody GroupDTO groupDTO) {
         return service.createGroup(groupDTO);
     }  
 
+    /* EXAMPLE:
+    {
+        "userID" : {UserID},
+        "groupID" : {GroupID}
+    }
+    */
     @PostMapping(path = "/addToGroup")
     public Response addUserToGroup(@RequestBody UserInGroupDTO userInGroupDTO) {
         return usersInGroupService.addUserToGroup(userInGroupDTO);

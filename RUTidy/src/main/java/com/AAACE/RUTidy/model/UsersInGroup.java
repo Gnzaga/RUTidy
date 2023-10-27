@@ -12,6 +12,7 @@ import java.util.List;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToMany;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import jakarta.persistence.Column;
@@ -41,20 +42,20 @@ import jakarta.persistence.FetchType;
 public class UsersInGroup {
 
     @Id
-    @Column(name = "UIGroupID", length=255)
+    @Column
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int UIGroupID;
 
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinColumn(name = "groupID", referencedColumnName = "groupID")
+    @ManyToOne
+    @JoinColumn(name = "groupID")
     private Group group;
 
     @Column(name = "roles", length=255)
     private int roles;
 
 
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinColumn(name = "userID", referencedColumnName = "userID")
+    @ManyToOne
+    @JoinColumn(name = "user")
     private User user;
     
 
@@ -75,8 +76,8 @@ public class UsersInGroup {
      * This is the default constructor for the Group class.
      */
     public UsersInGroup() {
-        this.group = new Group();
-        this.user = new User();
+        this.group = null;
+        this.user = null;
         this.UIGroupID = UUID.randomUUID().hashCode();
     }
 
