@@ -19,7 +19,7 @@ export default function Signup(props){
             return;
         }
 
-        axios.post("http://cs431-01.cs.rutgers.edu:8080/user/save", {username, password, name, email})
+        axios.post("http://localhost:8080/user/save", {username, password, name, email})
         .then((response) => { 
             const {message} = response.data;
             if (message !== "Account Created!"){
