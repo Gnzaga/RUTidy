@@ -21,7 +21,7 @@ public class UserImplementation implements UserService{
     @Autowired
     private PasswordEncoder passwordEncoder;
 
-//TODO: There is little distinction betweeen the handling of emails and usernames. This should be fixed. or at least commented on
+
     public LoginResponse addUser(UserDTO userDTO) {
 
         if(userRepository.findByEmail(userDTO.getEmail()).isPresent()) {

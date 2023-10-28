@@ -2,7 +2,6 @@ package com.AAACE.RUTidy.service;
 
 import com.AAACE.RUTidy.model.Invitation;
 
-import com.mysql.jdbc.log.Log;
 
 import java.util.List;
 
@@ -17,7 +16,7 @@ public interface InvitationService {
 
     Invitation updateInvitation(Invitation invitation);
 
-    void deleteInvitation(String email, int groupID);
+    //void deleteInvitation(Invitation invitation);
 
     
 }

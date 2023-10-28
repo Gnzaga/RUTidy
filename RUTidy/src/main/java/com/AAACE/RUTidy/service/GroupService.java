@@ -1,11 +1,15 @@
 package com.AAACE.RUTidy.service;
 
+
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.AAACE.RUTidy.dto.GroupDTO;
+import com.AAACE.RUTidy.dto.Response;
 import com.AAACE.RUTidy.model.Group;
 import com.AAACE.RUTidy.model.User;
 import com.AAACE.RUTidy.model.UsersInGroup;
@@ -27,11 +31,22 @@ public class GroupService {
 
     public List<UsersInGroup> getGroupsIn(int userID){
         List<UsersInGroup> list = this.usersGroupRepository.findByUserUserID(userID);
+        for(int i = 0; i < list.size(); i++){
+            System.out.println(list.get(i).getGroup().getName());
+        }
         return list;
     }
 
     public List<Group> findGroupByName(String name){
         return this.groupRepository.findByName(name);
+    }
+
+    public List<User> findUsersInGroup(int groupID){
+        List<UsersInGroup> usersInGroup = this.usersGroupRepository.findByGroupGroupID(groupID);
+
+     return usersInGroup.stream().map(UsersInGroup::getUser).collect(Collectors.toList());
+
+        
     }
 
     public String joinGroup(int groupID, int userID){
@@ -41,7 +56,7 @@ public class GroupService {
         Optional<Group> group = this.groupRepository.findByGroupID(groupID);
         if (group.isEmpty()) return "No group found!";
 
-        if (this.usersGroupRepository.findByGroupIDAndUserID(groupID, userID) != null){
+        if (this.usersGroupRepository.findByGroupGroupIDAndUserUserID(groupID, userID) != null){
             return "User already in group!";
         }
 
@@ -55,5 +70,38 @@ public class GroupService {
     public void leaveGroup(int UIGroupID){
         this.usersGroupRepository.deleteById(UIGroupID);
     }
+
+    public Response createGroup(GroupDTO groupDTO){
+        //search for the user in the DB
+        System.out.println(groupDTO.getGroupID());
+        System.out.println(groupDTO.getName());
+        System.out.println(groupDTO.getOwnerID());
+
+        Optional<User> optionalUser = userRepository.findByUserID(groupDTO.getOwnerID());
+        
+        //ensures user exists ( they should, but just in case)
+        System.out.println(optionalUser);
+        if( optionalUser.isEmpty() ){
+            return new Response("User not found", null);
+        }
+        //create user object
+        User owner = optionalUser.get();
+
+        //create group object
+        Group newGroup = new Group(
+            groupDTO.getName(),
+            owner
+        );
+
+        //save group to DB
+        groupRepository.save(newGroup);
+        UsersInGroup temp = new UsersInGroup(newGroup,owner);
+        usersGroupRepository.save(temp);
+        return new Response("group_created", newGroup);
+
+    }
+
+
     
 }
+

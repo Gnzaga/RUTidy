@@ -1,13 +1,12 @@
 package com.AAACE.RUTidy.dto;
 
-import com.AAACE.RUTidy.model.User;
-public class LoginResponse {
+public class Response {
     String message;
-    User user;
+    Object object;
 
-     public LoginResponse(String message, User user) {
+     public Response(String message, Object object) {
         this.message = message;
-        this.user = user;
+        this.object = object;
     }
 
     public String getMessage() {
@@ -16,9 +15,9 @@ public class LoginResponse {
     public void setMessage(String message) {
         this.message = message;
     }
-    public User getUser() {
-        return user;
-   }
- 
+    public Object getObject() {
+        return this.object;
+    }
+
    
 }
