@@ -1,29 +1,36 @@
 import React, {useState, useEffect} from 'react';
+import {useNavigate} from "react-router";
+import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import "../css/GroupDetails.css";
 
 export default function GroupDetails(props){
 
-    const [userID, setUserID] = useState(sessionStorage.getItem("userID"));
+    const navigate = useNavigate();
+
     const [error, setError] = useState("");
     const [newRoles, setNewRoles] = useState("");
 
     const [usersInGroup, setUsersInGroup] = useState([]);
+    const{groupID} = useParams();
     const [group, setGroup] = useState([]);
 
     useEffect(() => {
-        axios.get("http://localhost:8080/group/usersIn", null, {params: {"groupID": sessionStorage.getItem("groupID")}})
+        if (sessionStorage.getItem("userID") === null){
+            navigate("/");
+        }
+        axios.get("http://localhost:8080/group/listUsersInGroup", null, {params: {groupID}})
         .then((response) => {
-            const usersInGroup = response.data;
+            setUsersInGroup(response.data);
         })
         .catch((error) => {
             setUsersInGroup([]);
         })
     }, []);
 
-    const handleRoleChange = (UIGroupID, newRoles) => {
+    const handleRoleChange = (userID, newRoles) => {
 
-        axios.put("http://localhost:8080/group/updateUserPermission", null, {params: {UIGroupID, newRoles}})
+        axios.put("http://localhost:8080/group/updateUserPermission", null, {params: {groupID, userID, newRoles}})
         .then((response) => {
             const {message} = response.data;
             if (message !== "Permission Updated Successfully"){
@@ -53,7 +60,7 @@ export default function GroupDetails(props){
                             <tr key={user.id}>
                                 <td>{user.name}</td>
                                 <td>
-                                <form method="post" onSubmit={(e) => handleRoleChange(user.id, e.target.value)}>
+                                <form method="post" onSubmit={(e) => handleRoleChange(groupID, user.id, e.target.value)}>
                                     <select value={newRoles} onChange = {(e) => setNewRoles(e.target.value)}>
                                     <option value="0">Admin</option>
                                     <option value="1">Manage</option>
@@ -69,6 +76,7 @@ export default function GroupDetails(props){
                         ))}
                     </tbody>
                 </table>
+                <button onClick = {() => navigate("/home")}>Home</button>
             </div>
         </div>
     )

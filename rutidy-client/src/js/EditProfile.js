@@ -19,7 +19,7 @@ export default function EditProfile(props){
             return;
         }
 
-        axios.post("http://cs431-01.cs.rutgers.edu:8080/editprofile/user/save", {username, password, name, email})
+        axios.post("http://localhost:8080/editprofile/user/save", {username, password, name, email})
         .then((response) => { 
             const {message} = response.data;
             if (message !== "Account Created!"){

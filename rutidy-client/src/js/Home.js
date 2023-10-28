@@ -22,27 +22,42 @@ export default function Home (){
         navigate("/");
     }
 
-    useEffect(() => {
-        /*if (sessionStorage.getItem("userID") === null){
-            navigate("/");
-        }*/
-
-        axios.get("http://localhost:8080/group/in", null, {params: {"userID": sessionStorage.getItem("userID")}})
+    function queryGroups(){
+        axios.get("http://localhost:8080/group/in", {params: {"userID": sessionStorage.getItem("userID")}})
         .then((response) => {
             const groups = response.data;
+            const newAdminGroups = groups.filter((group) => groups.roles !== 2);
+            const newUserGroups = groups.filter((group) => group.roles === 2);
+            setAdminGroups([...newAdminGroups]);
+            setUserGroups([...newUserGroups]);
+
         })
         .catch((error) => {
             setAdminGroups([]);
             setUserGroups([]);
         })
+    }
 
+    useEffect(() => {
+        if (sessionStorage.getItem("userID") === null){
+            navigate("/");
+        }
+        queryGroups();
     }, []);
 
-    async function handleLeaveGroup(UIGroupID){
+    async function handleLeaveGroup(UIGroupID, isAdmin){
         const id = UIGroupID;
 
         await axios.delete("http://localhost:8080/group/leave", null, {params: {"UIGroupID": id}})
         .then((response) => {
+            if (isAdmin){
+                const newAdminGroups = adminGroups.filter(group => group.uigroupID !== UIGroupID);
+                setAdminGroups([...newAdminGroups]);
+            } else {
+                const newUserGroups = userGroups.filter(group => group.uigroupID !== UIGroupID);
+                setUserGroups([...newUserGroups]);
+            }
+
             setPopUpMessage(true);
             setPopUpMessage("Successfully left group!");
         })
@@ -63,6 +78,7 @@ export default function Home (){
             if (message !== "Success!"){
                 setPopUpSuccess(false);
             } else { 
+                queryGroups();
                 setPopUpSuccess(true);
             }
             setPopUpMessage(message);
@@ -72,7 +88,7 @@ export default function Home (){
     }
 
     async function handleSearch(){
-        await axios.get("http://localhost:8080/group/name", null, {params: {"groupName": searchGroupName}})
+        await axios.get("http://localhost:8080/group/name", {params: {"groupName": searchGroupName}})
         .then((response) => {
             setSearchResults([...response.data]);
         })
@@ -95,6 +111,7 @@ export default function Home (){
                 <div className = "homeNavigationButtonDiv">
                     <button onClick = {() => navigate("/edit/profile")}>Edit Profile</button>
                     <button onClick = {() => navigate("/create/group")}>Create Group</button>
+                    <p onClick = {() => navigate("/groupdetails")}>Group Details</p>
                 </div>
                 <h2 onClick = {handleLogout} className = "homeLogout">logout</h2>
             </div>
@@ -105,8 +122,8 @@ export default function Home (){
                     return (
                         <div className = "homePageGroupDiv">
                             <h3 className = "homeGroupName">{group.name}</h3>
-                            <button onClick = {() => navigate("/groupdetails")}>Group Details</button>
-                            <p>Leave group</p>
+                            <p onClick = {() => handleLeaveGroup(group.uigroupID, true)}>Leave group</p>
+                            <p onClick = {() => navigate("/groupdetails", {groupID: group.id})}>Group Details</p>
                         </div>
                     )
                 }) 
@@ -122,7 +139,7 @@ export default function Home (){
                             return (
                                 <div className = "homePageSearchResult">
                                     <h3>{result.name}</h3>
-                                    <p>Join Group</p>
+                                    <p onClick = {() => handleJoinGroup(result.groupID)}>Join Group</p>
                                 </div>
                             )
                         })}
@@ -135,7 +152,7 @@ export default function Home (){
                     return (
                         <div className = "homePageGroupDiv">
                             <h3 className = "homeGroupName">{group.name}</h3>
-                            <p>Leave Group</p>
+                            <p onClick = {() => handleLeaveGroup(group.uigroupID, false)}>Leave Group</p>
                         </div>
                     )
                 })}
