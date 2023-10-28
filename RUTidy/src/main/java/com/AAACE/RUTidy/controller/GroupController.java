@@ -1,6 +1,7 @@
 package com.AAACE.RUTidy.controller;
 
 import java.util.List;
+import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -26,6 +27,9 @@ public class GroupController {
     private GroupService service;
 
     @Autowired
+    private UserService userService;
+
+    @Autowired
     private UsersInGroupService usersInGroupService;
 
     /* to be used when invitations are implemented properly
@@ -41,10 +45,8 @@ public class GroupController {
         if (groups.size() == 0 || groups == null){
             return new ResponseEntity<List<Group>>(groups, HttpStatus.BAD_REQUEST);
         }
-
         return new ResponseEntity<List<Group>>(groups, HttpStatus.ACCEPTED);
     }
-
     
 // EXAMPLE
 // /group/in?userID={userID}
@@ -56,6 +58,26 @@ public class GroupController {
         }
         return new ResponseEntity<List<UsersInGroup>>(list, HttpStatus.ACCEPTED);
     }
+
+    //gives all the groups you OWN
+    @GetMapping(path = "/myGroups")
+    public ResponseEntity<List<Group>> getMyGroups(@RequestParam int userID) {
+        User user = userService.getUser(userID);
+        List<UsersInGroup> groupsIn = this.service.getGroupsIn(userID);
+        if (user == null || groupsIn == null || groupsIn.size() == 0) {
+            return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
+        }
+
+        List<Group> myGroups = new ArrayList<Group>();
+
+        for (UsersInGroup groupIn : groupsIn) {
+            if (groupIn.getGroup().getOwner() == user) {
+                myGroups.add(groupIn.getGroup());
+            }
+        }
+        return new ResponseEntity<List<Group>>(myGroups, HttpStatus.ACCEPTED);
+    }
+
 // EXAMPLE
 // http://localhost:8080/group/join?groupID={GROUPID}&userID={USERID}
     @PutMapping("/join")
@@ -63,6 +85,7 @@ public class GroupController {
         String message = this.service.joinGroup(groupID, userID);
         return new ResponseEntity<String>(message, HttpStatus.ACCEPTED);
     }
+
 // EXAMPLE
 // http://localhost:8080/group/leave?UIGroupID={UIGROUPID}
     @DeleteMapping("/leave")
@@ -75,6 +98,7 @@ public class GroupController {
             return new Response("Error!", null);
         }
     }
+
 // EXAMPLE
 // http://localhost:8080/group/listUsersInGroup?groupID={GROUPID}
     @GetMapping("/listUsersInGroup")
@@ -86,6 +110,7 @@ public class GroupController {
         }
         return new ResponseEntity<List<User>>(list, HttpStatus.ACCEPTED);
     }
+
     /* EXAMPLE:
     {
         "name" : "{GroupName}",
@@ -107,6 +132,5 @@ public class GroupController {
     public Response addUserToGroup(@RequestBody UserInGroupDTO userInGroupDTO) {
         return usersInGroupService.addUserToGroup(userInGroupDTO);
     }
-
 
 }

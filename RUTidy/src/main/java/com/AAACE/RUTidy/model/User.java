@@ -241,6 +241,19 @@ public class User{
     @Override
     public String toString(){
         return "User{" + "name=" + name + ", email=" + email + ", password=" + password + ", username=" + username + "}";
+
+    }
+
+    @Override
+    public boolean equals(Object o){
+        if (o == this){
+            return true;
+        }
+        if (!(o instanceof User)){
+            return false;
+        }
+        User user = (User) o;
+        return user.getUserID() == this.userID;
     }
 
 

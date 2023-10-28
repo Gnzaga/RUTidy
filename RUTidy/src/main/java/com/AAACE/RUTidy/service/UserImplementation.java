@@ -67,4 +67,14 @@ public class UserImplementation implements UserService{
         }
         return new LoginResponse("Incorrect password", null);
     }
+
+
+    public User getUser(int userID) {
+        Optional<User> optionalUser = userRepository.findByUserID(userID);
+        if(optionalUser.isEmpty()) {
+            return null;
+        }
+        User user = optionalUser.get();
+        return user;
+    }
 }
