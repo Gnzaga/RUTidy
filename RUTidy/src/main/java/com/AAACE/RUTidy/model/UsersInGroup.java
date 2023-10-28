@@ -13,6 +13,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import jakarta.persistence.Column;
 import jakarta.persistence.OneToMany;
@@ -20,6 +21,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
+import jakarta.persistence.FetchType;
 
     /**
 
@@ -41,7 +43,7 @@ public class UsersInGroup {
 
     @Id
     @Column
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int UIGroupID;
 
     @ManyToOne
@@ -53,7 +55,7 @@ public class UsersInGroup {
 
 
     @ManyToOne
-    @JoinColumn(name = "userID")
+    @JoinColumn(name = "user")
     private User user;
     
 
@@ -67,6 +69,15 @@ public class UsersInGroup {
     public UsersInGroup(Group group , User user){
         this.group = group;
         this.user = user;
+        this.UIGroupID = UUID.randomUUID().hashCode();
+    }
+
+    /**
+     * This is the default constructor for the Group class.
+     */
+    public UsersInGroup() {
+        this.group = null;
+        this.user = null;
         this.UIGroupID = UUID.randomUUID().hashCode();
     }
 

@@ -12,10 +12,11 @@ import java.util.List;
 @Repository
 public interface GroupRepository extends JpaRepository <Group, Integer> {
     //find specific group
-    Optional<Group> findByGroupID(int groupID);
+    Optional<Group> findByGroupID(int id);
 
     //find all group of name
     List<Group> findByName(String name);
+
 
     
 }
