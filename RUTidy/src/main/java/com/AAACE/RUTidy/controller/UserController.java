@@ -8,8 +8,10 @@ import com.AAACE.RUTidy.service.UserService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -35,7 +37,7 @@ public class UserController {
     }
 
     @PostMapping(path = "/update")
-    public LoginResponse updateUser(@RequestBody UserDTO userDTO, int userID) {
+    public LoginResponse updateUser(@RequestBody UserDTO userDTO, @RequestParam int userID) {
         LoginResponse loginResponse = userService.updateUser(userDTO, userID);
         return loginResponse;
     }

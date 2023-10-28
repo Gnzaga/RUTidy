@@ -15,7 +15,7 @@ export default function EditProfile(props){
     const navigate = useNavigate();
 
     async function handleEdit(){
-        if (username === "" || password === "" || name === "" || email === "") { 
+        if (username === "" || name === "" || email === "") { 
             setError("Please enter all fields!");
             return;
         }
@@ -24,21 +24,21 @@ export default function EditProfile(props){
             return;
         }
 
-        axios.post("http://cs431-01.cs.rutgers.edu:8080/editprofile/user/update", {username, password, name, email}, sessionStorage.getItem("userID"))
+        axios.post("http://cs431-01.cs.rutgers.edu:8080/user/update?userID=" + sessionStorage.getItem("userID").toString(), {username, password, name, email})
         .then((response) => { 
             const {message} = response.data;
             if (message !== "Account Updated!"){
                 setError(message);
                 return;
             }
-            sessionStorage.setItem("name", user.name);
-            sessionStorage.setItem("email", user.email);
-            sessionStorage.setItem("username", user.username);
+            sessionStorage.setItem("name", name);
+            sessionStorage.setItem("email", email);
+            sessionStorage.setItem("username", username);
 
             navigate("/profile");
         })
         .catch((error) => { 
-            setError("An unexpected error occured!");
+            setError("An unexpected error has occurred!");
             return;
         })
         

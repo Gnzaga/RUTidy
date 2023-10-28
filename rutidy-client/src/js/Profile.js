@@ -45,7 +45,7 @@ export default function Profile(props){
                 </table>
                 <br></br>
                 <p onClick = {() => navigate("/profile/edit")}className = "editProfile">Click here to edit profile information or set a new password!</p>
-                {error !== "" && <h3 className = "errorMessage">{error}</h3>}
+                <button className = "cancelButton" onClick = {() => navigate("/home")}>Return to home page</button>
             </div>
         </div>
     );

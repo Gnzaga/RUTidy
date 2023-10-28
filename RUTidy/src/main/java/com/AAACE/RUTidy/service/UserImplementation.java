@@ -69,20 +69,30 @@ public class UserImplementation implements UserService{
     }
 
     public LoginResponse updateUser(UserDTO userDTO, int userID) {
-        if(userRepository.findByEmail(userDTO.getEmail()).get().getUserID() != userID) {
-            return new LoginResponse("Email already in use", null);
-        }
-        if(userRepository.findByUsername(userDTO.getUsername()).get().getUserID() != userID) {
-            return new LoginResponse("Username already in use", null);
+        Optional<User> userByEmail = userRepository.findByEmail(userDTO.getEmail());
+        if (!userByEmail.isEmpty()){
+            User emailUser  = userByEmail.get();
+
+            if(emailUser.getUserID() != userID) {
+                return new LoginResponse("Email already in use", null);
+            }
         }
 
-        User user = new User(
-            userDTO.getName(),
-            userDTO.getEmail(),
-            this.passwordEncoder.encode(userDTO.getPassword()),
-            userDTO.getUsername()
-        );
+        Optional<User> userByUsername = userRepository.findByUsername(userDTO.getUsername());
+        if (!userByUsername.isEmpty()){
+            User usernameUser  = userByUsername.get();
 
+            if(usernameUser.getUserID() != userID) {
+                return new LoginResponse("Username already in use", null);
+            }
+        }
+
+        System.out.println(userDTO.getPassword());
+        User user = userRepository.findByUserID(userID).get();
+        user.setEmail(userDTO.getEmail());
+        user.setName(userDTO.getName());
+        if(userDTO.getPassword() != null) user.setPassword(this.passwordEncoder.encode(userDTO.getPassword()));
+        user.setUsername(userDTO.getUsername());
         userRepository.save(user);
         return new LoginResponse("Account Updated!", user);
     }
