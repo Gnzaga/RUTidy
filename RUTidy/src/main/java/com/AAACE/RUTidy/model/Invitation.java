@@ -20,7 +20,7 @@ public class Invitation {
 
     @Id
     @Column(name = "invitationID", length=255)
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int invitationID;
 
     @Column(name = "email", length=255)
