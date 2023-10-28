@@ -8,5 +8,6 @@ import com.AAACE.RUTidy.model.User;
 public interface UserService {
     LoginResponse addUser(UserDTO user);
     LoginResponse login(LoginDTO login);
+    LoginResponse updateUser(UserDTO user, int userID);
     User getUser(int userID);
 }
