@@ -7,15 +7,14 @@ import org.springframework.stereotype.Repository;
 
 import com.AAACE.RUTidy.model.UsersInGroup;
 
-import java.util.Optional;
 import java.util.List;
+import java.util.Optional;
 
 @EnableJpaRepositories
 @Repository
 public interface UsersInGroupRepository extends JpaRepository<UsersInGroup, Integer> {
-    List<UsersInGroup> findByGroupID(int groupID);
+    List<UsersInGroup> findByGroupGroupID(int groupID);
     List<UsersInGroup> findByUserUserID(int userID);
-    Optional<UsersInGroup> findByGroupIDAndUserUserID(int groupID, int userID);
-    List<UsersInGroup> findByGroupIDAndUserID(int groupID, int userID);
-
+    Optional<UsersInGroup> findByGroupGroupIDAndUserUserID(int groupID, int userID);
+    
 }

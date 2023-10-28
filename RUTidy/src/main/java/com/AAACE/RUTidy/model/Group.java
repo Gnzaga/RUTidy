@@ -50,8 +50,8 @@ public class Group {
      */
     @Id
     @Column(name = "groupID", length=255)
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private int ID;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int groupID;
     
     /**
      * This is the field for the name of the group.
@@ -71,19 +71,6 @@ public class Group {
     private User owner;
     
 
-    /**
-     * This is the constructor for the Group class.
-     * 
-     * @param name String
-     * @param members ArrayList<User> 
-     * @param admin User
-     */
-
-    public Group(String name, ArrayList<User> members, User owner){
-        this.name = name;
-        this.owner = owner;
-        this.ID = UUID.randomUUID().hashCode();
-    }
 
 
     /**
@@ -95,7 +82,7 @@ public class Group {
     public Group(String name, User owner){
         this.name = name;
         this.owner = owner;
-        this.ID = UUID.randomUUID().hashCode();
+        this.groupID = UUID.randomUUID().hashCode();
     }
 
     /**
@@ -105,7 +92,7 @@ public class Group {
     public Group(){
         this.name = "";
         this.owner = null;
-        this.ID = UUID.randomUUID().hashCode();
+        this.groupID = UUID.randomUUID().hashCode();
     }
 
 
@@ -147,7 +134,7 @@ public class Group {
      */
 
     public int getGroupID(){
-        return this.ID;
+        return this.groupID;
     }
 
 

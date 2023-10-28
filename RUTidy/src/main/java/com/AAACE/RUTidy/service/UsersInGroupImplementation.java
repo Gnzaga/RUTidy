@@ -33,7 +33,7 @@ public class UsersInGroupImplementation implements UsersInGroupService{
         int groupID = userInGroupDTO.getGroupID();
         //check if user and group exist
         Optional<User> optionalUser = userRepository.findByUserID(userID);
-        Optional<Group> optionalGroup = groupRepository.findByID(groupID);
+        Optional<Group> optionalGroup = groupRepository.findByGroupID(groupID);
 
         if(optionalUser.isEmpty()){
             return new Response("User not found", null);
@@ -47,17 +47,20 @@ public class UsersInGroupImplementation implements UsersInGroupService{
         Group group = optionalGroup.get();
 
         //check if user is already in group
-        Optional<UsersInGroup> optionalUsersInGroup = usersInGroupRepository.findByGroupIDAndUserUserID(group.getGroupID(), user.getUserID());
+        Optional<UsersInGroup> optionalUsersInGroup = usersInGroupRepository.findByGroupGroupIDAndUserUserID(group.getGroupID(), user.getUserID());
 
         if(optionalUsersInGroup.isPresent()){
             return new Response("User already in group", null);
         }
 
         //add user to group
+        groupRepository.save(group);
+
         UsersInGroup userInGroup = new UsersInGroup(group, user);
     
         usersInGroupRepository.save(userInGroup);
 
         return new Response("User added to group", userInGroup);
     }
+
 }

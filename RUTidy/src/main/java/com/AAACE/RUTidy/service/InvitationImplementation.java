@@ -6,12 +6,9 @@ import com.AAACE.RUTidy.repository.GroupRepository;
 import com.AAACE.RUTidy.repository.InvitationRepository;
 import com.AAACE.RUTidy.model.Invitation;
 import com.AAACE.RUTidy.model.Group;
-import com.AAACE.RUTidy.dto.Response;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import java.util.Optional;
 
 @Service
@@ -24,7 +21,7 @@ public class InvitationImplementation implements InvitationService{
     private GroupRepository groupRepository;
 
     public Invitation getInvitation(String email, int groupID) {
-        Optional<Group> optionalGroup = groupRepository.findByID(groupID);
+        Optional<Group> optionalGroup = groupRepository.findByGroupID(groupID);
         if(optionalGroup.isEmpty()) {
             return null;
         }
@@ -43,7 +40,7 @@ public class InvitationImplementation implements InvitationService{
     }
 
     public List<Invitation> getGroupsInvitations(int groupID) {
-        return invitationRepository.findByGroupID(groupID);
+        return invitationRepository.findByGroupGroupID(groupID);
     }
 
     public Invitation addInvitation(Invitation invitation) {
