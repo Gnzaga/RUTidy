@@ -44,7 +44,7 @@ export default function Profile(props){
                     </tr>
                 </table>
                 <br></br>
-                <p onClick = {() => navigate("/editProfile")}className = "editProfile">Click here to edit profile information or set a new password!</p>
+                <p onClick = {() => navigate("/profile/edit")}className = "editProfile">Click here to edit profile information or set a new password!</p>
                 {error !== "" && <h3 className = "errorMessage">{error}</h3>}
             </div>
         </div>

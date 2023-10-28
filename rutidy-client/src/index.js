@@ -16,7 +16,7 @@ root.render(
       <Route path = "/signup" element = {<Signup />}></Route>
       <Route path = "/home" element = {<Home/>}></Route>
       <Route path = "/profile" element = {<Profile />}></Route>
-      <Route path = "/editprofile" element = {<EditProfile />}></Route>
+      <Route path = "/profile/edit" element = {<EditProfile />}></Route>
     </Routes>
   </BrowserRouter>
 );

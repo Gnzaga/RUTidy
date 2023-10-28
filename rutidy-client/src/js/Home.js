@@ -93,7 +93,7 @@ export default function Home (){
             <div className = "homeNavigationBar">
                 <h1>RUTidy</h1>
                 <div className = "homeNavigationButtonDiv">
-                    <button onClick = {() => navigate("/edit/profile")}>Edit Profile</button>
+                    <button onClick = {() => navigate("/profile")}>Profile</button>
                     <button onClick = {() => navigate("/create/group")}>Create Group</button>
                 </div>
                 <h2 onClick = {handleLogout} className = "homeLogout">logout</h2>
