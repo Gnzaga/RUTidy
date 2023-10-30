@@ -18,7 +18,8 @@ public class UserDTO {
     public UserDTO(String name, String email, String password, String username) {
         this.name = name;
         this.email = email;
-        this.password =this.passwordEncoder.encode(password);
+        if(password.length() == 0) this.password = null;
+        else this.password = this.passwordEncoder.encode(password);
         this.username = username;
     }
 
@@ -72,10 +73,11 @@ public class UserDTO {
      * This is the setter for the password field.
      * 
      * @param password
+     * @deprecated
      */
-    public void setPassword(String password){
+    /*public void setPassword(String password){
         this.password = password;
-    }
+    }*/
 
     /**
      * This is the getter for the username field.
@@ -95,7 +97,9 @@ public class UserDTO {
         this.username = username;
     }
 
-
+    public String toString(){
+        return this.username + " " + this.password + " " + this.email + " " + this.name;
+    }
     
 
     

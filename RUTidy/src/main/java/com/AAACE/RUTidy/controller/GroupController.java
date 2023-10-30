@@ -1,10 +1,12 @@
 package com.AAACE.RUTidy.controller;
 
 import java.util.List;
+import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -19,11 +21,15 @@ import com.AAACE.RUTidy.dto.*;
 import com.AAACE.RUTidy.service.*;
 
 @RestController
+@CrossOrigin
 @RequestMapping("/group")
 public class GroupController {
 
     @Autowired
     private GroupService service;
+
+    @Autowired
+    private UserService userService;
 
     @Autowired
     private UsersInGroupService usersInGroupService;
@@ -41,10 +47,8 @@ public class GroupController {
         if (groups.size() == 0 || groups == null){
             return new ResponseEntity<List<Group>>(groups, HttpStatus.BAD_REQUEST);
         }
-
         return new ResponseEntity<List<Group>>(groups, HttpStatus.ACCEPTED);
     }
-
     
 // EXAMPLE
 // /group/in?userID={userID}
@@ -56,6 +60,27 @@ public class GroupController {
         }
         return new ResponseEntity<List<UsersInGroup>>(list, HttpStatus.ACCEPTED);
     }
+    
+
+    //gives all the groups you OWN
+    @GetMapping(path = "/myGroups")
+    public ResponseEntity<List<Group>> getMyGroups(@RequestParam int userID) {
+        User user = userService.getUser(userID);
+        List<UsersInGroup> groupsIn = this.service.getGroupsIn(userID);
+        if (user == null || groupsIn == null || groupsIn.size() == 0) {
+            return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
+        }
+
+        List<Group> myGroups = new ArrayList<Group>();
+
+        for (UsersInGroup groupIn : groupsIn) {
+            if (groupIn.getGroup().getOwner() == user) {
+                myGroups.add(groupIn.getGroup());
+            }
+        }
+        return new ResponseEntity<List<Group>>(myGroups, HttpStatus.ACCEPTED);
+    }
+
 // EXAMPLE
 // http://localhost:8080/group/join?groupID={GROUPID}&userID={USERID}
     @PutMapping("/join")
@@ -63,6 +88,7 @@ public class GroupController {
         String message = this.service.joinGroup(groupID, userID);
         return new ResponseEntity<String>(message, HttpStatus.ACCEPTED);
     }
+
 // EXAMPLE
 // http://localhost:8080/group/leave?UIGroupID={UIGROUPID}
     @DeleteMapping("/leave")
@@ -75,6 +101,7 @@ public class GroupController {
             return new Response("Error!", null);
         }
     }
+
 // EXAMPLE
 // http://localhost:8080/group/listUsersInGroup?groupID={GROUPID}
     @GetMapping("/listUsersInGroup")
@@ -86,6 +113,17 @@ public class GroupController {
         }
         return new ResponseEntity<List<User>>(list, HttpStatus.ACCEPTED);
     }
+
+    @GetMapping("/listUIGInGroup")
+    public ResponseEntity<List<UsersInGroup>> getUIGInGroup(@RequestParam int groupID){
+        List<UsersInGroup> list = this.service.findUIGInGroup(groupID);
+
+        if (list.size() == 0 || list == null){
+            return new ResponseEntity<List<UsersInGroup>>(list, HttpStatus.BAD_REQUEST);
+        }
+        return new ResponseEntity<List<UsersInGroup>>(list, HttpStatus.ACCEPTED);
+    }
+
     /* EXAMPLE:
     {
         "name" : "{GroupName}",
@@ -112,6 +150,4 @@ public class GroupController {
     public Response updateUserPermission(@RequestParam int groupID, @RequestParam int userID, @RequestParam int roles){
         return service.updateUserPermission(groupID, userID, roles);
     }
-
-
 }

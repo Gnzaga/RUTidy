@@ -13,6 +13,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import jakarta.persistence.Column;
 import jakarta.persistence.OneToMany;
@@ -20,6 +21,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
+import jakarta.persistence.FetchType;
 
     /**
 
@@ -41,7 +43,7 @@ public class UsersInGroup {
 
     @Id
     @Column
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int UIGroupID;
 
     @ManyToOne
@@ -49,11 +51,11 @@ public class UsersInGroup {
     private Group group;
 
     @Column(name = "roles", length=255)
-    private int roles; //0 = user, 1 = user with manage, 2 = admin
+    private int roles;
 
 
     @ManyToOne
-    @JoinColumn(name = "userID")
+    @JoinColumn(name = "user")
     private User user;
     
 
@@ -72,14 +74,12 @@ public class UsersInGroup {
 
     /**
      * This is the default constructor for the Group class.
-     */ 
-
-    public UsersInGroup(){
+     */
+    public UsersInGroup() {
         this.group = null;
         this.user = null;
         this.UIGroupID = UUID.randomUUID().hashCode();
     }
-
 
 
 
@@ -96,6 +96,10 @@ public class UsersInGroup {
 
     public Group getGroup(){
         return this.group;
+    }
+
+    public int getRoles(){
+        return this.roles;
     }
 
     public void setRoles(int roles){

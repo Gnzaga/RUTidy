@@ -1,7 +1,5 @@
 package com.AAACE.RUTidy.model;
 
-import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.UUID;
 
 //import com.AAACE.RUTidy.Groups.Group;
@@ -34,7 +32,7 @@ import jakarta.persistence.GenerationType;
 
 @Entity
 @Table(name = "Users")
-public class User implements Serializable{
+public class User{
 
     @Column(name = "`name`", length=255)
     private String name;
@@ -50,7 +48,7 @@ public class User implements Serializable{
     
     @Id
     @Column(name = "userID", length=255)
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int userID;
     
     //private ArrayList<Group> groups;
@@ -243,6 +241,19 @@ public class User implements Serializable{
     @Override
     public String toString(){
         return "User{" + "name=" + name + ", email=" + email + ", password=" + password + ", username=" + username + "}";
+
+    }
+
+    @Override
+    public boolean equals(Object o){
+        if (o == this){
+            return true;
+        }
+        if (!(o instanceof User)){
+            return false;
+        }
+        User user = (User) o;
+        return user.getUserID() == this.userID;
     }
 
 

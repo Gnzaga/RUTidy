@@ -16,5 +16,4 @@ public interface UsersInGroupRepository extends JpaRepository<UsersInGroup, Inte
     List<UsersInGroup> findByGroupGroupID(int groupID);
     List<UsersInGroup> findByUserUserID(int userID);
     Optional<UsersInGroup> findByGroupGroupIDAndUserUserID(int groupID, int userID);
-    
 }

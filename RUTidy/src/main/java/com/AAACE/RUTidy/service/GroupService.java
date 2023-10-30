@@ -10,7 +10,6 @@ import org.springframework.stereotype.Service;
 
 import com.AAACE.RUTidy.dto.GroupDTO;
 import com.AAACE.RUTidy.dto.Response;
-import com.AAACE.RUTidy.dto.UserInGroupDTO;
 import com.AAACE.RUTidy.model.Group;
 import com.AAACE.RUTidy.model.User;
 import com.AAACE.RUTidy.model.UsersInGroup;
@@ -46,8 +45,13 @@ public class GroupService {
         List<UsersInGroup> usersInGroup = this.usersGroupRepository.findByGroupGroupID(groupID);
 
      return usersInGroup.stream().map(UsersInGroup::getUser).collect(Collectors.toList());
+ 
+    }
 
-        
+    public List<UsersInGroup> findUIGInGroup(int groupID){
+        List<UsersInGroup> usersInGroup = this.usersGroupRepository.findByGroupGroupID(groupID);
+        return usersInGroup;
+ 
     }
 
     public String joinGroup(int groupID, int userID){
