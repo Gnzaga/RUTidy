@@ -3,6 +3,8 @@ import {useNavigate} from "react-router";
 import CheckImage from "../image/check.png";
 import ErrorImage from "../image/x.png";
 import SearchIcon from "../image/search.png";
+import { Link } from 'react-router-dom';
+
 import axios from "axios";
 import "../css/Home.css";
 
@@ -11,8 +13,12 @@ export default function Home (){
     const [adminGroups, setAdminGroups] = useState([{"id": 1, "name": "group 1"}, {"id": 2, "name": "group 2"}]);
     const [userGroups, setUserGroups] = useState([{"id": 1, "name": "group 1"}, {"id": 2, "name": "group 2"}]);
 
+    const [groups, setGroups] = useState(null);
+
     const [popUpSuccess, setPopUpSuccess] = useState(true);
     const [popUpMessage, setPopUpMessage] = useState(""); 
+
+    const [loading, setLoading] = useState(false);
 
     const [searchGroupName, setSearchGroupName] = useState("");
     const [searchResults, setSearchResults] = useState([{"id": 1, "name": "group 1"}, {"id": 2, "name": "group 2"}]);
@@ -23,14 +29,17 @@ export default function Home (){
     }
 
     function queryGroups(){
-        axios.get("http://localhost:8080/group/in", {params: {"userID": sessionStorage.getItem("userID")}})
+        axios.get("http://cs431-01.cs.rutgers.edu:8080/group/in", {params: {userID: sessionStorage.getItem("userID")}})
         .then((response) => {
-            const groups = response.data;
-            const newAdminGroups = groups.filter((group) => groups.roles !== 2);
-            const newUserGroups = groups.filter((group) => group.roles === 2);
-            setAdminGroups([...newAdminGroups]);
-            setUserGroups([...newUserGroups]);
-
+            console.log(response.data);
+            const retrievedGroups = response.data;
+            const newAdminGroups = retrievedGroups.filter((group) => groups.roles !== 2);
+            const newUserGroups = retrievedGroups.filter((group) => group.roles === 2);
+            setGroups(retrievedGroups)
+            setAdminGroups(newAdminGroups);
+            setUserGroups(newUserGroups);
+            console.log(adminGroups);
+            console.log(userGroups);
         })
         .catch((error) => {
             setAdminGroups([]);
@@ -43,12 +52,13 @@ export default function Home (){
             navigate("/");
         }
         queryGroups();
+        
     }, []);
 
     async function handleLeaveGroup(UIGroupID, isAdmin){
         const id = UIGroupID;
 
-        await axios.delete("http://localhost:8080/group/leave", null, {params: {"UIGroupID": id}})
+        await axios.delete("http://cs431-01.cs.rutgers.edu:8080/group/leave", null, {params: {"UIGroupID": id}, "userID": sessionStorage.getItem("userID")})
         .then((response) => {
             if (isAdmin){
                 const newAdminGroups = adminGroups.filter(group => group.uigroupID !== UIGroupID);
@@ -72,7 +82,7 @@ export default function Home (){
     async function handleJoinGroup(groupID){
         const userID = sessionStorage.getItem("userID");
 
-        await axios.put("http://localhost:8080/group/join", null, {params: {groupID, userID}})
+        await axios.put("http://cs431-01.cs.rutgers.edu:8080/group/join", null, {params: {groupID, userID}})
         .then((response) => {
             const message = response.data;
             if (message !== "Success!"){
@@ -88,7 +98,7 @@ export default function Home (){
     }
 
     async function handleSearch(){
-        await axios.get("http://localhost:8080/group/name", {params: {"groupName": searchGroupName}})
+        await axios.get("http://cs431-01.cs.rutgers.edu:8080/group/name", {params: {"groupName": searchGroupName}})
         .then((response) => {
             setSearchResults([...response.data]);
         })
@@ -100,6 +110,7 @@ export default function Home (){
         setTimeout(() => setPopUpMessage(""), 2000);
     }
 
+   
     return (
         <div className = "homePage">
             {popUpMessage !== "" && <div className = "homePagePopUp">
@@ -119,8 +130,8 @@ export default function Home (){
                 <h2 className = "homeGroupHeader">Admin Groups</h2>
                 {adminGroups.map(group => {
                     return (
-                        <div className = "homePageGroupDiv">
-                            <h3 className = "homeGroupName">{group.name}</h3>
+                        <div key={group.group.groupID} className = "homePageGroupDiv">
+                            <Link to={'/groupdetails/' + group.group.groupID} className = "homeGroupName">{group.group.name}</Link>
                             <p onClick = {() => handleLeaveGroup(group.uigroupID, true)}>Leave group</p>
                         </div>
                     )
@@ -148,9 +159,9 @@ export default function Home (){
                 <h2 className = "homeGroupHeader">User Groups</h2>
                 {userGroups.map(group => {
                     return (
-                        <div className = "homePageGroupDiv">
-                            <h3 className = "homeGroupName">{group.name}</h3>
-                            <p onClick = {() => handleLeaveGroup(group.uigroupID, false)}>Leave Group</p>
+                        <div key={group.group.groupID} className = "homePageGroupDiv">
+                            <Link to={'/groupdetails/' + group.group.groupID} className = "homeGroupName">{group.group.name}</Link>
+                            <p onClick = {() => handleLeaveGroup(group.uigroupID, true)}>Leave group</p>
                         </div>
                     )
                 })}
@@ -158,4 +169,5 @@ export default function Home (){
             </div>
         </div>
     )
+            
 }

@@ -82,6 +82,7 @@ public class GroupController {
     }
 
 
+
     @GetMapping("/joined-groups")
     public ResponseEntity<List<Group>> getJoinedGroups(@RequestParam int userID){
         List<Group> list = this.service.getJoinedGroups(userID);
