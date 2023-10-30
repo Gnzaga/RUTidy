@@ -8,36 +8,53 @@ export default function GroupDetails(props){
     
     const navigate = useNavigate();
 
-    sessionStorage.setItem("groupID", 1);
-    sessionStorage.setItem("groupName", "test team")
     const groupID = sessionStorage.getItem("groupID");
     const groupIDInt = parseInt(groupID);
     const groupName = sessionStorage.getItem("groupName");
 
     const [error, setError] = useState("");
-    const [newRoles, setNewRoles] = useState();
+
+    const [newRoles, setNewRoles] = useState([]);
+
     const [usersInGroup, setUsersInGroup] = useState([]);
 
 
-    useEffect(() => {
-        
-        if (sessionStorage.getItem("userID") === null){
-            navigate("/");
-        }
+    function queryUserInGroups(){
         axios.get("http://localhost:8080/group/listUIGInGroup", {params: {groupID: groupIDInt}})
         .then((response) => {
-            setUsersInGroup(response.data);
+            const usersInGroups = response.data;
+            setUsersInGroup(usersInGroups);
+
             console.log("Users in Group:", usersInGroup);
         })
         .catch((error) => {
             setUsersInGroup([]);
         })
+    }
+
+    useEffect(() => {
+        if (sessionStorage.getItem("userID") === null){
+            navigate("/");
+        }
+        queryUserInGroups();
     }, []);
+        
+    const updateRoleLocally = (userID, newRole) => {
+        // Update the role in your local state.
+        const updatedUsers = usersInGroup.map(user => {
+          if (user.user.userID === userID) {
+            return { ...user, roles: newRole };
+          }
+          return user;
+        });
+        setUsersInGroup(updatedUsers);
+      };
 
     const handleRoleChange = (userID, newRoles) => {
+        const id = userID;
 
         axios.put("http://localhost:8080/group/updateUserPermission", null, {
-        params: {groupID: groupIDInt, userID: userID, roles: newRoles}})
+        params: {groupID: groupIDInt, userID: id, roles: newRoles}})
         .then((response) => {
             const {message} = response.data;
             if (message !== "Permission Updated Successfully"){
@@ -57,35 +74,31 @@ export default function GroupDetails(props){
                 <table>
                     <thead>
                         <tr>
-                            <th>Name</th>
-                            <th>Role</th>
-                            <th>Change Role</th>
+                            <th className='userColumn'>Name</th>
+                            <th className='roleColumn'>Role</th>
                         </tr>
                     </thead>
                     <tbody>
-                    {Array.isArray(usersInGroup) ? (usersInGroup.map((user) => (
-                        <tr key={user.id}>
-                        <td>{user.name}</td>
-                        <td>
-                        <form method="post" onSubmit={(e) => handleRoleChange(groupID, user.id, e.target.value)}>
-                            <select default="" value={newRoles} onChange = {(e) => setNewRoles(e.target.value)}>
-                            <option value="0">Admin</option>
-                            <option value="1">Manage</option>
-                            <option value="2">Member</option>
-                        </select>
-                        <button type="submit">Save Roles</button>
-                        {error !== "" && <h3 className = "errorMessage">{error}</h3>}
-                        </form> 
+                    {usersInGroup.map((user, index) => (
+                        <tr key={index}>
+                        <td className='userColumn'>{user.user.name}</td>
+                        <td className='roleColumn'>{user.roles}</td>
+                        <td className='saveRoles'>
+                            <p onClick={() => {
+                                handleRoleChange(user.user.userID, 0);
+                                updateRoleLocally(user.user.userID, 0); 
+                            }}>Make Admin</p>
+                            <p onClick={() => {
+                                handleRoleChange(user.user.userID, 1);
+                                updateRoleLocally(user.user.userID, 1); 
+                            }}>Make Manager</p>
+                            <p onClick={() => {
+                                handleRoleChange(user.user.userID, 2);
+                                updateRoleLocally(user.user.userID, 2); 
+                            }}>Make Member</p>
                         </td>
-                        <td>
-                        </td>
-                    </tr>
-                    ))
-                    ) : (
-                    <tr>
-                        <td colSpan="3">No users in the group</td>
-                    </tr>
-                    )}
+                        </tr>
+                    ))}
                     </tbody>
                 </table>
                 <button onClick = {() => {navigate("/home");

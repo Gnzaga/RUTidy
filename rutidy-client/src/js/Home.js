@@ -111,7 +111,6 @@ export default function Home (){
                 <div className = "homeNavigationButtonDiv">
                     <button onClick = {() => navigate("/profile")}>Profile</button>
                     <button onClick = {() => navigate("/create/group")}>Create Group</button>
-                    <button onClick = {() => navigate("/groupdetails")}>groupDetails</button>
                 </div>
                 <h2 onClick = {handleLogout} className = "homeLogout">logout</h2>
             </div>
@@ -123,9 +122,11 @@ export default function Home (){
                         <div className = "homePageGroupDiv">
                             <h3 className = "homeGroupName">{group.name}</h3>
                             <p onClick = {() => handleLeaveGroup(group.uigroupID, true)}>Leave group</p>
-                            <p onClick = {() => {navigate("/groupdetails");
-                            sessionStorage.setItem("groupID", group.id);
-                            sessionStorage.setItem("gorupName", group.name)}}>groupDetails</p>
+                            <p onClick = {() => {sessionStorage.setItem("groupID", group.group.groupID);
+                            sessionStorage.setItem("groupName", group.group.name);
+                            console.log(group.group.name);
+                            console.log(group.group.groupID);
+                            navigate("/groupdetails");}}>groupDetails</p>
                         </div>
                     )
                 }) 
