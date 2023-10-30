@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -20,6 +21,7 @@ import com.AAACE.RUTidy.dto.*;
 import com.AAACE.RUTidy.service.*;
 
 @RestController
+@CrossOrigin
 @RequestMapping("/group")
 public class GroupController {
 
@@ -57,6 +59,15 @@ public class GroupController {
             return new ResponseEntity<List<UsersInGroup>>(list, HttpStatus.BAD_REQUEST);
         }
         return new ResponseEntity<List<UsersInGroup>>(list, HttpStatus.ACCEPTED);
+    }
+
+    @GetMapping("/joined-groups")
+    public ResponseEntity<List<Group>> getJoinedGroups(@RequestParam int userID){
+        List<Group> list = this.service.getJoinedGroups(userID);
+        if (list.size() == 0 || list == null){
+            return new ResponseEntity<List<Group>>(list, HttpStatus.BAD_REQUEST);
+        }
+        return new ResponseEntity<List<Group>>(list, HttpStatus.ACCEPTED);
     }
 
     //gives all the groups you OWN
