@@ -151,7 +151,7 @@ export default function GroupDetails(props){
                                     <option value={1}>Manage</option>
                                     <option value={2}>Member</option>
                                 </select>
-                                <button type="submit" onClick={(event) => handleRoleChangeClick(event, user.userID,newRoles)}>Save Roles</button>
+                                <button type="submit" onClick={(event) => handleRoleChangeClick(event, user.userID,newRoles[user.userID])}>Save Roles</button>
                                 <button onClick={(event) => handleRemoveUserClick(event, user.userID)}>Remove User</button>
 
                                 </form> 

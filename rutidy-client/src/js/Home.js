@@ -66,7 +66,7 @@ export default function Home (){
     async function handleLeaveGroup(UIGroupID, isAdmin){
         const id = UIGroupID;
 
-        await axios.delete("http://cs431-01.cs.rutgers.edu:8080/group/leave", null, {params: {"UIGroupID": id}, "userID": sessionStorage.getItem("userID")})
+        await axios.delete("http://cs431-01.cs.rutgers.edu:8080/group/leave", {params: {userID: sessionStorage.getItem("userID"), groupID:id.group?.groupID}})
         .then((response) => {
             if (isAdmin){
                 const newAdminGroups = adminGroups.filter(group => group.uigroupID !== UIGroupID);
@@ -128,9 +128,10 @@ export default function Home (){
             <div className = "homeNavigationBar">
                 <h1>RUTidy</h1>
                 <div className = "homeNavigationButtonDiv">
-                    <button onClick = {() => navigate("/profile")}>Profile</button>
+                    <button onClick = {() => navigate("/profile")}>{sessionStorage.getItem("username").toString()}'s Profile</button>
                     <button onClick = {() => navigate("/create/group")}>Create Group</button>
                 </div>
+                
                 <h2 onClick = {handleLogout} className = "homeLogout">logout</h2>
             </div>
             <div className = "homeBody">
@@ -171,12 +172,14 @@ export default function Home (){
                         <div key={group.group?.groupID} className = "homePageGroupDiv">
                             <Link to={'/groupdetails/' + (group.group?.groupID || '')} className="homeGroupName">
         {group.group?.name || ''}</Link>
-                            <p onClick = {() => handleLeaveGroup(group.uigroupID, true)}>Leave group</p>
+                            <p onClick = {() => handleLeaveGroup(group?.uigroupID, true)}>Leave group</p>
                         </div>
                     )
                 })}
             </div>
+            
             </div>
+            
         </div>
     )
             
