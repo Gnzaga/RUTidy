@@ -26,8 +26,8 @@ export default function Login(props){
             }
 
             sessionStorage.setItem("name", user.name);
-            sessionStorage.setItem("email", user.password);
-            sessionStorage.setItem("username", user.username)
+            sessionStorage.setItem("email", user.email);
+            sessionStorage.setItem("username", user.username);
             sessionStorage.setItem("userID", user.userID);
 
             setError("");

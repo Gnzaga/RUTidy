@@ -109,9 +109,9 @@ export default function Home (){
             <div className = "homeNavigationBar">
                 <h1>RUTidy</h1>
                 <div className = "homeNavigationButtonDiv">
-                    <button onClick = {() => navigate("/edit/profile")}>Edit Profile</button>
+                    <button onClick = {() => navigate("/profile")}>Profile</button>
                     <button onClick = {() => navigate("/create/group")}>Create Group</button>
-                    <p onClick = {() => navigate("/groupdetails")}>Group Details</p>
+                    <button onClick = {() => navigate("/groupdetails")}>groupDetails</button>
                 </div>
                 <h2 onClick = {handleLogout} className = "homeLogout">logout</h2>
             </div>
@@ -123,7 +123,9 @@ export default function Home (){
                         <div className = "homePageGroupDiv">
                             <h3 className = "homeGroupName">{group.name}</h3>
                             <p onClick = {() => handleLeaveGroup(group.uigroupID, true)}>Leave group</p>
-                            <p onClick = {() => navigate("/groupdetails", {groupID: group.id})}>Group Details</p>
+                            <p onClick = {() => {navigate("/groupdetails");
+                            sessionStorage.setItem("groupID", group.id);
+                            sessionStorage.setItem("gorupName", group.name)}}>groupDetails</p>
                         </div>
                     )
                 }) 
