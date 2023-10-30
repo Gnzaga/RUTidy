@@ -181,7 +181,7 @@ public class GroupController {
 
     @PutMapping(path = "/updateUserPermission")
     public Response updateUserPermission(@RequestParam int groupID, @RequestParam int userID, @RequestParam int roles){
-        return service.updateUserPermission(groupID, userID, roles);
+        return service.updateUserPermission(userID, groupID, roles);
     }
 
 }
