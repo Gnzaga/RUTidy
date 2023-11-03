@@ -4,6 +4,13 @@ public class Response {
     String message;
     Object object;
 
+    /**
+     * Response message + object
+     * Please see com.AAACE.RUTidy.constants.ResponseConsants.java
+     * for possibe responses
+     * @param message
+     * @param object
+     */
      public Response(String message, Object object) {
         this.message = message;
         this.object = object;

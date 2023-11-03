@@ -1,6 +1,7 @@
 package com.AAACE.RUTidy.model;
 
 import java.util.UUID;
+import java.util.List;
 
 //import com.AAACE.RUTidy.Groups.Group;
 import jakarta.persistence.Id;
@@ -9,6 +10,8 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
+import jakarta.persistence.ManyToMany;
+
 
 
 /**
@@ -45,11 +48,15 @@ public class User{
 
     @Column(name = "username", length=25)
     private String username;
+
+    @ManyToMany(mappedBy="assignedUsers")
+    private List<Task> tasks;
     
     @Id
     @Column(name = "userID", length=255)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int userID;
+
     
     //private ArrayList<Group> groups;
     //private ArrayList<String> pendingInvitations;
