@@ -145,13 +145,13 @@ export default function GroupDetails(props){
                                 <td>{user.username}</td>
                                 <td>
                                 <form method="post" onSubmit={(e) => handleRoleChange(groupID, user.userID, e.target.value)}>
-                                    <select value={newRoles[user.userID] || userRo} onChange = {(e) => setNewRoles(prevState => ({ ...prevState, [user.userID]: e.target.value }))}>
+                                    <select value={newRoles[user.userID] || userRolesMap[user.userID]} onChange = {(e) => setNewRoles(prevState => ({ ...prevState, [user.userID]: e.target.value }))}>
                                     
                                     <option value={0}>Admin</option>
                                     <option value={1}>Manage</option>
                                     <option value={2}>Member</option>
                                 </select>
-                                <button type="submit" onClick={(event) => handleRoleChangeClick(event, user.userID,newRoles)}>Save Roles</button>
+                                <button type="submit" onClick={(event) => handleRoleChangeClick(event, user.userID,newRoles[user.userID])}>Save Roles</button>
                                 <button onClick={(event) => handleRemoveUserClick(event, user.userID)}>Remove User</button>
 
                                 </form> 
