@@ -106,8 +106,9 @@ public class GroupService {
 
     }
 
-    public void leaveGroup(int UIGroupID){
-        Optional <UsersInGroup> userInGroup = this.usersGroupRepository.findById(UIGroupID);
+    public void leaveGroup(int userID, int groupID){
+
+        Optional <UsersInGroup> userInGroup = this.usersGroupRepository.findByGroupGroupIDAndUserUserID(groupID, userID);
 
         if (userInGroup.isEmpty()) return;
         

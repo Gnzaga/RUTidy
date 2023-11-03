@@ -122,15 +122,17 @@ public class GroupController {
 // EXAMPLE
 // http://localhost:8080/group/leave?UIGroupID={UIGROUPID}
     @DeleteMapping("/leave")
-    public Response leaveGroup(@RequestParam int UIGroupID){
+    public Response leaveGroup(@RequestParam int userID, @RequestParam int groupID){
         try{
-            this.service.leaveGroup(UIGroupID);
+            this.service.leaveGroup(userID, groupID);
             return new Response("Success!", null);
         } 
         catch (Exception e){
             return new Response("Error!", null);
         }
     }
+
+    
 
     @DeleteMapping("/removeUserFromGroup")
     public Response removeUserFromGroup(@RequestParam int userID, @RequestParam int groupID){
