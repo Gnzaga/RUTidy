@@ -5,6 +5,7 @@ import Signup from "./js/Signup";
 import Home from "./js/Home";
 import Profile from "./js/Profile";
 import EditProfile from "./js/EditProfile";
+import UserChores from './js/UserChores';
 import {BrowserRouter, Routes, Route} from "react-router-dom";
 
 
@@ -17,6 +18,7 @@ root.render(
       <Route path = "/home" element = {<Home/>}></Route>
       <Route path = "/profile" element = {<Profile />}></Route>
       <Route path = "/profile/edit" element = {<EditProfile />}></Route>
+      <Route path = "/chores" element = {<UserChores />}></Route>
     </Routes>
   </BrowserRouter>
 );

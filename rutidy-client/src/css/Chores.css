@@ -1,0 +1,46 @@
+.choresPage { 
+    position: absolute;
+    display: flex;
+    flex-direction: row;
+    height: 100vh;
+    width: 100vw;
+}
+
+.leftPane {
+    width: 50%;
+    background-color: red;
+}
+
+.rightPane {
+    width: 50%;
+    background-color: blue;
+}
+
+.detailView { 
+    margin-top: 5vh;
+    height: 85vh;
+    width: 40vw;
+    background-color: white;
+    border-radius: 30px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+}
+
+.listView{ 
+    margin-top: 5vh;
+    height: 85vh;
+    width: 40vw;
+    background-color: white;
+    border-radius: 30px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+}
+
+.choreItem {
+    font-size: 30;
+    background-color: pink;
+    padding: 30;
+    margin-top: 20;
+}
