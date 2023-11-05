@@ -96,4 +96,14 @@ public class UserImplementation implements UserService{
         userRepository.save(user);
         return new LoginResponse("Account Updated!", user);
     }
+
+
+    public User getUser(int userID) {
+        Optional<User> optionalUser = userRepository.findByUserID(userID);
+        if(optionalUser.isEmpty()) {
+            return null;
+        }
+        User user = optionalUser.get();
+        return user;
+    }
 }
