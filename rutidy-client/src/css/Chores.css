@@ -4,16 +4,30 @@
     flex-direction: row;
     height: 100vh;
     width: 100vw;
+    background: linear-gradient(to right,#fac473, #fc9905);
+}
+
+.returnButton{
+    position: absolute;
+    top: 3vh;
+    left: 47vw;
+    border: 0.5px solid black;
+    border-radius: 20px;
+    height: 3rem;
+    width: 7rem;
+    font-weight: bolder;
+}
+
+.returnButton:hover{
+    cursor: pointer;
 }
 
 .leftPane {
     width: 50%;
-    background-color: red;
 }
 
 .rightPane {
     width: 50%;
-    background-color: blue;
 }
 
 .detailView { 
@@ -25,6 +39,8 @@
     margin-left: auto;
     margin-right: auto;
     text-align: center;
+    border: 0.5px solid black;
+    overflow-wrap: normal;
 }
 
 .listView{ 
@@ -36,11 +52,72 @@
     margin-left: auto;
     margin-right: auto;
     text-align: center;
+    border: 0.5px solid black;
+}
+
+.statusImage {
+    height: 24px;
+    width: auto;
+    margin-top: 0.5vh;
+    padding: 2px;
+    padding-left: 1vw;
 }
 
 .choreItem {
-    font-size: 30;
-    background-color: pink;
-    padding: 30;
-    margin-top: 20;
+    font-size: 24px;
+    background-color: orange;
+    margin-top: 0.5vh;
+    padding: 2px;
+    padding-left: 1vw;
+    padding-right: 1vw;
+    text-align: left;
+    margin-right: 4vw;
+    margin-left: 1vw;
+}
+
+.choreItem:hover {
+    cursor: pointer;
+}
+
+.choreTable {
+    overflow-y: auto;
+    overflow-x: hidden;
+    display: block;
+    height: 72vh;
+}
+
+.choreInfoType {
+    font-size: 24px;
+    margin-top: 0.5vh;
+    padding: 2px;
+    padding-left: 1vw;
+    text-align: left;
+    margin-right: 4vw;
+    margin-left: 1vw;
+}
+
+.choreInfo {
+    font-size: 24px;
+    margin-top: 0.5vh;
+    padding: 2px;
+    text-align: left;
+    margin-right: 4vw;
+    margin-left: 1vw;
+    overflow-wrap: anywhere;
+}
+
+.completionButton {
+    border-radius: 20px;
+    height: 2rem;
+    font-weight: bold;
+    align-self: left;
+}
+
+.choreDescription {
+    font-size: 20px;
+    margin-top: 0.01vh;
+    text-align: left;
+    margin-right: 3vw;
+    margin-left: 3vw;
+    overflow-wrap: anywhere;
 }
