@@ -39,9 +39,16 @@ export default function UserChores(props){
     const navigate = useNavigate();
 
     async function  displayDetails(chorekey){
-        //Task displayChore = 
         setDisplayChore(chores.find(chore => chore.key === chorekey));
-    };
+    }
+
+    async function  completeChore(){
+        
+    }
+
+    async function getChores(){
+
+    }
 
     return (
         <div className = "choresPage">
@@ -65,7 +72,7 @@ export default function UserChores(props){
                         <tr>
                             <td>
                                 <h2 className="choreInfoType">Status: </h2>
-                                <button className="completionButton">Mark Task As Complete!</button>
+                                <button className="completionButton" onClick={()=>completeChore()}>Mark Task As Complete!</button>
                             </td>
                             <td><h2 className="choreInfo">{displayChore.status}</h2></td>
                         </tr>
