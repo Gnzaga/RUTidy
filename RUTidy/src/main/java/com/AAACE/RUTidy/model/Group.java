@@ -80,7 +80,6 @@ public class Group {
     public Group(String name, User owner){
         this.name = name;
         this.owner = owner;
-        this.groupID = UUID.randomUUID().hashCode();
     }
 
     /**
@@ -90,7 +89,6 @@ public class Group {
     public Group(){
         this.name = "";
         this.owner = null;
-        this.groupID = UUID.randomUUID().hashCode();
     }
 
 
