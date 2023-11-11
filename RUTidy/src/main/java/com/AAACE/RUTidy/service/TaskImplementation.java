@@ -17,9 +17,6 @@ public class TaskImplementation implements TaskService {
     private UserRepository userRepository;
 
     @Autowired
-    private InvitationRepository invitationRepository;
-
-    @Autowired
     private GroupRepository groupRepository;
 
     @Autowired
