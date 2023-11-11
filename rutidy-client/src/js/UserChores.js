@@ -1,5 +1,5 @@
-import React, {useState} from "react";
-import {useNavigate} from "react-router-dom";
+import React, {useEffect, useState} from "react";
+import {useLocation, useNavigate, useResolvedPath, useSearchParams} from "react-router-dom";
 import "../css/Chores.css";
 import Check from "../image/check.png"
 import X from "../image/x.png"
@@ -7,47 +7,44 @@ import axios from "axios";
 
 
 export default function UserChores(props){
-    const [chores, setChores] = useState([
-        {status: "Ongoing", name: "chore1xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx", key: 1},
-        {status: "Complete", name: "chore2", key: 2},
-        {status: "Complete", name: "chore3", key: 3},
-        {status: "Ongoing", name: "chore4", key: 4},
-        {status: "Ongoing", name: "chore5", key: 5},
-        {status: "Complete", name: "chore6", key: 6},
-        {status: "Ongoing", name: "chore7", key: 7},
-        {status: "Complete", name: "chore8", key: 8},
-        {status: "Complete", name: "chore9", key: 9},
-        {status: "Ongoing", name: "chore10", key: 10},
-        {status: "Complete", name: "chore11", key: 11},
-        {status: "Complete", name: "chore12", key: 12},
-        {status: "Ongoing", name: "chore13", key: 13},
-        {status: "Complete", name: "chore14", key: 14},
-        {status: "Complete", name: "chore15", key: 15},
-        {status: "Complete", name: "chore16", key: 16},
-        {status: "Ongoing", name: "chore17", key: 17},
-        {status: "Complete", name: "chore18", key: 18}
-    ]);
-    const [displayChore, setDisplayChore] = useState(chores.find(chore => chore.key === 1));
+    const [chores, setChores] = useState([{"name": "", "status": "", "duedate": "", "description": ""}]);
+    const [displayChore, setDisplayChore] = useState({"name": "", "status": "", "duedate": "", "description": ""});
+    const [status, setStatus] = useState("completed");
+    const location = useLocation();
+    const path = location.pathname.split("/");
 
-    const listItems = chores.map((chores) =>
-        <tr>
-            <td><img className="statusImage" src = {chores.status === "Complete"? Check: X}></img></td>
-            <td><h2 className="choreItem" onClick={()=>displayDetails(chores.key)}>{chores.name}</h2></td>
-        </tr>
-    )
+    async function  displayDetails(taskID){
+        setDisplayChore(chores.find((chore) => chore.taskID === taskID));
+        setStatus(chores.find((chore) => chore.taskID === taskID).status);
+    }
+
+    useEffect(() => {populateChores()}, []); 
+
+    async function populateChores(){
+        axios.get("http://cs431-01.cs.rutgers.edu:8080/task/get-group-tasks-by-user", {params: {"userID": sessionStorage.getItem("userID"), "groupID": path[path.length-1]}})
+        .then((response) => { 
+            const {message, object} = response.data;
+            setChores(object);
+        }).catch((error) => {
+            console.log(error);
+        });
+    }
 
     const navigate = useNavigate();
 
-    async function  displayDetails(chorekey){
-        setDisplayChore(chores.find(chore => chore.key === chorekey));
-    }
+    async function  changeChoreStatus(taskID){
+        axios.put("http://cs431-01.cs.rutgers.edu:8080/task/update-status?taskID=" + taskID + "&taskStatus=" + status + "&userID=" + sessionStorage.getItem("userID"))
+        .then((response) => { 
+            console.log(response.data.message);
+        }).catch((error) => {
+            console.log(error);
+        });
 
-    async function  completeChore(){
-        
-    }
+        let tempChores = chores;
+        tempChores[tempChores.findIndex((chore) => chore.taskID === taskID)].status = status;
+        setChores(tempChores);
 
-    async function getChores(){
-
+        navigate(location.pathname);
     }
 
     return (
@@ -56,7 +53,13 @@ export default function UserChores(props){
                 <div className = "listView">
                     <br></br>
                     <h1>List of Chores</h1>
-                    <table className="choreTable">{listItems}</table>
+                    <table className="choreTable">{chores.map((chore) =>
+                        <tr>
+                            <td><img className="statusImage" src = {chore.status === "completed"? Check: X}></img></td>
+                            <td><h2 className="choreItem" onClick={()=>displayDetails(chore.taskID)}>{chore.name}</h2></td>
+                        </tr>
+                    )}
+                    </table>
                 </div>
             </div>
             <button className="returnButton" onClick={()=>navigate("/home")}>Return</button>
@@ -72,20 +75,27 @@ export default function UserChores(props){
                         <tr>
                             <td>
                                 <h2 className="choreInfoType">Status: </h2>
-                                <button className="completionButton" onClick={()=>completeChore()}>Mark Task As Complete!</button>
+                                <button className="completionButton" onClick={()=>changeChoreStatus(displayChore.taskID)}>Mark Task As:</button>
                             </td>
-                            <td><h2 className="choreInfo">{displayChore.status}</h2></td>
+                            <td>
+                                <h2 className="choreInfo">{displayChore.status}</h2>
+                                <select value={status} onChange = {(e) => setStatus(e.target.value)}>
+                                    <option value={"not started"}>Not Started</option>
+                                    <option value={"in progress"}>In Progress</option>
+                                    <option value={"completed"}>Completed</option>
+                                </select>
+                            </td>
                         </tr>
                         <tr>
                             <td><h2 className="choreInfoType">Due Date: </h2></td>
-                            <td><h2 className="choreInfo">{displayChore.status}</h2></td>
+                            <td><h2 className="choreInfo">{displayChore.dueDate}</h2></td>
                         </tr>
                         <tr>
                             <td><h2 className="choreInfoType">Description: </h2></td>
                         </tr>
                     </table>
                     <div>
-                        <h2 className="choreDescription">{displayChore.status}</h2>
+                        <h2 className="choreDescription">{displayChore.description}</h2>
                     </div>
                 </div>
             </div>

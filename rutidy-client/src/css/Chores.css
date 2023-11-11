@@ -22,6 +22,18 @@
     cursor: pointer;
 }
 
+.choresButton{
+    border: 0.5px solid black;
+    border-radius: 20px;
+    height: 3rem;
+    width: 7rem;
+    font-weight: bolder;
+}
+
+.choresButton:hover{
+    cursor: pointer;
+}
+
 .leftPane {
     width: 50%;
 }
@@ -113,6 +125,10 @@
     align-self: left;
 }
 
+.completionButton:hover {
+    cursor: pointer;
+}
+
 .choreDescription {
     font-size: 20px;
     margin-top: 0.01vh;
@@ -120,4 +136,11 @@
     margin-right: 3vw;
     margin-left: 3vw;
     overflow-wrap: anywhere;
+}
+
+.statusDropdown {
+    border-radius: 20px;
+    height: 2rem;
+    font-weight: bold;
+    align-self: left;
 }
