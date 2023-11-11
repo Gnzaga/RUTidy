@@ -28,7 +28,7 @@ export default function GroupDetails(props){
         }
         fetchUsersInGroup();
         fetchUserPermLevels();
-        axios.get("http://localhost:8080/group/get-group-by-id", {params: {"groupID": groupID}})
+        axios.get("http://cs431-01.cs.rutgers.edu:8080/group/get-group-by-id", {params: {"groupID": groupID}})
         .then((response) => {
             console.log(response.data);
             setGroup(response.data);
@@ -44,7 +44,7 @@ export default function GroupDetails(props){
     }
     
     const fetchUsersInGroup = () => {
-        axios.get("http://localhost:8080/group/listUsersInGroup", {params: {"groupID": groupID}})
+        axios.get("http://cs431-01.cs.rutgers.edu:8080/group/listUsersInGroup", {params: {"groupID": groupID}})
         .then((response) => {
             console.log(response.data);
             setUsersInGroup(response.data);
@@ -56,7 +56,7 @@ export default function GroupDetails(props){
     }
 
     const fetchUserPermLevels = () => {
-        axios.get("http://localhost:8080/group/get-all-user-roles", {params: {"groupID": groupID}})
+        axios.get("http://cs431-01.cs.rutgers.edu:8080/group/get-all-user-roles", {params: {"groupID": groupID}})
         .then((response) => {
             console.log(response.data);
             setUserRolesMap(response.data);
@@ -70,7 +70,7 @@ export default function GroupDetails(props){
 
 
     const handleRemoveUser = (userID) => {
-        axios.delete("http://localhost:8080/group/removeUserFromGroup", {params: {userID: userID, groupID: groupID}})
+        axios.delete("http://cs431-01.cs.rutgers.edu:8080/group/removeUserFromGroup", {params: {userID: userID, groupID: groupID}})
         .then((response) => {
             const {message} = response.data;
             if (response.value == null){
@@ -90,7 +90,7 @@ export default function GroupDetails(props){
 
     const handleRoleChange = (userID, newRoles) => {
 
-        axios.put("http://localhost:8080/group/updateUserPermission", null, {params: { groupID:groupID, userID:userID, roles:newRoles}})
+        axios.put("http://cs431-01.cs.rutgers.edu:8080/group/updateUserPermission", null, {params: { groupID:groupID, userID:userID, roles:newRoles}})
         .then((response) => {
             
             const {message} = response.data;
@@ -107,7 +107,7 @@ export default function GroupDetails(props){
 
     const addUserToGroup = (textEntry) => {
         setError(null);
-        axios.post("http://localhost:8080/group/addUserToGroup", null, {params: {groupID, textEntry}})
+        axios.post("http://cs431-01.cs.rutgers.edu:8080/group/addUserToGroup", null, {params: {groupID, textEntry}})
         .then((response) => {
             const {message} = response.data;
             if (message !== "Success!"){

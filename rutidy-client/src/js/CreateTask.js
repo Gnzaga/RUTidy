@@ -3,7 +3,6 @@ import {useNavigate} from "react-router-dom";
 import { useParams } from 'react-router-dom';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
-import { format } from 'date-fns';
 import "../css/CreateTask.css";
 import axios from "axios";
 
@@ -35,7 +34,7 @@ export default function CreateTask(props){
 
         const timezoneOffset = taskDueDate.getTimezoneOffset();
         const adjustedIsoDueDate = new Date(taskDueDate.getTime() - (timezoneOffset * 60 * 1000)).toISOString().replace(/\.\d+/, '');
-        axios.post("http://localhost:8080/task/create", 
+        axios.post("http://cs431-01.cs.rutgers.edu:8080/task/create", 
         {"name":taskName, "description":taskDescription, "dueDate":adjustedIsoDueDate,
         "priority":taskPriority, "status":initialStatus,"userID":userID, "groupID":groupID})
         .then((response) => { 

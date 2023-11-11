@@ -17,7 +17,7 @@ export default function Login(props){
             return;
         }
         
-        axios.post("http://localhost:8080/user/login", {"email": username, password})
+        axios.post("http://cs431-01.cs.rutgers.edu:8080/user/login", {"email": username, password})
         .then((response) => {
             const {message, user} = response.data;
             if (message !== "Login successful") { 

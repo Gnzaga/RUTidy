@@ -30,7 +30,7 @@ export default function Home (){
 
     const queryGroups = useCallback(() => {
         axios
-          .get("http://localhost:8080/group/in", {
+          .get("http://cs431-01.cs.rutgers.edu:8080/group/in", {
             params: { userID: sessionStorage.getItem("userID") }
           })
           .then((response) => {
@@ -38,8 +38,8 @@ export default function Home (){
             const groups = response.data;
       
             // Correct the filter conditions to access group.group.roles
-            const newAdminGroups = groups.filter((group) => group.roles !== 2);
-            const newUserGroups = groups.filter((group) => group.roles === 2);
+            const newAdminGroups = groups.filter((group) => group.group.roles !== 2);
+            const newUserGroups = groups.filter((group) => group.group.roles === 2);
       
             // Update the state once with the filtered results
             setAdminGroups([...newAdminGroups]);
@@ -66,7 +66,7 @@ export default function Home (){
     async function handleLeaveGroup(UIGroupID, isAdmin){
         const id = UIGroupID;
 
-        await axios.delete("http://localhost:8080/group/leave", {params: {userID: sessionStorage.getItem("userID"), groupID:id.group?.groupID}})
+        await axios.delete("http://cs431-01.cs.rutgers.edu:8080/group/leave", {params: {userID: sessionStorage.getItem("userID"), groupID:id.group?.groupID}})
         .then((response) => {
             if (isAdmin){
                 const newAdminGroups = adminGroups.filter(group => group.uigroupID !== UIGroupID);
@@ -90,7 +90,7 @@ export default function Home (){
     async function handleJoinGroup(groupID){
         const userID = sessionStorage.getItem("userID");
 
-        await axios.put("http://localhost:8080/group/join", null, {params: {groupID, userID}})
+        await axios.put("http://cs431-01.cs.rutgers.edu:8080/group/join", null, {params: {groupID, userID}})
         .then((response) => {
             const message = response.data;
             if (message !== "Success!"){
@@ -106,7 +106,7 @@ export default function Home (){
     }
 
     async function handleSearch(){
-        await axios.get("http://localhost:8080/group/name", {params: {"groupName": searchGroupName}})
+        await axios.get("http://cs431-01.cs.rutgers.edu:8080/group/name", {params: {"groupName": searchGroupName}})
         .then((response) => {
             setSearchResults([...response.data]);
         })
@@ -171,9 +171,9 @@ export default function Home (){
                 {userGroups.map(group => {
                     return (
                         <div key={group.group?.groupID} className = "homePageGroupDiv">
-                            <Link to={'/chores/' + (group.group?.groupID || '')} className="homeGroupName">
+                            <Link to={'/groupdetails/' + (group.group?.groupID || '')} className="homeGroupName">
         {group.group?.name || ''}</Link>
-                            <p onClick = {() => handleLeaveGroup(group?.uigroupID, false)}>Leave group</p>
+                            <p onClick = {() => handleLeaveGroup(group?.uigroupID, true)}>Leave group</p>
                         </div>
                     )
                 })}
