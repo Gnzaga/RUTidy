@@ -1,0 +1,86 @@
+.editTaskPage { 
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 100vw;
+    background-color: #a8a1b1;
+    background-image:
+    radial-gradient(ellipse at 10% 90%, #5f5496 0%, transparent 55%),
+    radial-gradient(ellipse at 90% 90%, #e18fa7 0%, transparent 55%),
+    radial-gradient(ellipse at 90% 10%, #6d8bd6 0%, transparent 55%),
+    radial-gradient(ellipse at 10% 10%, #4c3d63 0%, transparent 55%);
+}
+
+.editTaskPage h1 { 
+    margin: 0;
+    padding-top: 50px;
+}
+
+.editTaskPage p {
+    margin-top: 10px;
+}
+
+.editTaskPage input { 
+    height: 1.5rem;
+    width: 10rem;
+}
+
+.editTaskForm { 
+    margin-top: 10%;
+    height: 60vh;
+    width: 50vw;
+    background-color: white;
+    border-radius: 30px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+}
+
+.errorMessage { 
+    margin-top: 50px;
+    font-size: 15px;
+    color: rgb(143, 29, 29);
+}
+
+.taskName { 
+    margin-top: 30px;
+    margin-bottom: 10px;
+}
+
+.taskDescription{
+
+}
+
+.taskDueDate{
+
+}
+
+.taskStatus{
+
+}
+
+.taskPriority{
+
+}
+
+.taskAssignment{
+
+}
+
+.button { 
+    margin-top: 30px;
+    padding-top: 0;
+    font: 17px;
+    border-radius: 10px;
+    background-color: #a8a1b1;
+    background-image:
+    radial-gradient(ellipse at 10% 90%, #5f5496 0%, transparent 55%),
+    radial-gradient(ellipse at 90% 90%, #e18fa7 0%, transparent 55%),
+    radial-gradient(ellipse at 90% 10%, #6d8bd6 0%, transparent 55%),
+    radial-gradient(ellipse at 10% 10%, #4c3d63 0%, transparent 55%);
+}
+
+.button:hover {
+    cursor: pointer;
+}

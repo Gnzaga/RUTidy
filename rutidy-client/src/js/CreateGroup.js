@@ -17,7 +17,7 @@ export default function Create(props){
             return;
         }
         const userID = sessionStorage.getItem("userID");
-        axios.post("http://cs431-01.cs.rutgers.edu:8080/group/create", {"name":name, "ownerID": userID})
+        axios.post("http://localhost:8080/group/create", {"name":name, "ownerID": userID})
         .then((response) => { 
             const {message} = response.data;
             if (message !== "Group has been created!"){
