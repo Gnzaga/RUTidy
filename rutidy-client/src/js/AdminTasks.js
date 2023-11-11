@@ -3,9 +3,11 @@ import "../css/AdminTasks.css";
 import axios from "axios";
 import X from "../image/x.png";
 import Edit from "../image/edit.png";
+import { useParams } from 'react-router-dom';
 import {useNavigate} from "react-router";
+import { Link } from 'react-router-dom';
 
-export default function AdminTasks(groupID){
+export default function AdminTasks(props){
     const [displayTask, setDisplayTask] = useState(false);
     const [tasks, setTasks] = useState([
         {
@@ -82,13 +84,14 @@ export default function AdminTasks(groupID){
         }
     ]);
     const [selectedTask, setSelectedTask] = useState({});
+    const {groupID} = useParams();
     const navigate = useNavigate();
 
     
-    /*useEffect(() => {
+    useEffect(() => {
         if (sessionStorage.getItem("userID") == null) navigate("/home");
 
-        axios.get("http://localhost:8080/task/get-group-tasks", null, {params: {groupID}})
+        axios.get("http://localhost:8080/task/get-group-tasks", {params: {groupID: groupID}})
         .then((response) => {
             setTasks(response.data.object);
         })
@@ -96,13 +99,12 @@ export default function AdminTasks(groupID){
             navigate("/home")
         })
 
-    }, [])*/
+    }, [])
 
     return (
         <div className = "adminTasksPage">
             <button onClick = {() => navigate("/home")}>Return to home</button>
-            {/* here you would navigate to the page Aidan created*/}
-            <button style = {{marginLeft: "30px"}}>Create Task</button>
+            <button onClick = {() => navigate(`/create/task/${groupID}`)}>Create a task</button>
             <div className = "adminTasksContainer">
                 <div className = "adminTasksDisplay">
                     <h1>Group Tasks</h1>
@@ -111,8 +113,7 @@ export default function AdminTasks(groupID){
                             return (
                                 <div className = "adminTask">
                                     <div className = "adminTaskLeftDiv">
-                                        {/*here you would navigate to the page Aidan created*/}
-                                        <img src = {Edit} alt = "editImage"></img>
+                                        <img src = {Edit} alt = "editImage" onClick = {() => navigate('/edit/task/' + (groupID) + '/' + (task.taskID))}></img>
                                         <h3 onClick = {() => {setSelectedTask(task); setDisplayTask(true)}}>{task.name}</h3>
                                     </div>
                                     <h3>{task.assignedUsers.map((user) => user.name).join(",")}</h3>
