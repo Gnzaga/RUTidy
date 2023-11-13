@@ -5,7 +5,6 @@ import X from "../image/x.png";
 import Edit from "../image/edit.png";
 import { useParams } from 'react-router-dom';
 import {useNavigate} from "react-router";
-import { Link } from 'react-router-dom';
 
 export default function AdminTasks(props){
     const [displayTask, setDisplayTask] = useState(false);
@@ -91,7 +90,7 @@ export default function AdminTasks(props){
     useEffect(() => {
         if (sessionStorage.getItem("userID") == null) navigate("/home");
 
-        axios.get("http://localhost:8080/task/get-group-tasks", {params: {groupID: groupID}})
+        axios.get("http://cs431-01.cs.rutgers.edu:8080/task/get-group-tasks", {params: {groupID: groupID}})
         .then((response) => {
             setTasks(response.data.object);
         })

@@ -6,7 +6,6 @@ import Home from "./js/Home";
 import GroupDetails from "./js/GroupDetails";
 import Profile from "./js/Profile";
 import EditProfile from "./js/EditProfile";
-import UserChores from './js/UserChores';
 import CreateGroup from "./js/CreateGroup";
 import CreateTask from "./js/CreateTask";
 import EditTask from "./js/EditTask";
@@ -23,7 +22,6 @@ root.render(
       <Route path = "/home" element = {<Home/>}></Route>
       <Route path = "/profile" element = {<Profile />}></Route>
       <Route path = "/profile/edit" element = {<EditProfile />}></Route>
-      <Route path = "/chores/:groupID" element = {<UserChores />}></Route>
       <Route path = "/groupdetails/:groupID" element = {<GroupDetails/>}></Route>
       
       <Route path = "/edit/task/:groupID/:taskID" element = {<EditTask/>}></Route>
