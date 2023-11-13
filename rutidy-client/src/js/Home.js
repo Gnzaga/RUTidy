@@ -38,8 +38,8 @@ export default function Home (){
             const groups = response.data;
       
             // Correct the filter conditions to access group.group.roles
-            const newAdminGroups = groups.filter((group) => group.group.roles !== 2);
-            const newUserGroups = groups.filter((group) => group.group.roles === 2);
+            const newAdminGroups = groups.filter((group) => group.roles !== 2);
+            const newUserGroups = groups.filter((group) => group.roles === 2);
       
             // Update the state once with the filtered results
             setAdminGroups([...newAdminGroups]);
@@ -171,9 +171,9 @@ export default function Home (){
                 {userGroups.map(group => {
                     return (
                         <div key={group.group?.groupID} className = "homePageGroupDiv">
-                            <Link to={'/groupdetails/' + (group.group?.groupID || '')} className="homeGroupName">
+                            <Link to={'/chores/' + (group.group?.groupID || '')} className="homeGroupName">
         {group.group?.name || ''}</Link>
-                            <p onClick = {() => handleLeaveGroup(group?.uigroupID, true)}>Leave group</p>
+                            <p onClick = {() => handleLeaveGroup(group?.uigroupID, false)}>Leave group</p>
                         </div>
                     )
                 })}
