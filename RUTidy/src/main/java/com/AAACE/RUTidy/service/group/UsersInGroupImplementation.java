@@ -1,4 +1,4 @@
-package com.AAACE.RUTidy.service;
+package com.AAACE.RUTidy.service.group;
 
 import java.util.Optional;
 import java.util.HashMap;

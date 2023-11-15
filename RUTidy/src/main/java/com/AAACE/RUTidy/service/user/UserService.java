@@ -1,4 +1,4 @@
-package com.AAACE.RUTidy.service;
+package com.AAACE.RUTidy.service.user;
 
 import com.AAACE.RUTidy.dto.LoginDTO;
 import com.AAACE.RUTidy.dto.LoginResponse;
