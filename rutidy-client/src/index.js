@@ -11,6 +11,7 @@ import CreateTask from "./js/CreateTask";
 import EditTask from "./js/EditTask";
 import AdminTasks from "./js/AdminTasks";
 import UserChores from "./js/UserChores";
+import CreateNSTask from './js/CreateNSTask';
 import {BrowserRouter, Routes, Route} from "react-router-dom";
 
 
@@ -28,6 +29,7 @@ root.render(
       <Route path = "/edit/task/:groupID/:taskID" element = {<EditTask/>}></Route>
       <Route path = "/admin/tasks/:groupID" element = {<AdminTasks />}></Route>
       <Route path = "/create/task/:groupID" element = {<CreateTask/>}></Route>
+      <Route path = "/create/nonscheduledtask/:groupID" element = {<CreateNSTask/>}></Route>
       <Route path = "/create/group" element = {<CreateGroup/>}></Route>
     </Routes>
   </BrowserRouter>

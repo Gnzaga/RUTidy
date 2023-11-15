@@ -21,7 +21,7 @@ export default function UserChores(props){
     useEffect(() => {populateChores()}, []); 
 
     async function populateChores(){
-        axios.get("http://cs431-01.cs.rutgers.edu:8080/task/get-group-tasks-by-user", {params: {"userID": sessionStorage.getItem("userID"), "groupID": path[path.length-1]}})
+        axios.get("http://localhost:8080/task/get-group-tasks-by-user", {params: {"userID": sessionStorage.getItem("userID"), "groupID": path[path.length-1]}})
         .then((response) => { 
             const {message, object} = response.data;
             setChores(object);
@@ -33,7 +33,7 @@ export default function UserChores(props){
     const navigate = useNavigate();
 
     async function  changeChoreStatus(taskID){
-        axios.put("http://cs431-01.cs.rutgers.edu:8080/task/update-status?taskID=" + taskID + "&taskStatus=" + status + "&userID=" + sessionStorage.getItem("userID"))
+        axios.put("http://localhost:8080/task/update-status?taskID=" + taskID + "&taskStatus=" + status + "&userID=" + sessionStorage.getItem("userID"))
         .then((response) => { 
             console.log(response.data.message);
         }).catch((error) => {
@@ -55,7 +55,7 @@ export default function UserChores(props){
                     <h1>List of Chores</h1>
                     <table className="choreTable">{chores.map((chore) =>
                         <tr>
-                            <td><img className="statusImage" src = {chore.status === "completed"? Check: X}></img></td>
+                            <td><img className="statusImage" src = {chore.status.toLowerCase() === "completed"? Check: X}></img></td>
                             <td><h2 className="choreItem" onClick={()=>displayDetails(chore.taskID)}>{chore.name}</h2></td>
                         </tr>
                     )}
@@ -63,6 +63,7 @@ export default function UserChores(props){
                 </div>
             </div>
             <button className="returnButton" onClick={()=>navigate("/home")}>Return</button>
+            <button className="createTaskButton" onClick={()=>navigate("/create/nonscheduledtask/"+ path[path.length-1])}>Create NS Task</button>
             <div className = "rightPane">
                 <div className = "detailView">
                     <br></br>
