@@ -25,6 +25,5 @@ public class Response {
     public Object getObject() {
         return this.object;
     }
-
-   
+    
 }

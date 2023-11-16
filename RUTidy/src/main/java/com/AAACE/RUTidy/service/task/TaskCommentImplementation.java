@@ -3,6 +3,7 @@ package com.AAACE.RUTidy.service.task;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 import com.AAACE.RUTidy.dto.*;
 import com.AAACE.RUTidy.repository.*;
@@ -26,11 +27,12 @@ public class TaskCommentImplementation implements TaskCommentService{
 
 
     public Response createTaskComment(TaskCommentDTO taskCommentDTO){
-        User user = userRepository.findByUserID(taskCommentDTO.getUserID()).get();
+        Optional<User> optionalUser = userRepository.findByUserID(taskCommentDTO.getUserID());
         //check if user exists
-        if(user == null){
+        if(optionalUser.isEmpty()){
             return new Response(ResponseConstants.USER_NOT_FOUND, null);
         }
+        User user = optionalUser.get();
 
         Task task = taskRepository.findByTaskID(taskCommentDTO.getTaskID()).get();
         //check if task exists
@@ -50,22 +52,26 @@ public class TaskCommentImplementation implements TaskCommentService{
     }
 
     public Response getTaskComment(int taskCommentID){
-        TaskComment taskComment = taskCommentRepository.findByCommentID(taskCommentID).get();
+        Optional<TaskComment> optionalTaskComment = taskCommentRepository.findByCommentID(taskCommentID);
         //check if task comment exists
-        if(taskComment == null){
+        if(optionalTaskComment.isEmpty()){
             return new Response(ResponseConstants.TASK_COMMENT_NOT_FOUND, null);
         }
+
+        TaskComment taskComment = optionalTaskComment.get();
 
         return new Response(ResponseConstants.SUCCESS, taskComment);
     }
     
 
     public Response getTaskComments(int taskID){
-        Task task = taskRepository.findByTaskID(taskID).get();
+        Optional<Task> optionalTask = taskRepository.findByTaskID(taskID);
         //check if task exists
-        if(task == null){
+        if(optionalTask.isEmpty()){
             return new Response(ResponseConstants.TASK_NOT_FOUND, null);
-        }
+        }  
+
+        Task task = optionalTask.get();
 
         List<TaskComment> taskComments = taskCommentRepository.findByTask(task);
 
@@ -74,11 +80,13 @@ public class TaskCommentImplementation implements TaskCommentService{
 
 
     public Response getTaskCommentsSorted(int taskID){
-        Task task = taskRepository.findByTaskID(taskID).get();
+        Optional<Task> optionalTask = taskRepository.findByTaskID(taskID);
         //check if task exists
-        if(task == null){
+        if(optionalTask.isEmpty()){
             return new Response(ResponseConstants.TASK_NOT_FOUND, null);
         }
+
+        Task task = optionalTask.get();
 
         List<TaskComment> taskComments = taskCommentRepository.findByTask(task);
 
@@ -88,11 +96,12 @@ public class TaskCommentImplementation implements TaskCommentService{
     }
 
     public Response getTaskCommentsByUserID(int userID){
-        User user = userRepository.findByUserID(userID).get();
+        Optional<User> optionalUser = userRepository.findByUserID(userID);
         //check if user exists
-        if(user == null){
+        if(optionalUser.isEmpty()){
             return new Response(ResponseConstants.USER_NOT_FOUND, null);
         }
+        User user = optionalUser.get();
 
         List<TaskComment> taskComments = taskCommentRepository.findByAuthor(user);
 
@@ -100,11 +109,12 @@ public class TaskCommentImplementation implements TaskCommentService{
     }
 
     public Response updateTaskComment(TaskCommentDTO taskCommentDTO){
-        User user = userRepository.findByUserID(taskCommentDTO.getUserID()).get();
+        Optional<User> optionalUser = userRepository.findByUserID(taskCommentDTO.getUserID());
         //check if user exists
-        if(user == null){
+        if(optionalUser.isEmpty()){
             return new Response(ResponseConstants.USER_NOT_FOUND, null);
         }
+        User user = optionalUser.get();
 
         Task task = taskRepository.findByTaskID(taskCommentDTO.getTaskID()).get();
         //check if task exists
@@ -126,11 +136,13 @@ public class TaskCommentImplementation implements TaskCommentService{
     }
 
     public Response deleteTaskComment(int taskCommentID){
-        TaskComment taskComment = taskCommentRepository.findByCommentID(taskCommentID).get();
+        Optional<TaskComment> optionalComment = taskCommentRepository.findByCommentID(taskCommentID);
         //check if task comment exists
-        if(taskComment == null){
+        if(optionalComment.isEmpty()){
             return new Response(ResponseConstants.TASK_COMMENT_NOT_FOUND, null);
         }
+
+        TaskComment taskComment = optionalComment.get();
 
         taskCommentRepository.delete(taskComment);
 
@@ -138,11 +150,12 @@ public class TaskCommentImplementation implements TaskCommentService{
     }
 
     public Response getAuthoredComments(int userID){
-        User user = userRepository.findByUserID(userID).get();
+        Optional<User> optionalUser = userRepository.findByUserID(userID);
         //check if user exists
-        if(user == null){
+        if(optionalUser.isEmpty()){
             return new Response(ResponseConstants.USER_NOT_FOUND, null);
         }
+        User user = optionalUser.get();
 
         List<TaskComment> taskComments = taskCommentRepository.findByAuthor(user);
 
@@ -150,11 +163,12 @@ public class TaskCommentImplementation implements TaskCommentService{
     }    
 
     public Response getAuthoredCommentsInTask(int userID, int taskID){
-        User user = userRepository.findByUserID(userID).get();
+        Optional<User> optionalUser = userRepository.findByUserID(userID);
         //check if user exists
-        if(user == null){
+        if(optionalUser.isEmpty()){
             return new Response(ResponseConstants.USER_NOT_FOUND, null);
         }
+        User user = optionalUser.get();
 
         Task task = taskRepository.findByTaskID(taskID).get();
         //check if task exists

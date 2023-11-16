@@ -126,6 +126,14 @@ public class TaskComment {
     }
 
     /**
+     * This is the function to get the commentID
+     * @param other
+     * @return
+     */
+    public int getCommentID(){
+        return this.commentID;
+    }
+    /**
      * This compare to will override normal compare to to allow comments to be sorted by date
      */
     public int compareTo(TaskComment other){
