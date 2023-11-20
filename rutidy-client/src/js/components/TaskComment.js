@@ -38,6 +38,16 @@ const TaskCommentsComponent = React.memo(({ taskID, currentUserID }) => {
         commentsEndRef.current?.scrollIntoView({ behavior: "smooth" });
     }, [comments]); // Dependency array includes 'comments' to trigger effect when it updates
     
+    useEffect(() => {
+        const eventSource = new EventSource('http://localhost:8080/comment/stream'); // Use the actual server URL
+        eventSource.onmessage = (event) => {
+          const newComment = JSON.parse(event.data);
+          console.log('Received new comment:', newComment)
+          setComments(prevComments => [...prevComments, newComment]);
+        };
+    
+        return () => eventSource.close();
+    }, []);
     
 
     const handleAddComment = async (event) => {
