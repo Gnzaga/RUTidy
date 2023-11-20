@@ -144,18 +144,3 @@
     font-weight: bold;
     align-self: left;
 }
-
-.comment-text {
-    max-width: 300px; /* Adjust the maximum width as needed */
-    word-wrap: break-word; /* Enable word wrapping */
-}
-
-.container{
-    padding:20px;
-}
-
-.task-comments-container {
-    flex: 1; 
-    overflow-y: auto; 
-    padding: 20px;
-}

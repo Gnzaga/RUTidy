@@ -1,5 +1,5 @@
-import React, { useState, useEffect  } from 'react';
-import '../../css/Chores.css';
+import React, { useState, useEffect, useRef} from 'react';
+import '../../css/ChoreComment.css';
 import { 
     createTaskComment, 
     getAllTaskComments, 
@@ -15,6 +15,7 @@ const TaskCommentsComponent = React.memo(({ taskID, currentUserID }) => {
     const [editingComment, setEditingComment] = useState(null);
     const [editedCommentText, setEditedCommentText] = useState('');
     const [charCount, setCharCount] = useState(0);
+    const commentsEndRef = useRef(null);
 
     useEffect(() => {
         const fetchComments = async () => {
@@ -33,15 +34,21 @@ const TaskCommentsComponent = React.memo(({ taskID, currentUserID }) => {
         fetchComments();
     }, [taskID]);
 
+    useEffect(() => {
+        commentsEndRef.current?.scrollIntoView({ behavior: "smooth" });
+    }, [comments]); // Dependency array includes 'comments' to trigger effect when it updates
+    
     
 
     const handleAddComment = async (event) => {
-        event.preventDefault();
+        if(event){
+            event.preventDefault();
+        }
+        
         if (!newCommentText.trim() || newCommentText.length > 255) return;
         try {
             const newCommentDTO = buildCommentDTO(taskID, currentUserID, newCommentText);
-            const response = await createTaskComment(newCommentDTO);
-    
+            const response = await createTaskComment(newCommentDTO);    
             if (response.message === "Success" && response.object) {
                 // Extract the actual comment object from response and add to the state
                 setComments(prevComments => [...prevComments, response.object]);
@@ -49,18 +56,27 @@ const TaskCommentsComponent = React.memo(({ taskID, currentUserID }) => {
                 // Handle the case where the response is not as expected
                 console.error('Failed to add comment:', response.message);
             }
-            
+            setCharCount(0); // Reset the character count
             setNewCommentText(''); // Clear the input field
         } catch (error) {
             console.error('Error adding comment:', error);
         }
     };
 
+
+
     const startEditing = (comment) => {
         setEditingComment(comment);
         setEditedCommentText(comment.comment);
     };
 
+    const formatDateTime = (dateString) => {
+        const options = { hour: 'numeric', minute: 'numeric', hour12: true };
+        const date = new Date(dateString);
+        const timeString = date.toLocaleTimeString('en-US', options);
+        const dateString2 = date.toLocaleDateString('en-US', { day: '2-digit', month: '2-digit', year: 'numeric' });
+        return `${timeString}, ${dateString2}`;
+    }
 
     const handleEditComment = async () => {
         if (!editedCommentText.trim()) return;
@@ -92,31 +108,45 @@ const TaskCommentsComponent = React.memo(({ taskID, currentUserID }) => {
         setCharCount(text.length); // Update character count as the user types
     };
 
+    const handleKeyDown = (event) => {
+        if (event.key === 'Enter' && !event.shiftKey) { // Checks if Enter key is pressed without Shift
+            event.preventDefault(); // Prevents the default action of adding a new line
+            handleAddComment(); // Calls the function to handle adding a comment
+        }
+    };
+
     return (
         <div className="container">
             <h2>Task Comments</h2>
-            {comments.map(comment => (
-                <div key={comment.task.taskID}>
-                    <p>
-                        <strong>{comment.author.name}:</strong>
-                        <span className="comment-text">{comment.comment}</span>
-                    </p>
-    
-                    {parseInt(comment.author.userID) === parseInt(currentUserID) && (
-                        <div>
-                            <button onClick={() => handleDeleteComment(comment.commentID)}>Delete</button>
+            <div className="comments-container">
+                {comments.map((comment,index) => (
+                    <div 
+                        key={comment.commentID} 
+                        className={`comment ${parseInt(comment.author.userID) !== parseInt(currentUserID) ? 'other-comment' : ''}`}
+                        ref={index === comments.length-1 ? commentsEndRef : null}>
+                        <div className="comment-header">
+                            <span className="comment-author">{comment.author.name}</span>
+                            <span className="comment-time">{formatDateTime(comment.date)}</span>
                         </div>
-                    )}
-                </div>
-            ))}
+                        <div className="comment-body">{comment.comment}</div>
+                        {parseInt(comment.author.userID) === parseInt(currentUserID) && (
+                            <div className="comment-options">
+                                <span onClick={() => {handleDeleteComment(comment.commentID)}}>|</span>
+                            </div>
+                        )}
+                    </div>
+                ))}
+            </div>
 
 
             <form onSubmit={handleAddComment}>
-                <textarea 
-                    value={newCommentText} 
-                    onChange={handleInputChange}
-                    placeholder="Write a new comment..."
-                />
+            <textarea 
+                className="text-entry"
+                value={newCommentText} 
+                onChange={handleInputChange}
+                onKeyDown={handleKeyDown}
+                placeholder="Write a new comment..."
+            />
                 <div>
                   {charCount}/255 characters
                 </div>
