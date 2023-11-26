@@ -98,7 +98,7 @@ public interface TaskService  {
      * @param groupID
      * @return
      */
-    Response getUsersTasksInGroup(int userID, int groupID);
+    Response getUsersTasksInGroup(int userID, int groupID, String userTimeZone);
 
     /**
      * Adds a new user to this group
