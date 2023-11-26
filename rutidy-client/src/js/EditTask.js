@@ -48,7 +48,7 @@ export default function EditTask(props){
     }*/
 
     const fetchUsersInGroup = () => {
-        axios.get("http://localhost:8080/group/listUsersInGroup", {params: {"groupID": groupID}})
+        axios.get("http://cs431-01.cs.rutgers.edu:8080/group/listUsersInGroup", {params: {"groupID": groupID}})
         .then((response) => {
             console.log(response.data);
             setUsersInGroup(response.data);
@@ -69,7 +69,7 @@ export default function EditTask(props){
             return;
         }
         const isoDueDate = taskDueDate.toISOString();
-        axios.put("http://localhost:8080/task/update", 
+        axios.put("http://cs431-01.cs.rutgers.edu:8080/task/update", 
         {"name":taskName, "description":taskDescription, "dueDate":isoDueDate,
         "priority":taskPriority, "status":taskStatus, "userID":userID, "groupID":groupID},
         {params:{"taskID":taskID}})
@@ -95,7 +95,7 @@ export default function EditTask(props){
     async function handleAssignUser(userID, taskID, username){
         console.log(taskID);
         console.log(userID);
-        axios.put("http://localhost:8080/task/assign-user", null,
+        axios.put("http://cs431-01.cs.rutgers.edu:8080/task/assign-user", null,
         {params: {taskID:taskID, userID:userID}})
         .then((response) => { 
             const {message} = response.data;
@@ -121,7 +121,7 @@ export default function EditTask(props){
 
     async function handleUnassignUser(userID, taskID, username){
         
-        axios.put("http://localhost:8080/task/remove-user", null, 
+        axios.put("http://cs431-01.cs.rutgers.edu:8080/task/remove-user", null, 
         {params: {"taskID":taskID, "userID":userID}})
         .then((response) => { 
             const {message} = response.data;
@@ -147,7 +147,7 @@ export default function EditTask(props){
 
     async function handleDeleteTask(taskID){
         
-        axios.delete("http://localhost:8080/task/delete", 
+        axios.delete("http://cs431-01.cs.rutgers.edu:8080/task/delete", 
         {params: {"taskID":taskID}})
         .then((response) => { 
             const {message} = response.data;
