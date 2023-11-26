@@ -19,6 +19,8 @@ import java.util.ArrayList;
 import java.util.UUID;
 
 import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 
 /**
  * This is the Task class. It contains the following fields:
@@ -98,7 +100,12 @@ public class Task {
         this.name = name;
         this.description = description;
         this.dueDate = dueDate;
-        this.assignedDate = LocalDateTime.now();
+        LocalDateTime localDate = LocalDateTime.now();
+        ZoneId localZone = ZoneId.of("America/New_York");
+        ZonedDateTime zonedDateTime = localDate.atZone(localZone);
+        ZonedDateTime utcDateTime = zonedDateTime.withZoneSameInstant(ZoneId.of("UTC"));
+        LocalDateTime adjustedLocalDate = utcDateTime.toLocalDateTime();
+        this.assignedDate = adjustedLocalDate;
         this.priority = priority;
         this.status = status;
         this.taskID = UUID.randomUUID().hashCode();
@@ -114,8 +121,13 @@ public class Task {
     public Task(){
         this.name = "";
         this.description = "";
-        this.dueDate = LocalDateTime.now();
-        this.assignedDate = LocalDateTime.now();
+        LocalDateTime localDate = LocalDateTime.now();
+        ZoneId localZone = ZoneId.of("America/New_York");
+        ZonedDateTime zonedDateTime = localDate.atZone(localZone);
+        ZonedDateTime utcDateTime = zonedDateTime.withZoneSameInstant(ZoneId.of("UTC"));
+        LocalDateTime adjustedLocalDate = utcDateTime.toLocalDateTime();
+        this.dueDate = adjustedLocalDate;
+        this.assignedDate = adjustedLocalDate;
         this.priority = TaskConstants.LOW;
         this.status = TaskConstants.NOT_STARTED;
         this.taskID = UUID.randomUUID().hashCode();
