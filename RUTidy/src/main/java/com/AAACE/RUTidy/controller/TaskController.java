@@ -194,8 +194,8 @@ public class TaskController {
      * all tasks that are assigned to the specified user in the specified group
      */
     @GetMapping("/get-group-tasks-by-user")
-    public Response getGroupTasksByUser(@RequestParam int userID, @RequestParam int groupID) {
-        return taskService.getUsersTasksInGroup(userID, groupID);
+    public Response getGroupTasksByUser(@RequestParam int userID, @RequestParam int groupID, @RequestParam String userTimeZone) {
+        return taskService.getUsersTasksInGroup(userID, groupID, userTimeZone);
     }
 
 
