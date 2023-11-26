@@ -31,9 +31,7 @@ export default function CreateTask(props){
             setError("Please enter all fields!");
             return;
         }
-
-        const timezoneOffset = taskDueDate.getTimezoneOffset();
-        const adjustedIsoDueDate = new Date(taskDueDate.getTime() - (timezoneOffset * 60 * 1000)).toISOString().replace(/\.\d+/, '');
+        const adjustedIsoDueDate = taskDueDate.toISOString();
         axios.post("http://cs431-01.cs.rutgers.edu:8080/task/create", 
         {"name":taskName, "description":taskDescription, "dueDate":adjustedIsoDueDate,
         "priority":taskPriority, "status":initialStatus,"userID":userID, "groupID":groupID})
