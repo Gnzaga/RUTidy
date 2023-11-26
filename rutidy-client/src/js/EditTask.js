@@ -48,7 +48,7 @@ export default function EditTask(props){
     }*/
 
     const fetchUsersInGroup = () => {
-        axios.get("http://cs431-01.cs.rutgers.edu:8080/group/listUsersInGroup", {params: {"groupID": groupID}})
+        axios.get("http://localhost:8080/group/listUsersInGroup", {params: {"groupID": groupID}})
         .then((response) => {
             console.log(response.data);
             setUsersInGroup(response.data);
@@ -69,7 +69,7 @@ export default function EditTask(props){
             return;
         }
         const isoDueDate = taskDueDate.toISOString();
-        axios.put("http://cs431-01.cs.rutgers.edu:8080/task/update", 
+        axios.put("http://localhost:8080/task/update", 
         {"name":taskName, "description":taskDescription, "dueDate":isoDueDate,
         "priority":taskPriority, "status":taskStatus, "userID":userID, "groupID":groupID},
         {params:{"taskID":taskID}})
@@ -87,20 +87,24 @@ export default function EditTask(props){
         
     }
 
-    const handleAssignUserClick = (event, userID, taskID) => {
+    const handleAssignUserClick = (event, userID, taskID, username) => {
         event.preventDefault();
-        handleAssignUser(userID, taskID);
+        handleAssignUser(userID, taskID, username);
     }
 
-    async function handleAssignUser(userID, taskID){
+    async function handleAssignUser(userID, taskID, username){
         console.log(taskID);
         console.log(userID);
-        axios.put("http://cs431-01.cs.rutgers.edu:8080/task/assign-user", null,
+        axios.put("http://localhost:8080/task/assign-user", null,
         {params: {taskID:taskID, userID:userID}})
         .then((response) => { 
             const {message} = response.data;
             if (message !== "Success"){
-                setError(message);
+                setError(username + " is already assigned to task");
+                return;
+            }
+            else{
+                setError(username + " has been assigned to task");
                 return;
             }
         })
@@ -110,19 +114,23 @@ export default function EditTask(props){
         })
     }
 
-    const handleUnassignUserClick = (event, userID, taskID) => {
+    const handleUnassignUserClick = (event, userID, taskID, username) => {
         event.preventDefault();
-        handleUnassignUser(userID, taskID);
+        handleUnassignUser(userID, taskID, username);
     }
 
-    async function handleUnassignUser(userID, taskID){
+    async function handleUnassignUser(userID, taskID, username){
         
-        axios.put("http://cs431-01.cs.rutgers.edu:8080/task/remove-user", null, 
+        axios.put("http://localhost:8080/task/remove-user", null, 
         {params: {"taskID":taskID, "userID":userID}})
         .then((response) => { 
             const {message} = response.data;
             if (message !== "Success"){
-                setError(message);
+                setError(username + " is not assigned to task");
+                return;
+            }
+            else{
+                setError(username + " has been unassigned from task");
                 return;
             }
         })
@@ -139,7 +147,7 @@ export default function EditTask(props){
 
     async function handleDeleteTask(taskID){
         
-        axios.delete("http://cs431-01.cs.rutgers.edu:8080/task/delete", 
+        axios.delete("http://localhost:8080/task/delete", 
         {params: {"taskID":taskID}})
         .then((response) => { 
             const {message} = response.data;
@@ -190,8 +198,8 @@ export default function EditTask(props){
                         <tr key={user.userID}>
                             <td>{user.username}</td>
                             <td>
-                                <button onClick={(event) => handleAssignUserClick(event, user.userID, taskID)}>Assign User</button>
-                                <button onClick={(event) => handleUnassignUserClick(event, user.userID, taskID)}>Unassign User</button>
+                                <button onClick={(event) => handleAssignUserClick(event, user.userID, taskID, user.username)}>Assign User</button>
+                                <button onClick={(event) => handleUnassignUserClick(event, user.userID, taskID, user.username)}>Unassign User</button>
                             </td>
                             <td>
                             </td>
