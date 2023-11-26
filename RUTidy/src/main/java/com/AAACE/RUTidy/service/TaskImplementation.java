@@ -5,7 +5,12 @@ import com.AAACE.RUTidy.repository.*;
 import com.AAACE.RUTidy.constants.ResponseConstants;
 import com.AAACE.RUTidy.dto.*;
 
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
+import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -255,7 +260,7 @@ public class TaskImplementation implements TaskService {
             tasks);
     }
 
-    public Response getUsersTasksInGroup(int userID, int groupID) {
+    public Response getUsersTasksInGroup(int userID, int groupID, String userTimeZone) {
         User user = userRepository
             .findByUserID(userID).get();
 
@@ -276,11 +281,27 @@ public class TaskImplementation implements TaskService {
 
         List<Task> tasks = taskRepository
             .findByAssignedUsersAndGroup(user, group);
+        List<Task> tasksInUserTimeZone = tasks.stream()
+            .map(task -> convertTaskDateTimeToUserTimeZone(task, userTimeZone))
+            .collect(Collectors.toList());
         
         return new Response(
             ResponseConstants.SUCCESS, 
-            tasks);
+            tasksInUserTimeZone);
     }
+
+    private Task convertTaskDateTimeToUserTimeZone(Task task, String userTimeZone) {
+    LocalDateTime taskDateTime = task.getDueDate();
+    // Convert LocalDateTime to ZonedDateTime in UTC
+    ZonedDateTime utcDateTime = ZonedDateTime.of(taskDateTime, ZoneId.of("UTC"));
+    // Convert UTC ZonedDateTime to ZonedDateTime in user's local timezone
+    ZonedDateTime userLocalDateTime = utcDateTime.withZoneSameInstant(ZoneId.of(userTimeZone));
+
+    // Set the converted ZonedDateTime back to the task
+    task.setDueDate(userLocalDateTime.toLocalDateTime());
+
+    return task;
+}
 
     public Response assignUser(int taskID, int userID){
         Task task = taskRepository
