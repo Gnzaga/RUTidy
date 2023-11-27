@@ -90,18 +90,7 @@ public class TaskCommentController {
 }
 
 
-    public void sendCommentToClietns(TaskComment comment){
-           List<SseEmitter> deadEmitters = new ArrayList<>();
-        this.emitters.forEach(emitter -> {
-            try {
-                emitter.send(comment);
-            } catch (Exception e) {
-                deadEmitters.add(emitter);
-            }
-        });
-        this.emitters.removeAll(deadEmitters);
-    }
-    
+
 
     /**
      * This will get a task comment by its ID.

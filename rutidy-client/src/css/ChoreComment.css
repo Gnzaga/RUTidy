@@ -13,7 +13,7 @@
     grid-template-areas: 
         "header header header"
         "body body options";
-    
+    text-align:right;
     
     padding: 10px;
     border-bottom: 1px solid #ccc; 
@@ -43,11 +43,10 @@
 
 .other-comment {
     background-color: #efefefef; /* Light gray background */
+    text-align:left;
 }
 
-.user-comment .comment-body {
-    text-align: right;
-}
+
 
 .comment-options {
     grid-area: options;

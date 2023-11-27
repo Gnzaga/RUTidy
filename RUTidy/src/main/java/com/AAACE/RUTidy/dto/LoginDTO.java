@@ -15,7 +15,7 @@ public class LoginDTO {
     public LoginDTO(String email, String password) {
         this.email = email;
         this.password = password;
-        System.out.println("LoginDTO PW: " + this.password);
+        //System.out.println("LoginDTO PW: " + this.password);
     }
 
     /**

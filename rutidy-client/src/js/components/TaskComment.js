@@ -17,6 +17,8 @@ const TaskCommentsComponent = React.memo(({ taskID, currentUserID }) => {
     const [charCount, setCharCount] = useState(0);
     const commentsEndRef = useRef(null);
 
+    currentUserID = parseInt(currentUserID);
+
     useEffect(() => {
         const fetchComments = async () => {
             try {
@@ -39,11 +41,13 @@ const TaskCommentsComponent = React.memo(({ taskID, currentUserID }) => {
     }, [comments]); // Dependency array includes 'comments' to trigger effect when it updates
     
     useEffect(() => {
-        const eventSource = new EventSource('http://localhost:8080/comment/stream'); // Use the actual server URL
+        const eventSource = new EventSource('http://cs431-01.cs.rutgers.edu:8080/comment/stream'); // Use the actual server URL
         eventSource.onmessage = (event) => {
           const newComment = JSON.parse(event.data);
-          console.log('Received new comment:', newComment)
-          setComments(prevComments => [...prevComments, newComment]);
+          if(newComment.author.userID !== currentUserID){ // Ignore comments from the current user
+            console.log('Received new comment:', newComment)
+            setComments(prevComments => [...prevComments, newComment]);
+          }
         };
     
         return () => eventSource.close();
@@ -54,6 +58,7 @@ const TaskCommentsComponent = React.memo(({ taskID, currentUserID }) => {
         if(event){
             event.preventDefault();
         }
+    
         
         if (!newCommentText.trim() || newCommentText.length > 255) return;
         try {
