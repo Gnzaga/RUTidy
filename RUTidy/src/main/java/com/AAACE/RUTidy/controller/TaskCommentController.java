@@ -3,6 +3,12 @@ package com.AAACE.RUTidy.controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.CopyOnWriteArrayList;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,7 +17,10 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
+
 import com.AAACE.RUTidy.constants.ResponseConstants;
+
 
 
 
@@ -25,6 +34,9 @@ import com.AAACE.RUTidy.service.task.*;
 @CrossOrigin
 @RequestMapping("/comment")
 public class TaskCommentController {
+
+    private final CopyOnWriteArrayList<SseEmitter> emitters = new CopyOnWriteArrayList<>();
+
     @Autowired
     private TaskCommentService taskCommentService;
 
@@ -41,8 +53,44 @@ public class TaskCommentController {
      */
     @PostMapping("/create")
     public Response createTaskComment(@RequestBody TaskCommentDTO taskCommentDTO) {
-        return taskCommentService.createTaskComment(taskCommentDTO);
+        Response response = taskCommentService.createTaskComment(taskCommentDTO);
+        if (response.getMessage() == ResponseConstants.SUCCESS) {
+            TaskComment taskComment = (TaskComment) response.getObject();
+            sendCommentToClients(taskComment);
+        }
+        return response;
+
+        //return taskCommentService.createTaskComment(taskCommentDTO);
     }
+
+    @GetMapping("/stream")
+    public SseEmitter stream() throws IOException   {
+        SseEmitter emitter = new SseEmitter(Long.MAX_VALUE); // Keep the connection open indefinitely
+        this.emitters.add(emitter);
+
+        emitter.onCompletion(() -> this.emitters.remove(emitter));
+        emitter.onTimeout(() -> {
+            emitter.complete();
+            this.emitters.remove(emitter);
+        });
+
+    return emitter;
+    }
+
+    public void sendCommentToClients(TaskComment comment) {
+    List<SseEmitter> deadEmitters = new ArrayList<>();
+    this.emitters.forEach(emitter -> {
+        try {
+            emitter.send(comment);
+        } catch (Exception e) {
+            deadEmitters.add(emitter);
+        }
+    });
+    this.emitters.removeAll(deadEmitters);
+}
+
+
+
 
     /**
      * This will get a task comment by its ID.
@@ -91,7 +139,12 @@ public class TaskCommentController {
      */
     @DeleteMapping("/delete")
     public Response deleteTaskComment(@RequestParam int taskCommentID) {
-        return taskCommentService.deleteTaskComment(taskCommentID);
+        Response response = taskCommentService.deleteTaskComment(taskCommentID);
+        if (response.getMessage() == ResponseConstants.SUCCESS) {
+            TaskComment taskComment = (TaskComment) response.getObject();
+            sendCommentToClients(taskComment);
+        }
+        return response;
     }
 
     /**

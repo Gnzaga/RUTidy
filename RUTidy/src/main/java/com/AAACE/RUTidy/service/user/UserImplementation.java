@@ -38,7 +38,7 @@ public class UserImplementation implements UserService{
             userDTO.getUsername()
         );
 
-        System.out.println(user.getPassword());
+        //System.out.println(user.getPassword());
         userRepository.save(user);
         return new LoginResponse("Account Created!", user);
     }
@@ -48,8 +48,8 @@ public class UserImplementation implements UserService{
   
     public LoginResponse login(LoginDTO loginDTO) {
         Optional<User> optionalUser = userRepository.findByEmail(loginDTO.getEmail());
-        System.out.println("Login username: " + loginDTO.getEmail());
-        System.out.println("Login PW: " + loginDTO.getPassword());
+        //System.out.println("Login username: " + loginDTO.getEmail());
+        //System.out.println("Login PW: " + loginDTO.getPassword());
         
         if(optionalUser.isEmpty()) {
             optionalUser = userRepository.findByUsername(loginDTO.getEmail());
@@ -87,8 +87,9 @@ public class UserImplementation implements UserService{
             }
         }
 
-        System.out.println(userDTO.getPassword());
+        //System.out.println(userDTO.getPassword());
         User user = userRepository.findByUserID(userID).get();
+        
         user.setEmail(userDTO.getEmail());
         user.setName(userDTO.getName());
         if(userDTO.getPassword() != null) user.setPassword(this.passwordEncoder.encode(userDTO.getPassword()));
