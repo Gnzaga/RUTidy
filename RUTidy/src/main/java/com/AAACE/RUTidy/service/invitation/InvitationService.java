@@ -1,4 +1,4 @@
-package com.AAACE.RUTidy.service;
+package com.AAACE.RUTidy.service.invitation;
 
 import com.AAACE.RUTidy.model.Invitation;
 

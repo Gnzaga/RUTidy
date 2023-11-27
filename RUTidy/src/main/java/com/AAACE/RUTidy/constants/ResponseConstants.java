@@ -17,6 +17,8 @@ public class ResponseConstants {
 
     public static final String TASK_NOT_FOUND = "Task not found";
 
+    public static final String TASK_COMMENT_NOT_FOUND = "Task comment not found";
+
         
  //for when * exists failure   
     public static final String USER_ALREADY_EXISTS="User already exists";

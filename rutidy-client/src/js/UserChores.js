@@ -4,6 +4,7 @@ import "../css/Chores.css";
 import Check from "../image/check.png"
 import X from "../image/x.png"
 import axios from "axios";
+import TaskCommentsComponent from "./components/TaskComment";
 
 
 export default function UserChores(props){
@@ -28,6 +29,7 @@ export default function UserChores(props){
         .then((response) => { 
             const {message, object} = response.data;
             setChores(object);
+            setDisplayChore(object[0]);
         }).catch((error) => {
             console.log(error);
         });
@@ -101,7 +103,12 @@ export default function UserChores(props){
                     <div>
                         <h2 className="choreDescription">{displayChore.description}</h2>
                     </div>
+                    <div className="task-comments-container">
+                    <TaskCommentsComponent taskID={displayChore.taskID} 
+                    currentUserID = {sessionStorage.getItem("userID")} />
+                    </div>
                 </div>
+             
             </div>
         </div>
     );

@@ -4,6 +4,7 @@ import com.AAACE.RUTidy.constants.TaskConstants;
 
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.JoinColumn;
@@ -40,6 +41,7 @@ import java.time.ZonedDateTime;
  */
 
  @Entity
+
 public class Task {
     
 
@@ -78,6 +80,16 @@ public class Task {
         inverseJoinColumns = @JoinColumn(name = "userid")
     )
     private List<User> assignedUsers;
+
+    @ManyToMany
+    @JoinTable(
+        name = "task_comment",
+        joinColumns = @JoinColumn(name = "task_id"),
+        inverseJoinColumns = @JoinColumn(name = "commentid")
+    )
+    private List<TaskComment> task_comments;
+
+    
 
     @ManyToOne
     private Group group;

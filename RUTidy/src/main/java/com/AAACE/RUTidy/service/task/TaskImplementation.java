@@ -1,4 +1,4 @@
-package com.AAACE.RUTidy.service;
+package com.AAACE.RUTidy.service.task;
 
 import com.AAACE.RUTidy.model.*;
 import com.AAACE.RUTidy.repository.*;

@@ -19,7 +19,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.AAACE.RUTidy.model.*;
 import com.AAACE.RUTidy.dto.*;
-import com.AAACE.RUTidy.service.*;
+import com.AAACE.RUTidy.service.group.GroupService;
+import com.AAACE.RUTidy.service.group.UsersInGroupService;
+import com.AAACE.RUTidy.service.user.UserService;
 
 @RestController
 @CrossOrigin

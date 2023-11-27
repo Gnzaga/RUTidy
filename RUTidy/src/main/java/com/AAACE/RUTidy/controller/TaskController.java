@@ -12,10 +12,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
-
-import com.AAACE.RUTidy.model.*;
 import com.AAACE.RUTidy.dto.*;
-import com.AAACE.RUTidy.service.*;
+
+import com.AAACE.RUTidy.service.group.GroupService;
+import com.AAACE.RUTidy.service.task.TaskService;
 
 
 @RestController

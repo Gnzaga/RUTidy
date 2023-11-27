@@ -4,7 +4,7 @@ package com.AAACE.RUTidy.controller;
 import com.AAACE.RUTidy.dto.LoginDTO;
 import com.AAACE.RUTidy.dto.LoginResponse;
 import com.AAACE.RUTidy.dto.UserDTO;
-import com.AAACE.RUTidy.service.UserService;
+import com.AAACE.RUTidy.service.user.UserService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
