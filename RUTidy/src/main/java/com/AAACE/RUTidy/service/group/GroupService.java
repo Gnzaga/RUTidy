@@ -17,6 +17,7 @@ import com.AAACE.RUTidy.model.UsersInGroup;
 import com.AAACE.RUTidy.repository.GroupRepository;
 import com.AAACE.RUTidy.repository.UserRepository;
 import com.AAACE.RUTidy.repository.UsersInGroupRepository;
+import com.AAACE.RUTidy.constants.ResponseConstants;
 
 @Service
 public class GroupService {
@@ -58,6 +59,26 @@ public class GroupService {
     public List<UsersInGroup> getUsersInGroupObject(int groupID){
         List<UsersInGroup> usersInGroup = this.usersGroupRepository.findByGroupGroupID(groupID);
         return usersInGroup;
+    }
+
+    public Response addUserToGroup(Group group, User user){
+        try{
+            Optional <UsersInGroup> userInGroup = this.usersGroupRepository.findByGroupGroupIDAndUserUserID(group.getGroupID(), user.getUserID());
+
+            if (userInGroup.isEmpty()){
+                UsersInGroup newUserInGroup = new UsersInGroup(group, user);
+                this.usersGroupRepository.save(newUserInGroup);
+                return new Response(ResponseConstants.SUCCESS, newUserInGroup);
+            }
+            else{
+                return new Response(ResponseConstants.USER_ALREADY_IN_GROUP, null);
+            }
+        }
+        catch(Exception e){
+            return new Response(ResponseConstants.ERROR, null);
+        }   
+
+
     }
 
     public Response addUserToGroup(int groupID, String textEntry){

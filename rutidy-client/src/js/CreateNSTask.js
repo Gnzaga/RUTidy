@@ -43,7 +43,7 @@ export default function CreateNSTask(props){
             const {message} = response.data;
             if (message !== "Task created successfully"){
                 setError(message);
-                return;
+                
             }
             navigate("/");
         })

@@ -1,22 +1,33 @@
 package com.AAACE.RUTidy.service.invitation;
 
+import com.AAACE.RUTidy.dto.Response;
 import com.AAACE.RUTidy.model.Invitation;
 
 
 import java.util.List;
 
 public interface InvitationService {
-    Invitation getInvitation(String email, int groupID);
+    Response getInvitation(String email, int groupID);
 
-    List<Invitation> getUsersInvitations(String email);
+    Response getInvitation(int invitationID);
 
-    List<Invitation> getGroupsInvitations(int groupID);
+    Response getUsersInvitations(String email);
 
-    Invitation addInvitation(Invitation invitation);
+    Response getGroupsInvitations(int groupID);
 
-    Invitation updateInvitation(Invitation invitation);
+    Response addInvitation(Invitation invitation);
 
-    //void deleteInvitation(Invitation invitation);
+    Response addInvitation(int groupID, String email);
 
+    Response updateInvitation(Invitation invitation);
+
+/* 
+    Response deleteInvitation (int invitationID);
+
+    Response deleteInvitation(Invitation invitation);
+*/
+    Response acceptInvitation(int invitationID);
+
+    Response rejectInvitation(int invitationID);
     
 }

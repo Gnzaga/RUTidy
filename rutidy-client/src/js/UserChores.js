@@ -20,11 +20,12 @@ export default function UserChores(props){
     }
 
     useEffect(() => {
+        console.log(path[path.length-1]);
         populateChores()
     }, []); 
 
     async function populateChores(){
-        axios.get("http://localhost:8080/task/get-group-tasks-by-user", 
+        axios.get("http://cs431-01.cs.rutgers.edu:8080/task/get-group-tasks-by-user", 
         {params: {"userID": sessionStorage.getItem("userID"), "groupID": path[path.length-1], userTimeZone: Intl.DateTimeFormat().resolvedOptions().timeZone}})
         .then((response) => { 
             const {message, object} = response.data;
@@ -38,7 +39,7 @@ export default function UserChores(props){
     const navigate = useNavigate();
 
     async function  changeChoreStatus(taskID){
-        axios.put("http://localhost:8080/task/update-status?taskID=" + taskID + "&taskStatus=" + status + "&userID=" + sessionStorage.getItem("userID"))
+        axios.put("http://cs431-01.cs.rutgers.edu:8080/task/update-status?taskID=" + taskID + "&taskStatus=" + status + "&userID=" + sessionStorage.getItem("userID"))
         .then((response) => { 
             console.log(response.data.message);
         }).catch((error) => {

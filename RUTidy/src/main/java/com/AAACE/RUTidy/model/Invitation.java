@@ -3,6 +3,7 @@ package com.AAACE.RUTidy.model;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -13,10 +14,10 @@ import jakarta.persistence.GenerationType;
 @Table(name = "Invitations")
 public class Invitation {
     
-    final String NOT_SENT = "not sent";
-    final String SENT = "sent";
-    final String ACCEPTED = "accepted";
-    final String REJECTED = "rejected";
+    public static final String NOT_SENT = "not sent";
+    public static final String SENT = "sent";
+    public static final String ACCEPTED = "accepted";
+    public static final String REJECTED = "rejected";
 
     @Id
     @Column(name = "invitationID", length=255)
@@ -25,6 +26,10 @@ public class Invitation {
 
     @Column(name = "email", length=255)
     private String email;
+
+    @ManyToOne
+    @JoinColumn(name = "userID")
+    private User user;
 
     @Column(name = "status", length=255)
     private String status;
@@ -41,6 +46,7 @@ public class Invitation {
         this.email = email;
         this.group = group;
         this.status = SENT;
+        this.user = null;
     }
 
     public int getInvitationID() {
@@ -66,6 +72,14 @@ public class Invitation {
 
     public void setGroup(Group group){
         this.group = group;
+    }
+
+    public void setUser(User user){
+        this.user = user;
+    }
+
+    public User getUser() {
+        return user;
     }
 
     public Group getGroup() {

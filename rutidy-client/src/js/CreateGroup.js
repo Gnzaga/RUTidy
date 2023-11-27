@@ -24,7 +24,7 @@ export default function Create(props){
                 setError(message);
                 return;
             }
-            navigate("/");
+            //navigate("");
         })
         .catch((error) => { 
             setError("An unexpected error occured!");
