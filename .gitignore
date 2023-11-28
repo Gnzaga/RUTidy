@@ -1,3 +1,4 @@
 .vscode/settings.json
 .vscode/launch.json
 RUTidy/target/test-classes/com/AAACE/RUTidy/RuTidyApplicationTests.class
+/home/amg573/RUTidy/RUTidy/src/test/java/com/AAACE/RUTidy/GroupControllerTest.java

@@ -1,0 +1,2426 @@
+{
+	"info": {
+		"_postman_id": "d61c202f-664f-462f-a190-e4e95848df72",
+		"name": "RUTidy",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "30378221",
+		"_collection_link": "https://speeding-escape-276587.postman.co/workspace/New-Team-Workspace~bcce7adc-0d52-4aa8-b571-eebabdb338a7/collection/30378221-d61c202f-664f-462f-a190-e4e95848df72?action=share&source=collection_link&creator=30378221"
+	},
+	"item": [
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "R1.1",
+					"item": [
+						{
+							"name": "T01",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n   \"name\" : \"test_name\",\n   \"email\" : \"test@email.com\",\n   \"password\" : \"test_password\",\n   \"username\" : \"test_username\"\n}\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://cs431-01.cs.rutgers.edu:8080/user/save",
+									"protocol": "http",
+									"host": [
+										"cs431-01",
+										"cs",
+										"rutgers",
+										"edu"
+									],
+									"port": "8080",
+									"path": [
+										"user",
+										"save"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "T02",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n   \"name\" : \"two_name\",\n   \"email\" : \"two@email.com\",\n   \"password\" : \"two_password\",\n   \"username\" : \"test_username\"\n}\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://cs431-01.cs.rutgers.edu:8080/user/save",
+									"protocol": "http",
+									"host": [
+										"cs431-01",
+										"cs",
+										"rutgers",
+										"edu"
+									],
+									"port": "8080",
+									"path": [
+										"user",
+										"save"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "T03",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n   \"name\" : \"three_name\",\n   \"email\" : \"test@email.com\",\n   \"password\" : \"three_password\",\n   \"username\" : \"three_username\"\n}\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://cs431-01.cs.rutgers.edu:8080/user/save",
+									"protocol": "http",
+									"host": [
+										"cs431-01",
+										"cs",
+										"rutgers",
+										"edu"
+									],
+									"port": "8080",
+									"path": [
+										"user",
+										"save"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "R1.2",
+					"item": [
+						{
+							"name": "T04",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n   \"email\" : \"test_username\",\n   \"password\" : \"test_password\"\n}\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://cs431-01.cs.rutgers.edu:8080/user/login",
+									"protocol": "http",
+									"host": [
+										"cs431-01",
+										"cs",
+										"rutgers",
+										"edu"
+									],
+									"port": "8080",
+									"path": [
+										"user",
+										"login"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "T05",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n   \"email\" : \"test@email.com\",\n   \"password\" : \"test_password\"\n}\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://cs431-01.cs.rutgers.edu:8080/user/login",
+									"protocol": "http",
+									"host": [
+										"cs431-01",
+										"cs",
+										"rutgers",
+										"edu"
+									],
+									"port": "8080",
+									"path": [
+										"user",
+										"login"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "T06",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n   \"email\" : \"test_username\",\n   \"password\" : \"password\"\n}\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://cs431-01.cs.rutgers.edu:8080/user/login",
+									"protocol": "http",
+									"host": [
+										"cs431-01",
+										"cs",
+										"rutgers",
+										"edu"
+									],
+									"port": "8080",
+									"path": [
+										"user",
+										"login"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "T07",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n   \"email\" : \"test@email.com\",\n   \"password\" : \"password\"\n}\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://cs431-01.cs.rutgers.edu:8080/user/login",
+									"protocol": "http",
+									"host": [
+										"cs431-01",
+										"cs",
+										"rutgers",
+										"edu"
+									],
+									"port": "8080",
+									"path": [
+										"user",
+										"login"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Group",
+			"item": [
+				{
+					"name": "R2.1",
+					"item": [
+						{
+							"name": "T08",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"name\": \"test group\",\n    \"ownerID\": 3\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://cs431-01.cs.rutgers.edu:8080/group/create",
+									"protocol": "http",
+									"host": [
+										"cs431-01",
+										"cs",
+										"rutgers",
+										"edu"
+									],
+									"port": "8080",
+									"path": [
+										"group",
+										"create"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "T09",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"name\": \"test group\",\n    \"ownerID\": 1\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://cs431-01.cs.rutgers.edu:8080/group/create",
+									"protocol": "http",
+									"host": [
+										"cs431-01",
+										"cs",
+										"rutgers",
+										"edu"
+									],
+									"port": "8080",
+									"path": [
+										"group",
+										"create"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "R2.2",
+					"item": [
+						{
+							"name": "T10",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "http://cs431-01.cs.rutgers.edu:8080/group/addUserToGroup?groupID=1&textEntry=\"fake_entry\"",
+									"protocol": "http",
+									"host": [
+										"cs431-01",
+										"cs",
+										"rutgers",
+										"edu"
+									],
+									"port": "8080",
+									"path": [
+										"group",
+										"addUserToGroup"
+									],
+									"query": [
+										{
+											"key": "groupID",
+											"value": "1"
+										},
+										{
+											"key": "textEntry",
+											"value": "\"fake_entry\""
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "T11",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "http://cs431-01.cs.rutgers.edu:8080/group/addUserToGroup?groupID=3&textEntry=\"fake_entry\"",
+									"protocol": "http",
+									"host": [
+										"cs431-01",
+										"cs",
+										"rutgers",
+										"edu"
+									],
+									"port": "8080",
+									"path": [
+										"group",
+										"addUserToGroup"
+									],
+									"query": [
+										{
+											"key": "groupID",
+											"value": "3"
+										},
+										{
+											"key": "textEntry",
+											"value": "\"fake_entry\""
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "T12",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "http://cs431-01.cs.rutgers.edu:8080/group/addUserToGroup?groupID=1&textEntry=\"test\"",
+									"protocol": "http",
+									"host": [
+										"cs431-01",
+										"cs",
+										"rutgers",
+										"edu"
+									],
+									"port": "8080",
+									"path": [
+										"group",
+										"addUserToGroup"
+									],
+									"query": [
+										{
+											"key": "groupID",
+											"value": "1"
+										},
+										{
+											"key": "textEntry",
+											"value": "\"test\""
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "T13",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "http://cs431-01.cs.rutgers.edu:8080/group/addUserToGroup?groupID=2&textEntry=test",
+									"protocol": "http",
+									"host": [
+										"cs431-01",
+										"cs",
+										"rutgers",
+										"edu"
+									],
+									"port": "8080",
+									"path": [
+										"group",
+										"addUserToGroup"
+									],
+									"query": [
+										{
+											"key": "groupID",
+											"value": "2"
+										},
+										{
+											"key": "textEntry",
+											"value": "test"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "R2.3",
+					"item": [
+						{
+							"name": "T14",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "http://cs431-01.cs.rutgers.edu:8080/group/removeUserFromGroup?userID=1&groupID=3000",
+									"protocol": "http",
+									"host": [
+										"cs431-01",
+										"cs",
+										"rutgers",
+										"edu"
+									],
+									"port": "8080",
+									"path": [
+										"group",
+										"removeUserFromGroup"
+									],
+									"query": [
+										{
+											"key": "userID",
+											"value": "1"
+										},
+										{
+											"key": "groupID",
+											"value": "3000"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "T15",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "http://cs431-01.cs.rutgers.edu:8080/group/removeUserFromGroup?userID=1&groupID=2",
+									"protocol": "http",
+									"host": [
+										"cs431-01",
+										"cs",
+										"rutgers",
+										"edu"
+									],
+									"port": "8080",
+									"path": [
+										"group",
+										"removeUserFromGroup"
+									],
+									"query": [
+										{
+											"key": "userID",
+											"value": "1"
+										},
+										{
+											"key": "groupID",
+											"value": "2"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "T16",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "http://cs431-01.cs.rutgers.edu:8080/group/removeUserFromGroup?userID=1&groupID=1",
+									"protocol": "http",
+									"host": [
+										"cs431-01",
+										"cs",
+										"rutgers",
+										"edu"
+									],
+									"port": "8080",
+									"path": [
+										"group",
+										"removeUserFromGroup"
+									],
+									"query": [
+										{
+											"key": "userID",
+											"value": "1"
+										},
+										{
+											"key": "groupID",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "createGroup",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\" : \"test\",\n    \"ownerID\" : 1\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://cs431-01.cs.rutgers.edu:8080/group/create",
+							"protocol": "http",
+							"host": [
+								"cs431-01",
+								"cs",
+								"rutgers",
+								"edu"
+							],
+							"port": "8080",
+							"path": [
+								"group",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getUsersGroups",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"groupName\" : \"test\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://cs431-01.cs.rutgers.edu:8080/group/in?userID=3",
+							"protocol": "http",
+							"host": [
+								"cs431-01",
+								"cs",
+								"rutgers",
+								"edu"
+							],
+							"port": "8080",
+							"path": [
+								"group",
+								"in"
+							],
+							"query": [
+								{
+									"key": "userID",
+									"value": "3"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "getUsersGroups",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"groupName\" : \"test10\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://cs431-01.cs.rutgers.edu:8080/group/in?userID=1",
+									"protocol": "http",
+									"host": [
+										"cs431-01",
+										"cs",
+										"rutgers",
+										"edu"
+									],
+									"port": "8080",
+									"path": [
+										"group",
+										"in"
+									],
+									"query": [
+										{
+											"key": "userID",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"status": "Accepted",
+							"code": 202,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "0"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, no-store, max-age=0, must-revalidate"
+								},
+								{
+									"key": "Pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "Expires",
+									"value": "0"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 27 Oct 2023 21:47:06 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "[\n    {\n        \"group\": {\n            \"groupID\": 3,\n            \"name\": \"test1\",\n            \"owner\": {\n                \"name\": null,\n                \"email\": \"test\",\n                \"password\": \"$2a$10$9b2FnkJaSIFpyBV3h6Cla.NAM3TtKKZq6CoJvP5c8K831YmMdJfay\",\n                \"username\": null,\n                \"userID\": 1\n            }\n        },\n        \"roles\": 0,\n        \"user\": {\n            \"name\": null,\n            \"email\": \"test\",\n            \"password\": \"$2a$10$9b2FnkJaSIFpyBV3h6Cla.NAM3TtKKZq6CoJvP5c8K831YmMdJfay\",\n            \"username\": null,\n            \"userID\": 1\n        },\n        \"uigroupID\": 2\n    },\n    {\n        \"group\": {\n            \"groupID\": 2,\n            \"name\": \"test10\",\n            \"owner\": {\n                \"name\": null,\n                \"email\": \"test\",\n                \"password\": \"$2a$10$9b2FnkJaSIFpyBV3h6Cla.NAM3TtKKZq6CoJvP5c8K831YmMdJfay\",\n                \"username\": null,\n                \"userID\": 1\n            }\n        },\n        \"roles\": 0,\n        \"user\": {\n            \"name\": null,\n            \"email\": \"test\",\n            \"password\": \"$2a$10$9b2FnkJaSIFpyBV3h6Cla.NAM3TtKKZq6CoJvP5c8K831YmMdJfay\",\n            \"username\": null,\n            \"userID\": 1\n        },\n        \"uigroupID\": 3\n    }\n]"
+						}
+					]
+				},
+				{
+					"name": "PutUserInGroup",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://cs431-01.cs.rutgers.edu:8080/group/addUserToGroup?groupID=1&textEntry=d",
+							"protocol": "http",
+							"host": [
+								"cs431-01",
+								"cs",
+								"rutgers",
+								"edu"
+							],
+							"port": "8080",
+							"path": [
+								"group",
+								"addUserToGroup"
+							],
+							"query": [
+								{
+									"key": "groupID",
+									"value": "1"
+								},
+								{
+									"key": "textEntry",
+									"value": "d"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getGroupByName",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://cs431-01.cs.rutgers.edu:8080/group/name?groupName=test10",
+							"protocol": "http",
+							"host": [
+								"cs431-01",
+								"cs",
+								"rutgers",
+								"edu"
+							],
+							"port": "8080",
+							"path": [
+								"group",
+								"name"
+							],
+							"query": [
+								{
+									"key": "groupName",
+									"value": "test10"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "LeaveGroup",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://cs431-01.cs.rutgers.edu:8080/group/leave?userID=6?groupID=1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"group",
+								"leave"
+							],
+							"query": [
+								{
+									"key": "userID",
+									"value": "6?groupID=1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getUsers",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://cs431-01.cs.rutgers.edu:8080/group/listUsersInGroup?groupID=1",
+							"protocol": "http",
+							"host": [
+								"cs431-01",
+								"cs",
+								"rutgers",
+								"edu"
+							],
+							"port": "8080",
+							"path": [
+								"group",
+								"listUsersInGroup"
+							],
+							"query": [
+								{
+									"key": "groupID",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "T31",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "http://cs431-01.cs.rutgers.edu:8080/group/updateUserPermission?groupID=1&userID=1&roles=1",
+							"protocol": "http",
+							"host": [
+								"cs431-01",
+								"cs",
+								"rutgers",
+								"edu"
+							],
+							"port": "8080",
+							"path": [
+								"group",
+								"updateUserPermission"
+							],
+							"query": [
+								{
+									"key": "groupID",
+									"value": "1"
+								},
+								{
+									"key": "userID",
+									"value": "1"
+								},
+								{
+									"key": "roles",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Task",
+			"item": [
+				{
+					"name": "R3.1",
+					"item": [
+						{
+							"name": "T17",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "http://cs431-01.cs.rutgers.edu:8080/task/create?name=\"test1\"&description=”This is a test”&dueDate=”2023-11-2512:00:00.000000”&priority=”high”&status=”not started”&userID=100&groupID=5",
+									"protocol": "http",
+									"host": [
+										"cs431-01",
+										"cs",
+										"rutgers",
+										"edu"
+									],
+									"port": "8080",
+									"path": [
+										"task",
+										"create"
+									],
+									"query": [
+										{
+											"key": "name",
+											"value": "\"test1\""
+										},
+										{
+											"key": "description",
+											"value": "”This is a test”"
+										},
+										{
+											"key": "dueDate",
+											"value": "”2023-11-2512:00:00.000000”"
+										},
+										{
+											"key": "priority",
+											"value": "”high”"
+										},
+										{
+											"key": "status",
+											"value": "”not started”"
+										},
+										{
+											"key": "userID",
+											"value": "100"
+										},
+										{
+											"key": "groupID",
+											"value": "5"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "T18",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "http://cs431-01.cs.rutgers.edu:8080/task/create?name=”test1”&description=”This is a test”&dueDate=”2023-11-2512:00:00.000000”&priority=”high”&status=”not started”&userID=100&groupID=6000",
+									"protocol": "http",
+									"host": [
+										"cs431-01",
+										"cs",
+										"rutgers",
+										"edu"
+									],
+									"port": "8080",
+									"path": [
+										"task",
+										"create"
+									],
+									"query": [
+										{
+											"key": "name",
+											"value": "”test1”"
+										},
+										{
+											"key": "description",
+											"value": "”This is a test”"
+										},
+										{
+											"key": "dueDate",
+											"value": "”2023-11-2512:00:00.000000”"
+										},
+										{
+											"key": "priority",
+											"value": "”high”"
+										},
+										{
+											"key": "status",
+											"value": "”not started”"
+										},
+										{
+											"key": "userID",
+											"value": "100"
+										},
+										{
+											"key": "groupID",
+											"value": "6000"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "T19",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "http://cs431-01.cs.rutgers.edu:8080/task/create?name=”test2”&description=”This is a test”&dueDate=”2023-13-2512:00:00.000000”&priority=”medium”&status=”not started”&userID=101&groupID=5",
+									"protocol": "http",
+									"host": [
+										"cs431-01",
+										"cs",
+										"rutgers",
+										"edu"
+									],
+									"port": "8080",
+									"path": [
+										"task",
+										"create"
+									],
+									"query": [
+										{
+											"key": "name",
+											"value": "”test2”"
+										},
+										{
+											"key": "description",
+											"value": "”This is a test”"
+										},
+										{
+											"key": "dueDate",
+											"value": "”2023-13-2512:00:00.000000”"
+										},
+										{
+											"key": "priority",
+											"value": "”medium”"
+										},
+										{
+											"key": "status",
+											"value": "”not started”"
+										},
+										{
+											"key": "userID",
+											"value": "101"
+										},
+										{
+											"key": "groupID",
+											"value": "5"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "R3.2",
+					"item": [
+						{
+							"name": "T20",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"url": {
+									"raw": "http://cs431-01.cs.rutgers.edu:8080/task/assign-user?taskID=1&userID=1",
+									"protocol": "http",
+									"host": [
+										"cs431-01",
+										"cs",
+										"rutgers",
+										"edu"
+									],
+									"port": "8080",
+									"path": [
+										"task",
+										"assign-user"
+									],
+									"query": [
+										{
+											"key": "taskID",
+											"value": "1"
+										},
+										{
+											"key": "userID",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "T21",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"url": {
+									"raw": "http://cs431-01.cs.rutgers.edu:8080/task/assign-user?taskID=1000&userID=1",
+									"protocol": "http",
+									"host": [
+										"cs431-01",
+										"cs",
+										"rutgers",
+										"edu"
+									],
+									"port": "8080",
+									"path": [
+										"task",
+										"assign-user"
+									],
+									"query": [
+										{
+											"key": "taskID",
+											"value": "1000"
+										},
+										{
+											"key": "userID",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "T22",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"url": {
+									"raw": "http://cs431-01.cs.rutgers.edu:8080/task/assign-user?taskID=1&userID=1000",
+									"protocol": "http",
+									"host": [
+										"cs431-01",
+										"cs",
+										"rutgers",
+										"edu"
+									],
+									"port": "8080",
+									"path": [
+										"task",
+										"assign-user"
+									],
+									"query": [
+										{
+											"key": "taskID",
+											"value": "1"
+										},
+										{
+											"key": "userID",
+											"value": "1000"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "T23",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"url": {
+									"raw": "http://cs431-01.cs.rutgers.edu:8080/task/assign-user?taskID=1&userID=1",
+									"protocol": "http",
+									"host": [
+										"cs431-01",
+										"cs",
+										"rutgers",
+										"edu"
+									],
+									"port": "8080",
+									"path": [
+										"task",
+										"assign-user"
+									],
+									"query": [
+										{
+											"key": "taskID",
+											"value": "1"
+										},
+										{
+											"key": "userID",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "T24",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"url": {
+									"raw": "http://cs431-01.cs.rutgers.edu:8080/task/remove-user?taskID=1&userID=1",
+									"protocol": "http",
+									"host": [
+										"cs431-01",
+										"cs",
+										"rutgers",
+										"edu"
+									],
+									"port": "8080",
+									"path": [
+										"task",
+										"remove-user"
+									],
+									"query": [
+										{
+											"key": "taskID",
+											"value": "1"
+										},
+										{
+											"key": "userID",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "T25",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"url": {
+									"raw": "http://cs431-01.cs.rutgers.edu:8080/task/remove-user?taskID=1000&userID=1",
+									"protocol": "http",
+									"host": [
+										"cs431-01",
+										"cs",
+										"rutgers",
+										"edu"
+									],
+									"port": "8080",
+									"path": [
+										"task",
+										"remove-user"
+									],
+									"query": [
+										{
+											"key": "taskID",
+											"value": "1000"
+										},
+										{
+											"key": "userID",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "T26",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"url": {
+									"raw": "http://cs431-01.cs.rutgers.edu:8080/task/remove-user?taskID=1&userID=1000",
+									"protocol": "http",
+									"host": [
+										"cs431-01",
+										"cs",
+										"rutgers",
+										"edu"
+									],
+									"port": "8080",
+									"path": [
+										"task",
+										"remove-user"
+									],
+									"query": [
+										{
+											"key": "taskID",
+											"value": "1"
+										},
+										{
+											"key": "userID",
+											"value": "1000"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "T27",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"url": {
+									"raw": "http://cs431-01.cs.rutgers.edu:8080/task/remove-user?taskID=1&userID=1",
+									"protocol": "http",
+									"host": [
+										"cs431-01",
+										"cs",
+										"rutgers",
+										"edu"
+									],
+									"port": "8080",
+									"path": [
+										"task",
+										"remove-user"
+									],
+									"query": [
+										{
+											"key": "taskID",
+											"value": "1"
+										},
+										{
+											"key": "userID",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "R3.3",
+					"item": [
+						{
+							"name": "T28",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"url": {
+									"raw": "http://cs431-01.cs.rutgers.edu:8080/task/update-status?taskID=1&taskStatus=\"completed\"&userID=1",
+									"protocol": "http",
+									"host": [
+										"cs431-01",
+										"cs",
+										"rutgers",
+										"edu"
+									],
+									"port": "8080",
+									"path": [
+										"task",
+										"update-status"
+									],
+									"query": [
+										{
+											"key": "taskID",
+											"value": "1"
+										},
+										{
+											"key": "taskStatus",
+											"value": "\"completed\""
+										},
+										{
+											"key": "userID",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "T29",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"url": {
+									"raw": "http://cs431-01.cs.rutgers.edu:8080/task/update-status?taskID=1&taskStatus=\"not started\"&userID=1",
+									"protocol": "http",
+									"host": [
+										"cs431-01",
+										"cs",
+										"rutgers",
+										"edu"
+									],
+									"port": "8080",
+									"path": [
+										"task",
+										"update-status"
+									],
+									"query": [
+										{
+											"key": "taskID",
+											"value": "1"
+										},
+										{
+											"key": "taskStatus",
+											"value": "\"not started\""
+										},
+										{
+											"key": "userID",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "T30",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"url": {
+									"raw": "http://cs431-01.cs.rutgers.edu:8080/task/update-status?taskID=1&taskStatus=\"in progress\"&userID=1",
+									"protocol": "http",
+									"host": [
+										"cs431-01",
+										"cs",
+										"rutgers",
+										"edu"
+									],
+									"port": "8080",
+									"path": [
+										"task",
+										"update-status"
+									],
+									"query": [
+										{
+											"key": "taskID",
+											"value": "1"
+										},
+										{
+											"key": "taskStatus",
+											"value": "\"in progress\""
+										},
+										{
+											"key": "userID",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "R3.4",
+					"item": [
+						{
+							"name": "createNSTask",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "  {\r\n  \"name\": \"Demo\",\r\n  \"description\": \"Demo Description\",\r\n  \"dueDate\": \"2023-11-15T14:30:00\",\r\n  \"priority\": \"NA\",\r\n  \"status\": \"Completed\",\r\n  \"userID\": 1,\r\n  \"groupID\": 1\r\n  }",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://cs431-01.cs.rutgers.edu:8080/task/create",
+									"protocol": "http",
+									"host": [
+										"cs431-01",
+										"cs",
+										"rutgers",
+										"edu"
+									],
+									"port": "8080",
+									"path": [
+										"task",
+										"create"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "createTask",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"Task Name\",\n  \"description\": \"Task Description\",\n  \"dueDate\": \"2023-11-15T14:30:00\",\n  \"priority\": \"High\",\n  \"status\": \"In Progress\",\n  \"userID\": 1,\n  \"groupID\": 1\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://cs431-01.cs.rutgers.edu:8080/task/create",
+							"protocol": "http",
+							"host": [
+								"cs431-01",
+								"cs",
+								"rutgers",
+								"edu"
+							],
+							"port": "8080",
+							"path": [
+								"task",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "assign/delete user",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "http://cs431-01.cs.rutgers.edu:8080/task/assign-user?taskID=2&userID=2",
+							"protocol": "http",
+							"host": [
+								"cs431-01",
+								"cs",
+								"rutgers",
+								"edu"
+							],
+							"port": "8080",
+							"path": [
+								"task",
+								"assign-user"
+							],
+							"query": [
+								{
+									"key": "taskID",
+									"value": "2"
+								},
+								{
+									"key": "userID",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateTaskStatus",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "http://cs431-01.cs.rutgers.edu:8080/task/update-status?taskID=1&taskStatus=complete&userID=1",
+							"protocol": "http",
+							"host": [
+								"cs431-01",
+								"cs",
+								"rutgers",
+								"edu"
+							],
+							"port": "8080",
+							"path": [
+								"task",
+								"update-status"
+							],
+							"query": [
+								{
+									"key": "taskID",
+									"value": "1"
+								},
+								{
+									"key": "taskStatus",
+									"value": "complete"
+								},
+								{
+									"key": "userID",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update priority",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "http://cs431-01.cs.rutgers.edu:8080/task/update-priority?taskID=1&priority=high",
+							"protocol": "http",
+							"host": [
+								"cs431-01",
+								"cs",
+								"rutgers",
+								"edu"
+							],
+							"port": "8080",
+							"path": [
+								"task",
+								"update-priority"
+							],
+							"query": [
+								{
+									"key": "taskID",
+									"value": "1"
+								},
+								{
+									"key": "priority",
+									"value": "high"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getTask",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://cs431-01.cs.rutgers.edu:8080/task/get?taskID=1",
+							"protocol": "http",
+							"host": [
+								"cs431-01",
+								"cs",
+								"rutgers",
+								"edu"
+							],
+							"port": "8080",
+							"path": [
+								"task",
+								"get"
+							],
+							"query": [
+								{
+									"key": "taskID",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateDueDate",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "http://cs431-01.cs.rutgers.edu:8080/task/update-due-date?taskID=1&dueDate=2023-11-27T14:30:00",
+							"protocol": "http",
+							"host": [
+								"cs431-01",
+								"cs",
+								"rutgers",
+								"edu"
+							],
+							"port": "8080",
+							"path": [
+								"task",
+								"update-due-date"
+							],
+							"query": [
+								{
+									"key": "taskID",
+									"value": "1"
+								},
+								{
+									"key": "dueDate",
+									"value": "2023-11-27T14:30:00"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getAllUsersTasks",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://cs431-01.cs.rutgers.edu:8080/task/get-user-tasks?userID=2",
+							"protocol": "http",
+							"host": [
+								"cs431-01",
+								"cs",
+								"rutgers",
+								"edu"
+							],
+							"port": "8080",
+							"path": [
+								"task",
+								"get-user-tasks"
+							],
+							"query": [
+								{
+									"key": "userID",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetGroupTasks",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://cs431-01.cs.rutgers.edu:8080/task/get-group-tasks?groupID=1",
+							"protocol": "http",
+							"host": [
+								"cs431-01",
+								"cs",
+								"rutgers",
+								"edu"
+							],
+							"port": "8080",
+							"path": [
+								"task",
+								"get-group-tasks"
+							],
+							"query": [
+								{
+									"key": "groupID",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Comment",
+			"item": [
+				{
+					"name": "R3.5",
+					"item": [
+						{
+							"name": "T37",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"",
+											"pm.test(\"Response status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});",
+											"",
+											"",
+											"pm.test(\"Validate the response message\", function () {",
+											"  const responseData = pm.response.json();",
+											"    ",
+											"  pm.expect(responseData).to.be.an('object');",
+											"  pm.expect(responseData.message).to.exist.and.to.be.a('string');",
+											"});",
+											"",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"comment\":\"test-for-chatgpt\",\n  \"userID\": 1,\n  \"taskID\": 1\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://cs431-01.cs.rutgers.edu:8080/comment/create",
+									"protocol": "http",
+									"host": [
+										"cs431-01",
+										"cs",
+										"rutgers",
+										"edu"
+									],
+									"port": "8080",
+									"path": [
+										"comment",
+										"create"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "GetComment",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"comment\":\"test\",\n  \"userID\": 1,\n  \"taskID\": 1\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://cs431-01.cs.rutgers.edu:8080/comment/get?taskCommentID=42",
+							"protocol": "http",
+							"host": [
+								"cs431-01",
+								"cs",
+								"rutgers",
+								"edu"
+							],
+							"port": "8080",
+							"path": [
+								"comment",
+								"get"
+							],
+							"query": [
+								{
+									"key": "taskCommentID",
+									"value": "42"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetTaskComments",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"comment\":\"test\",\n  \"userID\": 1,\n  \"taskID\": 1\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://cs431-01.cs.rutgers.edu:8080/comment/get/all?taskID=1",
+							"protocol": "http",
+							"host": [
+								"cs431-01",
+								"cs",
+								"rutgers",
+								"edu"
+							],
+							"port": "8080",
+							"path": [
+								"comment",
+								"get",
+								"all"
+							],
+							"query": [
+								{
+									"key": "taskID",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetComment Copy",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"comment\":\"test\",\n  \"userID\": 1,\n  \"taskID\": 1\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://cs431-01.cs.rutgers.edu:8080/comment/delete?taskCommentID=2",
+							"protocol": "http",
+							"host": [
+								"cs431-01",
+								"cs",
+								"rutgers",
+								"edu"
+							],
+							"port": "8080",
+							"path": [
+								"comment",
+								"delete"
+							],
+							"query": [
+								{
+									"key": "taskCommentID",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "EditComment",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"comment\":\"update-test\",\n  \"userID\": 1,\n  \"taskID\": 1,\n  \"taskCommentID\": 1\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://cs431-01.cs.rutgers.edu:8080/comment/update",
+							"protocol": "http",
+							"host": [
+								"cs431-01",
+								"cs",
+								"rutgers",
+								"edu"
+							],
+							"port": "8080",
+							"path": [
+								"comment",
+								"update"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "MakeComment Copy",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"",
+									"pm.test(\"Response status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"",
+									"pm.test(\"Validate the response message\", function () {",
+									"  const responseData = pm.response.json();",
+									"    ",
+									"  pm.expect(responseData).to.be.an('object');",
+									"  pm.expect(responseData.message).to.exist.and.to.be.a('string');",
+									"});",
+									"",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"comment\":\"test-for-chatgpt\",\n  \"userID\": 1,\n  \"taskID\": 1\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://cs431-01.cs.rutgers.edu:8080/comment/create",
+							"protocol": "http",
+							"host": [
+								"cs431-01",
+								"cs",
+								"rutgers",
+								"edu"
+							],
+							"port": "8080",
+							"path": [
+								"comment",
+								"create"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Invite",
+			"item": [
+				{
+					"name": "R2.4",
+					"item": [
+						{
+							"name": "T35",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test('Response status code is 200', function () {",
+											"    pm.expect(pm.response.code).to.equal(200);",
+											"})",
+											"",
+											"pm.test(\"Response has required fields\", function () {",
+											"    const responseData = pm.response.json();",
+											"    pm.expect(responseData).to.be.an('object');",
+											"    pm.expect(responseData.message).to.exist;",
+											"    pm.expect(responseData.message).to.not.equal(\"error\");",
+											"",
+											"});",
+											"",
+											"pm.test('Message is a non-empty string', function () {",
+											"    const responseData = pm.response.json();",
+											"    pm.expect(responseData.message).to.be.a('string').and.to.have.lengthOf.at.least(1, 'Value should not be empty');",
+											"})",
+											"",
+											"pm.test('Object should not be null', function () {",
+											"    const responseData = pm.response.json();",
+											"    pm.expect(responseData.object).to.not.equal(null);",
+											"})",
+											"",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"url": {
+									"raw": "http://cs431-01.cs.rutgers.edu:8080/invitations/accept/3",
+									"protocol": "http",
+									"host": [
+										"cs431-01",
+										"cs",
+										"rutgers",
+										"edu"
+									],
+									"port": "8080",
+									"path": [
+										"invitations",
+										"accept",
+										"3"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "R2.5",
+					"item": [
+						{
+							"name": "T36",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test('Response status code is 200', function () {",
+											"    pm.response.to.have.status(200);",
+											"})",
+											"",
+											"pm.test('Validate the message field is not empty', function () {",
+											"    const responseData = pm.response.json();",
+											"    pm.expect(responseData.message).to.exist.and.to.not.be.empty;",
+											"})",
+											"",
+											"pm.test('Validate the object field', function () {",
+											"    const responseData = pm.response.json();",
+											"    pm.expect(responseData).to.be.an('object');",
+											"    pm.expect(responseData.object).to.exist.and.to.be.an('object');",
+											"})",
+											"",
+											"pm.test(\"invitationID field is a non-zero integer\", function () {",
+											"  const responseData = pm.response.json();",
+											"  ",
+											"  pm.expect(responseData.object.invitationID).to.exist.and.to.be.a('number');",
+											"  pm.expect(responseData.object.invitationID).to.be.above(0);",
+											"});",
+											"",
+											"pm.test('Email field is a non-empty string', function () {",
+											"    const responseData = pm.response.json();",
+											"    pm.expect(responseData).to.be.an('object');",
+											"    pm.expect(responseData.object.email).to.exist.and.to.be.a('string').and.to.have.lengthOf.at.least(1, 'Value should not be empty');",
+											"})",
+											"",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"url": {
+									"raw": "http://cs431-01.cs.rutgers.edu:8080/invitations/reject/2",
+									"protocol": "http",
+									"host": [
+										"cs431-01",
+										"cs",
+										"rutgers",
+										"edu"
+									],
+									"port": "8080",
+									"path": [
+										"invitations",
+										"reject",
+										"2"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Get Invitation by user and group",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": ""
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetUser's Invitations",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://cs431-01.cs.rutgers.edu:8080/invitations/user/e",
+							"protocol": "http",
+							"host": [
+								"cs431-01",
+								"cs",
+								"rutgers",
+								"edu"
+							],
+							"port": "8080",
+							"path": [
+								"invitations",
+								"user",
+								"e"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Group's Invitations",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://cs431-01.cs.rutgers.edu:8080/invitations/groups/{groupID}",
+							"protocol": "http",
+							"host": [
+								"cs431-01",
+								"cs",
+								"rutgers",
+								"edu"
+							],
+							"port": "8080",
+							"path": [
+								"invitations",
+								"groups",
+								"{groupID}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create invitation",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://cs431-01.cs.rutgers.edu:8080/invitations/create/1/e",
+							"protocol": "http",
+							"host": [
+								"cs431-01",
+								"cs",
+								"rutgers",
+								"edu"
+							],
+							"port": "8080",
+							"path": [
+								"invitations",
+								"create",
+								"1",
+								"e"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "accept invite",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "http://cs431-01.cs.rutgers.edu:8080/invitations/accept/2",
+							"protocol": "http",
+							"host": [
+								"cs431-01",
+								"cs",
+								"rutgers",
+								"edu"
+							],
+							"port": "8080",
+							"path": [
+								"invitations",
+								"accept",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "reject invite",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://cs431-01.cs.rutgers.edu:8080/invitations/reject/{invitationID}",
+							"protocol": "http",
+							"host": [
+								"cs431-01",
+								"cs",
+								"rutgers",
+								"edu"
+							],
+							"port": "8080",
+							"path": [
+								"invitations",
+								"reject",
+								"{invitationID}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Email",
+			"item": [
+				{
+					"name": "R3.6",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"notificationTitle\": \"Note\",\r\n  \"description\": \"Do not forget to do your task\",\r\n  \"senderID\": 1,\r\n  \"groupID\": 1,\r\n  \"receiverID\": \"2,3\",\r\n   \"status\": \"Not Opened\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://cs431-01.cs.rutgers.edu:8080/notification/create",
+							"protocol": "http",
+							"host": [
+								"cs431-01",
+								"cs",
+								"rutgers",
+								"edu"
+							],
+							"port": "8080",
+							"path": [
+								"notification",
+								"create"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

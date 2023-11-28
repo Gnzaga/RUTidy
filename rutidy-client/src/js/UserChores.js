@@ -25,8 +25,8 @@ export default function UserChores(props){
     }, []); 
 
     async function populateChores(){
-        axios.get("http://cs431-01.cs.rutgers.edu:8080/task/get-group-tasks-by-user", 
-        {params: {"userID": sessionStorage.getItem("userID"), "groupID": path[path.length-1], userTimeZone: Intl.DateTimeFormat().resolvedOptions().timeZone}})
+        axios.get("http://cs431-01.cs.rutgers.edu:8080/task/get-group-tasks", 
+        {params: { "groupID": path[path.length-1], userTimeZone: Intl.DateTimeFormat().resolvedOptions().timeZone}})
         .then((response) => { 
             const {message, object} = response.data;
             setChores(object);
@@ -78,6 +78,7 @@ export default function UserChores(props){
                         <tr>
                             <td><h2 className="choreInfoType">Name: </h2></td>
                             <td><h2 className="choreInfo">{displayChore.name}</h2></td>
+                            
                         </tr>
                         <tr>
                             <td>
@@ -108,6 +109,7 @@ export default function UserChores(props){
                     <TaskCommentsComponent taskID={displayChore.taskID} 
                     currentUserID = {sessionStorage.getItem("userID")} />
                     </div>
+                    <td><h2 className="choreInfo">Assigned to: {displayChore.assignedUsers?.map(user => user.name).join(', ')}</h2></td>
                 </div>
              
             </div>

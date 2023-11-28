@@ -1,3 +1,26 @@
+#Sprint 5 Readme
+
+## Our Test Cases as well as our Post Request can be found in the following directory:
+```
+/home/amg573/RUTidy/RUTidy/src/test/java/com/AAACE/RUTidy
+```
+
+Our endpoint testing can be found in:
+``` 
+/home/amg573/RUTidy/RUTidy/src/test/java/com/AAACE/RUTidy/Postman
+```
+
+Our future jUnit testing for Emails can be found at:
+```
+/home/amg573/RUTidy/RUTidy/src/test/java/com/AAACE/RUTidy/EmailTest.java
+```
+
+
+
+
+
+
+
 # Front-end
 
 ## Run front-end locally 

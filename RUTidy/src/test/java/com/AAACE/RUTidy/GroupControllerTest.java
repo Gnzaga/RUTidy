@@ -26,6 +26,10 @@ import com.AAACE.RUTidy.service.user.UserService;
 import com.AAACE.RUTidy.dto.*;
 
 
+
+
+
+@Deprecated
 @SpringBootTest
 @AutoConfigureMockMvc
 public class GroupControllerTest {
@@ -168,6 +172,4 @@ public class GroupControllerTest {
                 .andExpect(status().isOk()) // Assuming the status is OK for success
                 .andExpect(content().string(containsString("User permissions updated")));
     }
-
-    // ... (other test methods) ...
 }
