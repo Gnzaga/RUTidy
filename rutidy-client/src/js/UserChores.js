@@ -5,10 +5,13 @@ import Check from "../image/check.png"
 import X from "../image/x.png"
 import axios from "axios";
 import TaskCommentsComponent from "./components/TaskComment";
+import 'bootstrap/dist/css/bootstrap.min.css';
+import Button from "react-bootstrap/Button";
+import Form from 'react-bootstrap/Form';
 
 
 export default function UserChores(props){
-    const [chores, setChores] = useState([{"name": "", "status": "", "duedate": "", "description": ""}]);
+    const [chores, setChores] = useState([{"name": "dishes", "status": "completed", "duedate": "", "description": "do dishes"}, {"name": "laundry", "status": "incomplete", "duedate": "", "description": "do laundry"}]);
     const [displayChore, setDisplayChore] = useState({"name": "", "status": "", "duedate": "", "description": ""});
     const [status, setStatus] = useState("completed");
     const location = useLocation();
@@ -22,7 +25,7 @@ export default function UserChores(props){
     useEffect(() => {
         console.log(path[path.length-1]);
         populateChores()
-    }, []); 
+    }, []);
 
     async function populateChores(){
         axios.get("http://cs431-01.cs.rutgers.edu:8080/task/get-group-tasks", 
@@ -68,8 +71,8 @@ export default function UserChores(props){
                     </table>
                 </div>
             </div>
-            <button className="returnButton" onClick={()=>navigate("/home")}>Return</button>
-            <button className="createTaskButton" onClick={()=>navigate("/create/nonscheduledtask/"+ path[path.length-1])}>Create NS Task</button>
+            <Button size = "sm" className = "btn-secondary" onClick={()=>navigate("/home")}>Return</Button>
+            <Button size = "sm" className = "btn-primary" onClick={()=>navigate("/create/nonscheduledtask/"+ path[path.length-1])}>Create NS task</Button>
             <div className = "rightPane">
                 <div className = "detailView">
                     <br></br>
@@ -83,7 +86,7 @@ export default function UserChores(props){
                         <tr>
                             <td>
                                 <h2 className="choreInfoType">Status: </h2>
-                                <button className="completionButton" onClick={()=>changeChoreStatus(displayChore.taskID)}>Mark Task As:</button>
+                                <Button className = "btn-primary" onClick={()=>changeChoreStatus(displayChore.taskID)}>Mark Task As</Button>
                             </td>
                             <td>
                                 <h2 className="choreInfo">{displayChore.status}</h2>

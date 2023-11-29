@@ -4,34 +4,12 @@
     flex-direction: row;
     height: 100vh;
     width: 100vw;
-    background: linear-gradient(to right,#fac473, #fc9905);
+    background: linear-gradient(#dec2c2, #6e75c2);
 }
 
-.returnButton{
-    position: absolute;
-    top: 3vh;
-    left: 47vw;
-    border: 0.5px solid black;
-    border-radius: 20px;
-    height: 3rem;
-    width: 7rem;
-    font-weight: bolder;
-}
-
-.returnButton:hover{
-    cursor: pointer;
-}
-
-.choresButton{
-    border: 0.5px solid black;
-    border-radius: 20px;
-    height: 3rem;
-    width: 7rem;
-    font-weight: bolder;
-}
-
-.choresButton:hover{
-    cursor: pointer;
+.choresPage button { 
+    height: 3.5rem;
+    width: 8rem;
 }
 
 .leftPane {
@@ -77,7 +55,6 @@
 
 .choreItem {
     font-size: 24px;
-    background-color: orange;
     margin-top: 0.5vh;
     padding: 2px;
     padding-left: 1vw;
@@ -118,17 +95,6 @@
     overflow-wrap: anywhere;
 }
 
-.completionButton {
-    border-radius: 20px;
-    height: 2rem;
-    font-weight: bold;
-    align-self: left;
-}
-
-.completionButton:hover {
-    cursor: pointer;
-}
-
 .choreDescription {
     font-size: 20px;
     margin-top: 0.01vh;
@@ -143,19 +109,4 @@
     height: 2rem;
     font-weight: bold;
     align-self: left;
-}
-
-.createTaskButton{
-    position: absolute;
-    top: 10vh;
-    left: 47vw;
-    border: 0.5px solid black;
-    border-radius: 20px;
-    height: 3rem;
-    width: 7rem;
-    font-weight: bolder;
-}
-
-.createTaskButton:hover{
-    cursor: pointer;
 }

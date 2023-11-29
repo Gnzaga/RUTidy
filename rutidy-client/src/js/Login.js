@@ -2,6 +2,9 @@ import React, {useState} from "react";
 import {useNavigate} from "react-router-dom";
 import axios from "axios";
 import "../css/Login.css";
+import 'bootstrap/dist/css/bootstrap.min.css';
+import Button from "react-bootstrap/Button";
+import Form from 'react-bootstrap/Form';
 
 
 export default function Login(props){
@@ -47,14 +50,12 @@ export default function Login(props){
         <div className = "loginPage">
             <div className = "loginForm">
                 <h1>Login</h1>
-                <input className = "loginUsername" value = {username} placeholder = "username" 
-                onChange = {(e) => setUsername(e.target.value)} ></input>
-                <br></br>
-                <input className = "loginPassword" value = {password} placeholder = "password" type = "password"
-                onChange = {(e) => setPassword(e.target.value)}></input>
+                <Form.Control className = "loginInput" size = "sm" onChange = {(e => setUsername(e.target.value))} placeholder = "username" value = {username}></Form.Control>
+                <Form.Control className = "loginInput" size = "sm" onChange = {(e) => setPassword(e.target.value)} placeholder = "password" type = "password" value = {password}></Form.Control>
                 {error !== "" && <h3 className = "errorMessage">{error}</h3>}
-                <p onClick = {() => navigate("/signup")}className = "signUp">Don't have an account... signup!</p>
-                <button className = "loginButton" onClick = {handleLogin}>Submit!</button>
+                <Button onClick = {() => navigate("/signup")} className = "btn-link">Don't have an account... signup!</Button>
+                <br></br>
+                <Button style = {{marginTop: "1rem"}} className = "btn-primary" onClick = {handleLogin}>Submit</Button>
             </div>
         </div>
     );

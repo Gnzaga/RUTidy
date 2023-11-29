@@ -5,6 +5,9 @@ import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import "../css/EditTask.css";
 import axios from "axios";
+import 'bootstrap/dist/css/bootstrap.min.css';
+import Button from "react-bootstrap/Button";
+import Form from 'react-bootstrap/Form';
 
 
 export default function EditTask(props){
@@ -22,7 +25,7 @@ export default function EditTask(props){
     const userID = sessionStorage.getItem("userID");
     
     const [error, setError] = useState("");
-    const [usersInGroup, setUsersInGroup] = useState([]);
+    const [usersInGroup, setUsersInGroup] = useState([{userID: 1, username: "christian"}, {userID: 2, username: "peter"}]);
 
     useEffect(() => {
         if (sessionStorage.getItem("userID") === null){
@@ -172,10 +175,8 @@ export default function EditTask(props){
         <div className = "editTaskPage">
             <div className = "editTaskForm">
                 <h1>Edit Task</h1>
-                <input className = "taskName" value = {taskName} placeholder = "name" 
-                onChange = {(e) => setTaskName(e.target.value)} ></input>
-                <input className = "taskDescription" value = {taskDescription} placeholder = "description" 
-                onChange = {(e) => setTaskDescription(e.target.value)} ></input>
+                <Form.Control className = "createTaskInput" size = "sm" value = {taskName} onChange = {(e) => setTaskName(e.target.value)} placeholder = "name"></Form.Control>
+                <Form.Control className = "createTaskInput" size = "sm" value = {taskDescription} onChange = {(e) => setTaskDescription(e.target.value)} placeholder = "description"></Form.Control>
                 <DatePicker className = "taskDueDate" selected={taskDueDate} showTimeSelect timeFormat="HH:mm"
                 timeIntervals={15} dateFormat="yyyy-MM-dd HH:mm:ss" onChange={handleDateChange}/>
                 
@@ -198,8 +199,8 @@ export default function EditTask(props){
                         <tr key={user.userID}>
                             <td>{user.username}</td>
                             <td>
-                                <button onClick={(event) => handleAssignUserClick(event, user.userID, taskID, user.username)}>Assign User</button>
-                                <button onClick={(event) => handleUnassignUserClick(event, user.userID, taskID, user.username)}>Unassign User</button>
+                                <Button className = "btn-success" size = "sm" onClick={(event) => handleAssignUserClick(event, user.userID, taskID, user.username)}>Assign User!</Button>
+                                <Button className = "btn-danger" size = "sm" onClick={(event) => handleUnassignUserClick(event, user.userID, taskID, user.username)}>Unassign User!</Button>
                             </td>
                             <td>
                             </td>
@@ -209,9 +210,9 @@ export default function EditTask(props){
 
                 <br></br>
                 {error !== "" && <h3 className = "errorMessage">{error}</h3>}
-                <button className = "button" onClick={(event) => handleEditTaskClick(event)}>Edit Task!</button>
-                <button className = "button" onClick={(event) => handleDeleteTaskClick(event, taskID)}>Delete Task!</button>
-                <button className = "button" onClick = {() => navigate('/admin/tasks/' + (groupID || ''))}>Back</button>
+                <Button onClick={(event) => handleEditTaskClick(event)} className = "btn-primary">Edit Task!</Button>
+                <Button onClick={(event) => handleDeleteTaskClick(event, taskID)} className = "btn-danger">Delete Task!</Button>
+                <Button onClick = {() => navigate('/admin/tasks/' + (groupID || ''))} className = "btn-secondary">Back</Button>
             </div>
         </div>);
 }

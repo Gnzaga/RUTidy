@@ -2,6 +2,9 @@ import React, {useState} from "react";
 import {useNavigate} from "react-router-dom";
 import "../css/Login.css";
 import axios from "axios";
+import 'bootstrap/dist/css/bootstrap.min.css';
+import Button from "react-bootstrap/Button";
+import Form from 'react-bootstrap/Form';
 
 
 export default function Signup(props){
@@ -36,20 +39,19 @@ export default function Signup(props){
 
     return (
         <div className = "loginPage">
-            <div className = "loginForm">
+            <div className = "loginForm signupForm">
                 <h1>Sign up</h1>
-                <input className = "loginUsername" value = {username} placeholder = "username" 
-                onChange = {(e) => setUsername(e.target.value)} ></input>
+                <Form.Control className = "signUpInput" size = "sm" onChange = {(e => setUsername(e.target.value))} placeholder = "username" value = {username}></Form.Control>
                 <br></br>
-                <input className = "loginPassword" value = {password} placeholder = "password" type = "password"
-                onChange = {(e) => setPassword(e.target.value)}></input>
+                <Form.Control className = "signUpInput" size = "sm" onChange = {(e => setPassword(e.target.value))} placeholder = "password" value = {password}></Form.Control>
                 <br></br>
-                <input value = {email} className = "signUpEmail" placeholder = "email" onChange = {(e) => setEmail(e.target.value) }></input>
+                <Form.Control className = "signUpInput" size = "sm" onChange = {(e => setEmail(e.target.value))} placeholder = "email" value = {email}></Form.Control>
                 <br></br>
-                <input value = {name} className = "signUpName" placeholder = "name" onChange = {(e) => setName(e.target.value)}></input>
+                <Form.Control style = {{marginBottom: "0px"}} className = "signUpInput" size = "sm" onChange = {(e => setName(e.target.value))} placeholder = "name" value = {name}></Form.Control>
                 {error !== "" && <h3 className = "errorMessage">{error}</h3>}
-                <p onClick = {() => navigate("/")}className = "signUp">Already have an account...login!</p>
-                <button className = "loginButton" onClick = {handleSignup}>Submit!</button>
+                <Button onClick = {() => navigate("/")} className = "btn-link">Already have an account... login!</Button>
+                <br></br>
+                <Button style = {{marginTop: "1rem"}} onClick = {handleSignup} className = "btn-primary">Submit!</Button>
             </div>
         </div>
     );
