@@ -28,7 +28,7 @@ export default function Home (){
     const [loading, setLoading] = useState(false);
 
     const [searchGroupName, setSearchGroupName] = useState("");
-    const [searchResults, setSearchResults] = useState([{"id": 1, "name": "group 1"}, {"id": 2, "name": "group 2"}]);
+    const [searchResults, setSearchResults] = useState([]);
     
     /**
      * Logs the user out of software, clears user information, and navigates to login page
