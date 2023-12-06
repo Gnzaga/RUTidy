@@ -9,6 +9,11 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Button from "react-bootstrap/Button";
 import Form from 'react-bootstrap/Form';
 
+/**
+ * Components the represents the page for admins of groups to manage tasks
+ * @param {*} props 
+ * @returns component for admin tasks
+ */
 export default function AdminTasks(props){
     const [displayTask, setDisplayTask] = useState(false);
     const [tasks, setTasks] = useState([
@@ -89,7 +94,9 @@ export default function AdminTasks(props){
     const {groupID} = useParams();
     const navigate = useNavigate();
 
-    
+    /**
+     * Function called after render that queries tasks in the managed group
+     */
     useEffect(() => {
         if (sessionStorage.getItem("userID") == null) navigate("/home");
 

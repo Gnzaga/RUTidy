@@ -95,7 +95,7 @@
 
 .homePageSearchResults { 
     position: absolute;
-    top: 4.8rem;
+    top: 4.5rem;
     left: 0.55rem;
     max-height: 20rem;
     overflow-y: scroll;

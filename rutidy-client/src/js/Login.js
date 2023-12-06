@@ -6,7 +6,11 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Button from "react-bootstrap/Button";
 import Form from 'react-bootstrap/Form';
 
-
+/**
+ * Component that represents the login page
+ * @param {*} props 
+ * @returns component representing the login page
+ */
 export default function Login(props){
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
@@ -14,6 +18,10 @@ export default function Login(props){
 
     const navigate = useNavigate();
 
+    /**
+     * Handles logic for logging in a user, makes api request to back-end, and updates ui accordingly 
+     * @returns 
+     */
     async function handleLogin(){
         if (username === "" || password === "") { 
             setError("Please enter both a username and password!");

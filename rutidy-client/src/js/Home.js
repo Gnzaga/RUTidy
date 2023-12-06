@@ -11,6 +11,10 @@ import Form from 'react-bootstrap/Form';
 import axios from "axios";
 import "../css/Home.css";
 
+/**
+ * Component that represents the home page
+ * @returns component representing the home page
+ */
 export default function Home (){
     const navigate = useNavigate();
     const [adminGroups, setAdminGroups] = useState([{"id": 1, "name": "group 1"}, {"id": 2, "name": "group 2"}]);
@@ -24,13 +28,19 @@ export default function Home (){
     const [loading, setLoading] = useState(false);
 
     const [searchGroupName, setSearchGroupName] = useState("");
-    const [searchResults, setSearchResults] = useState([]);
+    const [searchResults, setSearchResults] = useState([{"id": 1, "name": "group 1"}, {"id": 2, "name": "group 2"}]);
     
+    /**
+     * Logs the user out of software, clears user information, and navigates to login page
+     */
     const handleLogout = () => {
         sessionStorage.clear();
         navigate("/");
     }
 
+    /**
+     * Memoized function that queries the groups the user is part of
+     */
     const queryGroups = useCallback(() => {
         axios
         .get("http://cs431-01.cs.rutgers.edu:8080/group/in", {
@@ -57,7 +67,9 @@ export default function Home (){
           });
       }, []);
       
-
+    /**
+     * Function that is called after the page is rendered to query groups the user is in
+     */
     useEffect(() => {
         if (sessionStorage.getItem("userID") === null){
             navigate("/");
@@ -66,6 +78,11 @@ export default function Home (){
         
     }, [navigate, queryGroups]);
 
+    /**
+     * Handles logic for a user leaving a group specified
+     * @param {*} UIGroupID the group id 
+     * @param {*} isAdmin boolean representing if the user is an admin of the group
+     */
     async function handleLeaveGroup(UIGroupID, isAdmin){
         const id = UIGroupID;
 
@@ -90,6 +107,10 @@ export default function Home (){
         setTimeout(() => setPopUpMessage(""), 2000);
     }
 
+    /**
+     * Handles logic for user joining a group
+     * @param {*} groupID group id of the group the user joins
+     */
     async function handleJoinGroup(groupID){
         const userID = sessionStorage.getItem("userID");
 
@@ -108,6 +129,9 @@ export default function Home (){
         setTimeout(() => setPopUpMessage(""), 2000);
     }
 
+    /**
+     * Handles the logic that allows user to search for groups to join
+     */
     async function handleSearch(){
         await axios.get("http://cs431-01.cs.rutgers.edu:8080/group/name", {params: {"groupName": searchGroupName}})
         .then((response) => {
@@ -131,7 +155,7 @@ export default function Home (){
             <div className = "homeNavigationBar">
                 <h1>RUTidy</h1>
                 <div className = "homeNavigationButtonDiv">
-                    <Button className = "btn-primary" size = "sm" onClick = {() => navigate("/profile")}>{sessionStorage.getItem("username").toString()}'s Profile</Button>
+                    <Button className = "btn-primary" size = "sm" onClick = {() => navigate("/profile")}>{sessionStorage.getItem("username")}'s Profile</Button>
                     <Button className = "btn-primary" size = "sm" onClick = {() => navigate("/create/group")}>Create Group</Button>
                 </div>
                 

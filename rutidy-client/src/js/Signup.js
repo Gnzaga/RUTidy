@@ -6,7 +6,11 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Button from "react-bootstrap/Button";
 import Form from 'react-bootstrap/Form';
 
-
+/**
+ * Component representing the sign up page
+ * @param {*} props 
+ * @returns component representing the sign up page
+ */
 export default function Signup(props){
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
@@ -16,6 +20,10 @@ export default function Signup(props){
 
     const navigate = useNavigate();
 
+    /**
+     * Handles logic for signing a user up for software, makes api request to back-end, and updates ui accordingly
+     * @returns 
+     */
     async function handleSignup(){
         if (username === "" || password === "" || name === "" || email === "") { 
             setError("Please enter all fields!");
