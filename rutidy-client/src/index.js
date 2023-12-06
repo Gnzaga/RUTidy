@@ -27,7 +27,7 @@ root.render(
       <Route path = "/profile" element = {<Profile />}></Route>
       <Route path = "/profile/edit" element = {<EditProfile />}></Route>
       <Route path = "/groupdetails/:groupID" element = {<GroupDetails/>}></Route>
-      <Route path = "/chores/:groupID" element = {<UserChores/>}></Route> 
+      <Route path = "/chores/:groupID" element = {<UserChores/>}></Route>
       <Route path = "/edit/task/:groupID/:taskID" element = {<EditTask/>}></Route>
       <Route path = "/admin/tasks/:groupID" element = {<AdminTasks />}></Route>
       <Route path = "/create/task/:groupID" element = {<CreateTask/>}></Route>
