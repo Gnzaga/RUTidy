@@ -74,24 +74,46 @@ public class UsersInGroup {
 
 
 
-
+    /**
+     * This is the getter for the UIGroupID.
+     *
+     * @return int UIGroupID
+     */
     public int getUIGroupID(){
         return this.UIGroupID;
     }
 
-
+    /**
+     * This is the getter for the User in the group
+     *
+     * @return User user
+     */
     public User getUser(){
         return this.user;
     }
 
-
+    /**
+     * This is the getter for the Group that the user is in
+     *
+     * @return Group group
+     */
     public Group getGroup(){
         return this.group;
     }
 
+    /**
+     * This is the getter for the roles for the user
+     *
+     * @return int roles
+     */
     public int getRoles(){
         return this.roles;
     }
+    /**
+     * This is the setter for the roles of the user
+     *
+     * @param roles
+     */
 
     public void setRoles(int roles){
         this.roles = roles;
