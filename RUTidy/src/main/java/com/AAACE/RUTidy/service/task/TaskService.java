@@ -6,7 +6,7 @@ import com.AAACE.RUTidy.dto.*;
 
 import java.util.List;
 
-public interface TaskService  {
+public interface TaskService {
 
     /**
      * Creates a task

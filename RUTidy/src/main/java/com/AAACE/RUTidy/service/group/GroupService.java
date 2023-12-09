@@ -50,6 +50,12 @@ public class GroupService {
         return this.groupRepository.findByGroupID(groupID);
     }
 
+    public String groupNameByID(int groupID){
+        Optional<Group> group = this.groupRepository.findByGroupID(groupID);
+        if (group.isEmpty()) return "Null";
+        return group.get().getName();
+    }
+
     public List<User> findUsersInGroup(int groupID){
         List<UsersInGroup> usersInGroup = this.usersGroupRepository.findByGroupGroupID(groupID);
 

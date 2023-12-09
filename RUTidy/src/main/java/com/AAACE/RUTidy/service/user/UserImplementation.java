@@ -2,6 +2,7 @@ package com.AAACE.RUTidy.service.user;
 
 import com.AAACE.RUTidy.dto.LoginDTO;
 import com.AAACE.RUTidy.dto.LoginResponse;
+import com.AAACE.RUTidy.dto.Response;
 import com.AAACE.RUTidy.dto.UserDTO;
 import com.AAACE.RUTidy.model.User;
 import com.AAACE.RUTidy.repository.UserRepository;
@@ -20,6 +21,11 @@ public class UserImplementation implements UserService{
 
     @Autowired
     private PasswordEncoder passwordEncoder;
+
+
+    public Response getAllUsers() {
+        return new Response("Success", userRepository.findAll());
+    }
 
 
     public LoginResponse addUser(UserDTO userDTO) {

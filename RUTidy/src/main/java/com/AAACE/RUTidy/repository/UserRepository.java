@@ -7,6 +7,7 @@ import org.springframework.stereotype.Repository;
 import com.AAACE.RUTidy.model.User;
 
 import java.util.Optional;
+import java.util.List;
 
 @EnableJpaRepositories
 @Repository
@@ -17,4 +18,5 @@ public interface UserRepository extends JpaRepository<User, Integer> {
     Optional<User> findByUserID(int userID);
     Optional<User> findByEmailAndPassword(String email, String password);
     Optional<User> findByUsernameAndPassword(String username, String password);
+    List<User> findAll();
 }

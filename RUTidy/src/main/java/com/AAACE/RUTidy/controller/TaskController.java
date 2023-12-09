@@ -22,6 +22,7 @@ import com.AAACE.RUTidy.service.task.TaskService;
 @CrossOrigin
 @RequestMapping("/task")
 public class TaskController {
+    
     @Autowired
     private GroupService groupService;
 
