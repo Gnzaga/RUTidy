@@ -141,7 +141,7 @@ export default function GroupDetails(props){
                 <h2>Group Name: {group.name}</h2>
                 <Form.Control size = "sm" placeholder = "Add user by email/username" value = {newUser} onChange={(e) => setNewUser(e.target.value)}></Form.Control>
                 <Button className = "btn-primary" onClick = {() => addUserToGroup(newUser)}>New User</Button>
-                <button onClick = {() => handleAllEmailSend()}>Send Reminder Email to Group</button>
+                <Button className = "btn-primary" onClick = {() => handleAllEmailSend()}>Remind All</Button>
                 <table>
                     <thead>
                         <tr>
@@ -151,6 +151,7 @@ export default function GroupDetails(props){
                         </tr>
                     </thead>
                     <tbody>
+                    
                         {usersInGroup.map((user) => (
                             <tr key={user.userID}>
                                 <td>{user.username}</td>
@@ -169,17 +170,21 @@ export default function GroupDetails(props){
                                 <Button className = "btn-danger" onClick={(event) => handleRemoveUserClick(event, user.userID)}>Remove User</Button>
 
                     
-                                <button onClick= { () => handleEmailSend( user.userID)}>Send Reminder Email</button>
+                                <Button className = "btn-primary" size="s" onClick= { () => handleEmailSend( user.userID)}>Send Reminder Email</Button>
                                 </td>
                                 <td>
                                 </td>
+                               
                             </tr>
                         ))}
+                    
+                        
                     </tbody>
                     
                 </table>
             {error !== "" && <h3 className = "errorMessage">{error}</h3>}
             <Button className = "btn-primary" size = "lg" onClick = {() => navigate("/home")}>Home</Button>
+            
             </div>
         </div>
     )
