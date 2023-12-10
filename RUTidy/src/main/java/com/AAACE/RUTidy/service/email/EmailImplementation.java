@@ -7,10 +7,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.DependsOn;
 import org.springframework.stereotype.Service;
 
+import com.AAACE.RUTidy.service.group.GroupService;
 import com.AAACE.RUTidy.constants.ResponseConstants;
 import com.AAACE.RUTidy.dto.Response;
 import com.AAACE.RUTidy.model.Task;
 import com.AAACE.RUTidy.model.User;
+import com.AAACE.RUTidy.model.Group;
 
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -18,6 +20,7 @@ import org.springframework.mail.javamail.MimeMessageHelper;
 
 import com.AAACE.RUTidy.service.task.TaskImplementation;
 import com.AAACE.RUTidy.service.user.UserService;
+import com.AAACE.RUTidy.service.email.TaskProcessor;
 
 import jakarta.mail.internet.MimeMessage;
 
@@ -173,32 +176,18 @@ public class EmailImplementation implements EmailService{
      * @param groupID
      */
     public Response forceEmailToUsersOfGroup(int groupID){
-        List<User> users = groupService.get(groupID);
+        Response usersResponse = groupService.getUsersInGroup(groupID);
+        List<User> users = (List<User>) usersResponse.getObject();
         //check if we can get the users  
-        if(users == null){
-            return new Response(ResponseConstants.ERROR, null);
-        }
-        return this.forceEmailToUsersOfGroup(users);
-    }
 
-    public Response forceEmailToUsersOfGroup(List<User> users){
-        List<Task> tasks = new ArrayList<Task>();
-        for(User user : users){
-            Response userTasksResponse = taskService.getUserTasks(user.getUserID());
-            //check if we can get the user's tasks  
-            if(!userTasksResponse.getMessage().equals(ResponseConstants.SUCCESS) 
-                || user == null){
-                return new Response(ResponseConstants.ERROR, null);
-            }
-            
-            List<Task> userTasks = (List<Task>) userTasksResponse.getObject();
-            tasks.addAll(userTasks);
+        for( User user : users){
+            this.forceEmailToThisUserInGroup(user.getUserID(), groupID);
+
         }
 
-        String emailContent = this.generateEmailFromList(tasks);
-
-        return this.sendEmail(users.get(0).getEmail(), "Daily Task Summary", emailContent);
+        return new Response(ResponseConstants.SUCCESS, null);
     }
+
 
     public Response forceEmailToThisUserInGroup(int userid, int groupID){
         Response tasks = taskService.getUsersTasksInGroup(userid, groupID);
@@ -206,12 +195,12 @@ public class EmailImplementation implements EmailService{
             return tasks;
         }
 
-        Group group = (Group) groupService.get(groupID).getObject();
+        Group group = (Group) groupService.getGroupByID(groupID);
 
 
         String emailContent = this.generateEmailFromList((List<Task>) tasks.getObject());
 
-        return this.sendEmail(userService.getUser(userid).getEmail(), "Reminder for group: ".append(group.getName()), emailContent);
+        return this.sendEmail(userService.getUser(userid).getEmail(), "Reminder for group: " + (group.getName()), emailContent);
 
     }
     //TODO: Add the necessary methods to foce emails to specific users, then add the necessary buttons in the front end, reminding the entire group as well as just the user

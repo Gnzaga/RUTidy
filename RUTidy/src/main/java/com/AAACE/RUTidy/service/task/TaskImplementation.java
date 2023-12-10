@@ -10,7 +10,10 @@ import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
+
+
 
 import org.springframework.stereotype.Service;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -291,23 +294,29 @@ public class TaskImplementation implements TaskService {
     }
 
     public Response getUsersTasksInGroup(int userID, int groupID) {
-        User user = userRepository
-            .findByUserID(userID).get();
+        Optional<User> oUser = userRepository
+            .findByUserID(userID);
+        
 
-        if(user == null){
+        if(oUser.isEmpty()){
             return new Response(
                 ResponseConstants.USER_NOT_FOUND, 
                 null);
         }
 
-        Group group = groupRepository
-            .findByGroupID(groupID).get();
+        User user = oUser.get();
 
-        if(group == null){
+
+        Optional<Group> oGroup = groupRepository
+            .findByGroupID(groupID);
+
+        if(oGroup.isEmpty()){
             return new Response(
                 ResponseConstants.GROUP_NOT_FOUND, 
                 null);
         }
+
+        Group group = oGroup.get();
 
         List<Task> tasks = taskRepository
             .findByAssignedUsersAndGroup(user, group);

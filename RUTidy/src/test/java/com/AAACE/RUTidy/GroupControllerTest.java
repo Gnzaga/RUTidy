@@ -19,8 +19,7 @@ import java.util.HashMap;
 import java.util.Arrays;
 
 import com.AAACE.RUTidy.model.*;
-import com.AAACE.RUTidy.service.*;
-import com.AAACE.RUTidy.service.group.GroupService;
+import com.AAACE.RUTidy.service.group.*;
 import com.AAACE.RUTidy.service.group.UsersInGroupService;
 import com.AAACE.RUTidy.service.user.UserService;
 import com.AAACE.RUTidy.dto.*;

@@ -36,6 +36,12 @@ public class GroupService {
         return list;
     }
 
+    public Group getGroupByID(int groupID){
+        Optional<Group> group = this.groupRepository.findByGroupID(groupID);
+        if (group.isEmpty()) return null;
+        return group.get();
+    }
+
     public List<Group> getJoinedGroups(int userID){
         List<UsersInGroup> list = this.usersGroupRepository.findByUserUserID(userID);
         List<Group> groups = list.stream().map(UsersInGroup::getGroup).collect(Collectors.toList());

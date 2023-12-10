@@ -13,6 +13,7 @@ public interface EmailService {
     public Response forceEmailToUsersOfGroup(int groupID);
 
     public Response forceEmailToThisUserInGroup(int groupID, int userID);
+
     
 
     

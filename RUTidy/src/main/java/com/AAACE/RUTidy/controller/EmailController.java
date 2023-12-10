@@ -39,14 +39,14 @@ public class EmailController {
     }
 
     @PostMapping("/force-email-to-users-of-group")
-    public Response forceEmailToUserOfGroup(@RequestParam int groupID, @RequestParam String subject, @RequestParam String body){
-        return emailService.sendEmailToUsersOfGroup(groupID, subject, body);
+    public Response forceEmailToUserOfGroup(@RequestParam int groupID){
+        return emailService.forceEmailToUsersOfGroup(groupID);
     }
     
 
     @PostMapping("/force-email-to-this-user-in-group")
-    public Response forceEmailToThisUserInGroup(@RequestParam int groupID, @RequestParam int userID, @RequestParam String subject, @RequestParam String body){
-        return emailService.sendEmailToThisUserInGroup(groupID, userID);
+    public Response forceEmailToThisUserInGroup(@RequestParam int groupID, @RequestParam int userID){
+        return emailService.forceEmailToThisUserInGroup(userID, groupID);
     }
 
 }
