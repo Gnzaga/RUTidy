@@ -5,6 +5,9 @@ import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import "../css/CreateTask.css";
 import axios from "axios";
+import 'bootstrap/dist/css/bootstrap.min.css';
+import Button from "react-bootstrap/Button";
+import Form from 'react-bootstrap/Form';
 
 
 export default function CreateTask(props){
@@ -59,10 +62,8 @@ export default function CreateTask(props){
         <div className = "createTaskPage">
             <div className = "createTaskForm">
                 <h1>Create Task</h1>
-                <input className = "taskName" value = {taskName} placeholder = "Enter task name" 
-                onChange = {(e) => setTaskName(e.target.value)} ></input>
-                <input className = "taskDescription" value = {taskDescription} placeholder = "Enter task description" 
-                onChange = {(e) => setTaskDescription(e.target.value)} ></input>
+                <Form.Control className = "createTaskInput" onChange = {(e) => setTaskName(e.target.value)} size = "sm" value = {taskName} placeholder = "Enter task name"></Form.Control>
+                <Form.Control className = "createTaskInput" onChange = {(e) => setTaskDescription(e.target.value)} size = "sm" value = {taskDescription} placeholder = "Enter task description"></Form.Control>
                 <DatePicker selected={taskDueDate} showTimeSelect timeFormat="HH:mm"
                 timeIntervals={15} dateFormat="yyyy-MM-dd HH:mm:ss" onChange={handleDateChange}/>
                 <select value={taskPriority} onChange = {(e) => setTaskPriority(e.target.value )}>
@@ -74,9 +75,9 @@ export default function CreateTask(props){
                 </select>
                 <br></br>
                 {error !== "" && <h3 className = "errorMessage">{error}</h3>}
-                <button className = "createButton" onClick={(event) => handleCreateTaskClick(event)}>Create Task!</button>
+                <Button style = {{marginTop: "1rem"}}onClick={(event) => handleCreateTaskClick(event)} className = "btn-primary">Create Task!</Button>
                 <br></br>
-                <button className = "button" onClick = {() => navigate('/admin/tasks/' + (groupID || ''))}>Back</button>
+                <Button style = {{marginTop: "1rem"}} onClick = {() => navigate('/admin/tasks/' + (groupID || ''))} className = "btn-secondary">Back</Button>
             </div>
         </div>);
 }

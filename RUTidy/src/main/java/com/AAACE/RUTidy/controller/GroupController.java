@@ -135,7 +135,12 @@ public class GroupController {
     }
 
     
-
+    /**
+     * Removes user from a group or returns error message
+     * @param userID user id of the user to remove
+     * @param groupID group id
+     * @return Response object that represents response back to client
+     */
     @DeleteMapping("/removeUserFromGroup")
     public Response removeUserFromGroup(@RequestParam int userID, @RequestParam int groupID){
         try{

@@ -4,6 +4,9 @@ import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import "../css/GroupDetails.css";
 import { sendEmailToGroup, sendEmailToUserInGroup } from './components/EmailComponents';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import Button from "react-bootstrap/Button";
+import Form from 'react-bootstrap/Form';
 
 import TextBox from './components/TextBox';
 
@@ -18,7 +21,7 @@ export default function GroupDetails(props){
 
     const [newUser, setNewUser] = useState("");
 
-    const [usersInGroup, setUsersInGroup] = useState([]);
+    const [usersInGroup, setUsersInGroup] = useState([{userID: 1, username: "christian"}, {userID: 2, username: "peter"}]);
     const{groupID} = useParams();
     const [textEntry, setTextEntry] = useState("");
     const [group, setGroup] = useState([]);
@@ -136,12 +139,8 @@ export default function GroupDetails(props){
             <div className='groupDetailsForm'>
                 <h1>Group Details</h1>
                 <h2>Group Name: {group.name}</h2>
-                <TextBox 
-                    placeholder="Add user by email/username!"
-                    value={newUser}
-                    onChange={(e) => setNewUser(e.target.value)}
-                    >  </TextBox>
-                <button onClick = {() => addUserToGroup(newUser)}>Add User</button>
+                <Form.Control size = "sm" placeholder = "Add user by email/username" value = {newUser} onChange={(e) => setNewUser(e.target.value)}></Form.Control>
+                <Button className = "btn-primary" onClick = {() => addUserToGroup(newUser)}>New User</Button>
                 <button onClick = {() => handleAllEmailSend()}>Send Reminder Email to Group</button>
                 <table>
                     <thead>
@@ -163,10 +162,13 @@ export default function GroupDetails(props){
                                     <option value={1}>Manage</option>
                                     <option value={2}>Member</option>
                                 </select>
-                                <button type="submit" onClick={(event) => handleRoleChangeClick(event, user.userID,newRoles[user.userID])}>Save Roles</button>
-                                <button onClick={(event) => handleRemoveUserClick(event, user.userID)}>Remove User</button>
-
                                 </form> 
+                                </td>
+                                <td>
+                                <Button className = "btn-primary" type = "submit" onClick={(event) => handleRoleChangeClick(event, user.userID,newRoles[user.userID])}>Save Roles</Button>
+                                <Button className = "btn-danger" onClick={(event) => handleRemoveUserClick(event, user.userID)}>Remove User</Button>
+
+                    
                                 <button onClick= { () => handleEmailSend( user.userID)}>Send Reminder Email</button>
                                 </td>
                                 <td>
@@ -177,7 +179,7 @@ export default function GroupDetails(props){
                     
                 </table>
             {error !== "" && <h3 className = "errorMessage">{error}</h3>}
-                <button onClick = {() => navigate("/home")}>Home</button>
+            <Button className = "btn-primary" size = "lg" onClick = {() => navigate("/home")}>Home</Button>
             </div>
         </div>
     )

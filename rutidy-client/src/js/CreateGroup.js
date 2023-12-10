@@ -1,8 +1,10 @@
-
 import React, {useState} from "react";
 import {useNavigate} from "react-router-dom";
 import "../css/CreateGroup.css";
 import axios from "axios";
+import 'bootstrap/dist/css/bootstrap.min.css';
+import Button from "react-bootstrap/Button";
+import Form from 'react-bootstrap/Form';
 
 
 export default function Create(props){
@@ -37,12 +39,12 @@ export default function Create(props){
         <div className = "createGroupPage">
             <div className = "createGroupForm">
                 <h1>Create Group</h1>
-                <input className = "groupName" value = {name} placeholder = "Enter group name" 
-                onChange = {(e) => setName(e.target.value)} ></input>
+                <Form.Control size = "lg" value = {name} onChange = {(e) => setName(e.target.value)} placeholder = "group name"></Form.Control>
                 <br></br>
                 {error !== "" && <h3 className = "errorMessage">{error}</h3>}
-                <button className = "createButton" onClick = {handleCreateGroup}>Create Group!</button>
-                <button className = "goHome" onClick = {() => navigate("/home")}>home</button>
+                <Button onClick = {handleCreateGroup} className = "btn-primary">Create Group!</Button>
+                <br></br>
+                <Button style = {{marginTop: "2rem"}}onClick = {() => navigate("/home")} className = "btn-secondary">Home</Button>
             </div>
         </div>    );
 }

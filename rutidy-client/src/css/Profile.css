@@ -4,7 +4,12 @@
     left: 0;
     height: 100vh;
     width: 100vw;
-    background: linear-gradient(0deg, #000000 0%, #ffffff 100%);
+    background-color: #a8a1b1;
+    background-image:
+    radial-gradient(ellipse at 10% 90%, #5f5496 0%, transparent 55%),
+    radial-gradient(ellipse at 90% 90%, #e18fa7 0%, transparent 55%),
+    radial-gradient(ellipse at 90% 10%, #6d8bd6 0%, transparent 55%),
+    radial-gradient(ellipse at 10% 10%, #4c3d63 0%, transparent 55%);
 }
 
 .profilePage h1 { 
@@ -34,7 +39,6 @@
 }
 
 .errorMessage { 
-    margin-top: 15px;
     font-size: 15px;
     color: rgb(143, 29, 29);
 }
@@ -43,6 +47,10 @@
     margin: 0 auto;
     width: 75%;
     margin-right: 100px;
+}
+
+.editTable label { 
+    margin-right: 0.5rem;
 }
 
 .profileTable {
@@ -67,60 +75,4 @@ td {
     font-size: 24px;
     text-align: left;
     padding-left: 20px;
-}
-
-.profileUsername { 
-    margin-bottom: 10px;
-}
-
-.profilePassword { 
-    margin-bottom: 10px;
-}
-
-.profileCPassword { 
-    margin-bottom: 10px;
-}
-
-.profileName { 
-    margin-bottom: 10px;
-}
-
-.profileEmail { 
-    margin-bottom: 10px;
-}
-
-.editProfile { 
-    margin-top: 30px;
-    color: rgb(79, 79, 188);
-    font-size: 15px;
-    border-bottom: 1px blue;
-    transition: 1ms ease-in;
-}
-
-
-.editProfile:hover {
-    color: blue;
-    cursor: pointer;
-}
-
-.profileButton { 
-    margin-top: 15px;
-    padding-top: 0;
-    font: 17px;
-    border-radius: 10px;
-}
-
-.profileButton:hover {
-    cursor: pointer;
-}
-
-.cancelButton {
-    margin-top: 50px;
-    padding-top: 0;
-    font: 17px;
-    border-radius: 10px;
-}
-
-.cancelButton:hover {
-    cursor: pointer;
 }

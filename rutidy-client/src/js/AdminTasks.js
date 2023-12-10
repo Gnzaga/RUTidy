@@ -5,7 +5,15 @@ import X from "../image/x.png";
 import Edit from "../image/edit.png";
 import { useParams } from 'react-router-dom';
 import {useNavigate} from "react-router";
+import 'bootstrap/dist/css/bootstrap.min.css';
+import Button from "react-bootstrap/Button";
+import Form from 'react-bootstrap/Form';
 
+/**
+ * Components the represents the page for admins of groups to manage tasks
+ * @param {*} props 
+ * @returns component for admin tasks
+ */
 export default function AdminTasks(props){
     const [displayTask, setDisplayTask] = useState(false);
     const [tasks, setTasks] = useState([
@@ -86,7 +94,9 @@ export default function AdminTasks(props){
     const {groupID} = useParams();
     const navigate = useNavigate();
 
-    
+    /**
+     * Function called after render that queries tasks in the managed group
+     */
     useEffect(() => {
         if (sessionStorage.getItem("userID") == null) navigate("/home");
 
@@ -102,8 +112,8 @@ export default function AdminTasks(props){
 
     return (
         <div className = "adminTasksPage">
-            <button onClick = {() => navigate("/home")}>Return to home</button>
-            <button onClick = {() => navigate(`/create/task/${groupID}`)}>Create a task</button>
+            <Button onClick = {() => navigate("/home")} className = "btn-secondary">Return to home</Button>
+            <Button className = "btn-primary" onClick = {() => navigate(`/create/task/${groupID}`)}>Create a task</Button>
             <div className = "adminTasksContainer">
                 <div className = "adminTasksDisplay">
                     <h1>Group Tasks</h1>

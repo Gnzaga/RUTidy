@@ -8,6 +8,9 @@ import {
     buildCommentDTO, 
     buildCommentUpdateDTO 
 } from '../api/commentAPI'; // Adjust the import path as needed
+import 'bootstrap/dist/css/bootstrap.min.css';
+import Button from "react-bootstrap/Button";
+import Form from 'react-bootstrap/Form';
 
 const TaskCommentsComponent = React.memo(({ taskID, currentUserID }) => {
     const [comments, setComments] = useState([]);
@@ -165,7 +168,7 @@ const TaskCommentsComponent = React.memo(({ taskID, currentUserID }) => {
                 <div>
                   {charCount}/255 characters
                 </div>
-                <button type="submit">Add Comment</button>
+                <Button className = "btn-primary" type = "submit">Add Comment</Button>
             </form>
         </div>
     );

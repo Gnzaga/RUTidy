@@ -21,11 +21,6 @@
     margin-top: 10px;
 }
 
-.createTaskPage input { 
-    height: 1.5rem;
-    width: 10rem;
-}
-
 .createTaskForm { 
     margin-top: 10%;
     height: 60vh;
@@ -37,31 +32,6 @@
     text-align: center;
 }
 
-.errorMessage { 
-    margin-top: 50px;
-    font-size: 15px;
-    color: rgb(143, 29, 29);
-}
-
-.taskName { 
-    margin-top: 30px;
-    margin-bottom: 10px;
-}
-
-
-.createButton { 
-    margin-top: 30px;
-    padding-top: 0;
-    font: 17px;
-    border-radius: 10px;
-    background-color: #a8a1b1;
-    background-image:
-    radial-gradient(ellipse at 10% 90%, #5f5496 0%, transparent 55%),
-    radial-gradient(ellipse at 90% 90%, #e18fa7 0%, transparent 55%),
-    radial-gradient(ellipse at 90% 10%, #6d8bd6 0%, transparent 55%),
-    radial-gradient(ellipse at 10% 10%, #4c3d63 0%, transparent 55%);
-}
-
-.createButton:hover {
-    cursor: pointer;
+.createTaskInput { 
+    margin: 0.5rem 0 0.5rem;
 }

@@ -1,7 +1,10 @@
 import React, {useState} from "react";
 import {useNavigate} from "react-router-dom";
 import "../css/Profile.css";
+import 'bootstrap/dist/css/bootstrap.min.css';
 import axios from "axios";
+import Button from "react-bootstrap/Button";
+import Form from 'react-bootstrap/Form';
 
 
 export default function EditProfile(props){
@@ -55,8 +58,7 @@ export default function EditProfile(props){
                             <label for="profileUsername">Username:</label>
                         </td>
                         <td className="left">
-                            <input className = "profileUsername" value = {username} placeholder = "username" 
-                            onChange = {(e) => setUsername(e.target.value)} ></input>
+                            <Form.Control onChange = {(e) => setUsername(e.target.value)} size = "sm" type = "text" placeholder = "" value = {username}></Form.Control>
                         </td>
                     </tr>
                     <tr>
@@ -64,8 +66,7 @@ export default function EditProfile(props){
                             <label for="profilePassword">Password:</label>
                         </td>
                         <td>
-                            <input className = "profilePassword" value = {password} placeholder = "password" type = "password"
-                            onChange = {(e) => setPassword(e.target.value)}></input>
+                            <Form.Control onChange = {(e) => setPassword(e.target.value)} size = "sm" type = "text" placeholder = "" value = {password}></Form.Control>
                         </td>
                     </tr>
                     <tr>
@@ -73,8 +74,7 @@ export default function EditProfile(props){
                             <label for="profileCPassword">Retype Password:</label>
                         </td>
                         <td>
-                            <input className = "profileCPassword" value = {cpassword} placeholder = "retype password" type = "password"
-                            onChange = {(e) => setCPassword(e.target.value)}></input>
+                            <Form.Control onChange = {(e) => setCPassword(e.target.value)} size = "sm" type = "password" value = {cpassword}></Form.Control>
                         </td>
                     </tr>
                     <tr>
@@ -82,8 +82,7 @@ export default function EditProfile(props){
                             <label for="profileEmail">Email:</label>
                         </td>
                         <td>
-                            <input value = {email} className = "profileEmail" placeholder = "email"
-                            onChange = {(e) => setEmail(e.target.value) }></input>
+                            <Form.Control onChange = {(e) => setEmail(e.target.value)} size = "sm" type = "text" value = {email}></Form.Control>
                         </td>
                     </tr>
                     <tr>
@@ -91,16 +90,15 @@ export default function EditProfile(props){
                             <label for="profileName">Name:</label>
                         </td>
                         <td>
-                            <input value = {name} className = "profileName" placeholder = "name"
-                            onChange = {(e) => setName(e.target.value)}></input>
+                            <Form.Control onChange = {(e) => setName(e.target.value)} size = "sm" type = "text" value = {name}></Form.Control>
                         </td>
                     </tr>
                 </table>
                     <br></br>
                     {error !== "" && <h3 className = "errorMessage">{error}</h3>}
-                    <button className = "profileButton" onClick = {handleEdit}>Submit Changes</button>
+                    <Button onClick = {handleEdit} className = "btn-primary">Submit Changes</Button>{' '}
                     <br></br>
-                    <button className = "cancelButton" onClick = {() => navigate("/profile")}>Cancel</button>
+                    <Button style = {{marginTop: "1rem"}} size = "sm" className = "btn-secondary" onClick = {() => navigate("/profile")}>Cancel</Button>
             </div>
         </div>
     );

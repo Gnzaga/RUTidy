@@ -4,16 +4,23 @@ import CheckImage from "../image/check.png";
 import ErrorImage from "../image/x.png";
 import SearchIcon from "../image/search.png";
 import { Link } from 'react-router-dom';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import Button from "react-bootstrap/Button";
+import Form from 'react-bootstrap/Form';
 
 import axios from "axios";
 import "../css/Home.css";
 
+/**
+ * Component that represents the home page
+ * @returns component representing the home page
+ */
 export default function Home (){
     const navigate = useNavigate();
     const [adminGroups, setAdminGroups] = useState([{"id": 1, "name": "group 1"}, {"id": 2, "name": "group 2"}]);
     const [userGroups, setUserGroups] = useState([{"id": 1, "name": "group 1"}, {"id": 2, "name": "group 2"}]);
 
-    const [groups, setGroups] = useState(null);
+    const [groups, setGroups] = useState([]);
 
     const [popUpSuccess, setPopUpSuccess] = useState(true);
     const [popUpMessage, setPopUpMessage] = useState(""); 
@@ -21,13 +28,19 @@ export default function Home (){
     const [loading, setLoading] = useState(false);
 
     const [searchGroupName, setSearchGroupName] = useState("");
-    const [searchResults, setSearchResults] = useState([{"id": 1, "name": "group 1"}, {"id": 2, "name": "group 2"}]);
+    const [searchResults, setSearchResults] = useState([]);
     
+    /**
+     * Logs the user out of software, clears user information, and navigates to login page
+     */
     const handleLogout = () => {
         sessionStorage.clear();
         navigate("/");
     }
 
+    /**
+     * Memoized function that queries the groups the user is part of
+     */
     const queryGroups = useCallback(() => {
         axios
         .get("http://cs431-01.cs.rutgers.edu:8080/group/in", {
@@ -54,7 +67,9 @@ export default function Home (){
           });
       }, []);
       
-
+    /**
+     * Function that is called after the page is rendered to query groups the user is in
+     */
     useEffect(() => {
         if (sessionStorage.getItem("userID") === null){
             navigate("/");
@@ -63,6 +78,11 @@ export default function Home (){
         
     }, [navigate, queryGroups]);
 
+    /**
+     * Handles logic for a user leaving a group specified
+     * @param {*} UIGroupID the group id 
+     * @param {*} isAdmin boolean representing if the user is an admin of the group
+     */
     async function handleLeaveGroup(UIGroupID, isAdmin){
         const id = UIGroupID;
 
@@ -87,6 +107,10 @@ export default function Home (){
         setTimeout(() => setPopUpMessage(""), 2000);
     }
 
+    /**
+     * Handles logic for user joining a group
+     * @param {*} groupID group id of the group the user joins
+     */
     async function handleJoinGroup(groupID){
         const userID = sessionStorage.getItem("userID");
 
@@ -105,6 +129,9 @@ export default function Home (){
         setTimeout(() => setPopUpMessage(""), 2000);
     }
 
+    /**
+     * Handles the logic that allows user to search for groups to join
+     */
     async function handleSearch(){
         await axios.get("http://cs431-01.cs.rutgers.edu:8080/group/name", {params: {"groupName": searchGroupName}})
         .then((response) => {
@@ -128,13 +155,32 @@ export default function Home (){
             <div className = "homeNavigationBar">
                 <h1>RUTidy</h1>
                 <div className = "homeNavigationButtonDiv">
-                    <button onClick = {() => navigate("/profile")}>{sessionStorage.getItem("username").toString()}'s Profile</button>
-                    <button onClick = {() => navigate("/create/group")}>Create Group</button>
+                    <Button className = "btn-primary" size = "sm" onClick = {() => navigate("/profile")}>{sessionStorage.getItem("username")}'s Profile</Button>
+                    <Button className = "btn-primary" size = "sm" onClick = {() => navigate("/create/group")}>Create Group</Button>
                 </div>
                 
-                <h2 onClick = {handleLogout} className = "homeLogout">logout</h2>
+                <Button onClick = {handleLogout} className = "btn-secondary" size = "lg">logout</Button>
             </div>
-            <div className = "homeBody">
+            <div className = "homePageJoinGroup">
+                <h2>Join Groups</h2>
+                <div className = "homePageSearchDiv">
+                    <div className = "searchSection">
+                        <input onChange = {(e) => setSearchGroupName(e.target.value)} value = {searchGroupName} placeholder = "search"></input>
+                        <img onClick = {handleSearch}src = {SearchIcon} alt = "search"></img>
+                    </div>
+                    {searchResults.length !== 0 && <div className = "homePageSearchResults">
+                        {searchResults.map(result => {
+                            return (
+                                <div className = "homePageSearchResult">
+                                    <h3>{result.name}</h3>
+                                    <Button className = "btn-success" size = "sm" onClick = {() => handleJoinGroup(result.groupID)}>Join Group</Button>
+                                </div>
+                            )
+                        })}
+                    </div>}
+                </div>
+            </div>
+            <div className = "groupsDiv">
             <div className = "homeGroupDiv">
                 <h2 className = "homeGroupHeader">Admin Groups</h2>
                 {adminGroups.map(group => {
@@ -143,28 +189,11 @@ export default function Home (){
                             <Link to={'/groupdetails/' + (group.group?.groupID || '')} className="homeGroupName">
                             {group.group?.name || ''}</Link>
                             <Link to={'/admin/tasks/' + (group.group?.groupID || '')}>Go to Admin Tasks</Link>
-                            <p onClick = {() => handleLeaveGroup(group.uigroupID, true)}>Leave group</p>
+                            <Button onClick = {() => handleLeaveGroup(group.uigroupID, true)} size = "sm" className = "btn-danger">Leave Group</Button>
                         </div>
                     )
                 }) 
                 }
-            </div>
-            <div className = "homePageJoinGroup">
-                <h2>Join Groups</h2>
-                <div className = "homePageSearchDiv">
-                    <input onChange = {(e) => setSearchGroupName(e.target.value)} value = {searchGroupName} placeholder = "search"></input>
-                    <img onClick = {handleSearch}src = {SearchIcon} alt = "search"></img>
-                    {searchResults.length !== 0 && <div className = "homePageSearchResults">
-                        {searchResults.map(result => {
-                            return (
-                                <div className = "homePageSearchResult">
-                                    <h3>{result.name}</h3>
-                                    <p onClick = {() => handleJoinGroup(result.groupID)}>Join Group</p>
-                                </div>
-                            )
-                        })}
-                    </div>}
-                </div>
             </div>
             <div className = "homeGroupDiv">
                 <h2 className = "homeGroupHeader">User Groups</h2>
@@ -173,13 +202,13 @@ export default function Home (){
                         <div key={group.group?.groupID} className = "homePageGroupDiv">
                             <Link to={'/chores/' + (group.group?.groupID || '')} className="homeGroupName">
         {group.group?.name || ''}</Link>
-                            <p onClick = {() => handleLeaveGroup(group?.uigroupID, false)}>Leave group</p>
+                            <Button size = "sm" className = "btn-danger" onClick = {() => handleLeaveGroup(group?.uigroupID, false)}>Leave Group</Button>
                         </div>
                     )
                 })}
             </div>
-            
             </div>
+            
             
         </div>
     )
