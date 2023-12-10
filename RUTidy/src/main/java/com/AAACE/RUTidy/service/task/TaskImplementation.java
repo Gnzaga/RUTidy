@@ -290,6 +290,33 @@ public class TaskImplementation implements TaskService {
             tasksInUserTimeZone);
     }
 
+    public Response getUsersTasksInGroup(int userID, int groupID) {
+        User user = userRepository
+            .findByUserID(userID).get();
+
+        if(user == null){
+            return new Response(
+                ResponseConstants.USER_NOT_FOUND, 
+                null);
+        }
+
+        Group group = groupRepository
+            .findByGroupID(groupID).get();
+
+        if(group == null){
+            return new Response(
+                ResponseConstants.GROUP_NOT_FOUND, 
+                null);
+        }
+
+        List<Task> tasks = taskRepository
+            .findByAssignedUsersAndGroup(user, group);
+        
+        return new Response(
+            ResponseConstants.SUCCESS, 
+            tasks);
+    }
+
     private Task convertTaskDateTimeToUserTimeZone(Task task, String userTimeZone) {
     LocalDateTime taskDateTime = task.getDueDate();
     // Convert LocalDateTime to ZonedDateTime in UTC

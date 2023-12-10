@@ -101,6 +101,14 @@ public interface TaskService {
     Response getUsersTasksInGroup(int userID, int groupID, String userTimeZone);
 
     /**
+     * Gets all tasks from this user in this group
+     * @param userID
+     * @param groupID
+     * @return
+     */
+    Response getUsersTasksInGroup(int userID, int groupID);
+
+    /**
      * Adds a new user to this group
      * @param userID
      * @param groupID

@@ -10,6 +10,10 @@ public interface EmailService {
 
     public Response generateWeeklyEmail(int userID);
 
+    public Response forceEmailToUsersOfGroup(int groupID);
+
+    public Response forceEmailToThisUserInGroup(int groupID, int userID);
+    
 
     
 }

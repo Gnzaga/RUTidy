@@ -194,6 +194,19 @@ public class GroupService {
         return new Response("Permission Updated Successfully", usersInGroup);
     }
 
+    /**
+     * This method willasdfas return a list of all the users in a group
+     * @param groupID
+     */
+    public Response getUsersInGroup(int groupID) {
+        List<UsersInGroup> usersInGroup = this.usersGroupRepository.findByGroupGroupID(groupID);
+
+        List<User> users = usersInGroup.stream().map(UsersInGroup::getUser).collect(Collectors.toList());
+
+        return new Response(ResponseConstants.SUCCESS, users);
+
+    }
+
 
     
 }

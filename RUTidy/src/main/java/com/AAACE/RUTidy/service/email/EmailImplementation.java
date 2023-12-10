@@ -47,6 +47,9 @@ public class EmailImplementation implements EmailService{
     private UserService userService;
 
     @Autowired
+    private GroupService groupService;
+
+    @Autowired
     private EmailContentProvider ecp;
 
     public Response sendEmail(String toEmail, String subject, String body) {
@@ -98,7 +101,13 @@ public class EmailImplementation implements EmailService{
 
         String emailContent = ecp.createHtmlEmailContent(organizedTasks);
         return this.sendEmail(user.getEmail(), "Daily Task Summary", emailContent);
+    }
 
+    private String generateEmailFromList(List<Task> tasks){
+        TaskProcessor taskProcessor = new TaskProcessor();
+        Map<Integer, Map<String, List<Task>>> organizedTasks = taskProcessor.processTasks(tasks);
+        String emailContent = ecp.createHtmlEmailContent(organizedTasks);
+        return emailContent;
     }
 
     public Map<Integer, Map<String, List<Task>>> processTasks(List<Task> tasks) {
@@ -157,6 +166,55 @@ public class EmailImplementation implements EmailService{
 
         return this.sendEmail(user.getEmail(), "Daily Task Summary", emailContent);
     }
+    
+
+    /*
+     * This method will generate an email for all users in a group that reminds them of all the tasks they have to do still, grouped by status, sorted by due date then priority
+     * @param groupID
+     */
+    public Response forceEmailToUsersOfGroup(int groupID){
+        List<User> users = groupService.get(groupID);
+        //check if we can get the users  
+        if(users == null){
+            return new Response(ResponseConstants.ERROR, null);
+        }
+        return this.forceEmailToUsersOfGroup(users);
+    }
+
+    public Response forceEmailToUsersOfGroup(List<User> users){
+        List<Task> tasks = new ArrayList<Task>();
+        for(User user : users){
+            Response userTasksResponse = taskService.getUserTasks(user.getUserID());
+            //check if we can get the user's tasks  
+            if(!userTasksResponse.getMessage().equals(ResponseConstants.SUCCESS) 
+                || user == null){
+                return new Response(ResponseConstants.ERROR, null);
+            }
+            
+            List<Task> userTasks = (List<Task>) userTasksResponse.getObject();
+            tasks.addAll(userTasks);
+        }
+
+        String emailContent = this.generateEmailFromList(tasks);
+
+        return this.sendEmail(users.get(0).getEmail(), "Daily Task Summary", emailContent);
+    }
+
+    public Response forceEmailToThisUserInGroup(int userid, int groupID){
+        Response tasks = taskService.getUsersTasksInGroup(userid, groupID);
+        if(tasks.getMessage().equals(ResponseConstants.ERROR)){
+            return tasks;
+        }
+
+        Group group = (Group) groupService.get(groupID).getObject();
+
+
+        String emailContent = this.generateEmailFromList((List<Task>) tasks.getObject());
+
+        return this.sendEmail(userService.getUser(userid).getEmail(), "Reminder for group: ".append(group.getName()), emailContent);
+
+    }
+    //TODO: Add the necessary methods to foce emails to specific users, then add the necessary buttons in the front end, reminding the entire group as well as just the user
 
 
     
