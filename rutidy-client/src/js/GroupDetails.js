@@ -3,6 +3,7 @@ import {useNavigate} from "react-router";
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import "../css/GroupDetails.css";
+import { sendEmailToGroup, sendEmailToUserInGroup } from './components/EmailComponents';
 
 import TextBox from './components/TextBox';
 
@@ -69,6 +70,7 @@ export default function GroupDetails(props){
 
 
 
+
     const handleRemoveUser = (userID) => {
         axios.delete("http://cs431-01.cs.rutgers.edu:8080/group/removeUserFromGroup", {params: {userID: userID, groupID: groupID}})
         .then((response) => {
@@ -86,6 +88,15 @@ export default function GroupDetails(props){
     const handleRoleChangeClick = (event, userID, newRoles) => {
         event.preventDefault();
         handleRoleChange(userID, newRoles);
+    }
+
+    const handleEmailSend = (userID) => {
+        sendEmailToUserInGroup(groupID, userID);
+    }
+
+    const handleAllEmailSend = () => {
+        
+        sendEmailToGroup(groupID);
     }
 
     const handleRoleChange = (userID, newRoles) => {
@@ -131,6 +142,7 @@ export default function GroupDetails(props){
                     onChange={(e) => setNewUser(e.target.value)}
                     >  </TextBox>
                 <button onClick = {() => addUserToGroup(newUser)}>Add User</button>
+                <button onClick = {() => handleAllEmailSend()}>Send Reminder Email to Group</button>
                 <table>
                     <thead>
                         <tr>
@@ -155,6 +167,7 @@ export default function GroupDetails(props){
                                 <button onClick={(event) => handleRemoveUserClick(event, user.userID)}>Remove User</button>
 
                                 </form> 
+                                <button onClick= { () => handleEmailSend( user.userID)}>Send Reminder Email</button>
                                 </td>
                                 <td>
                                 </td>
