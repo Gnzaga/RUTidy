@@ -84,9 +84,15 @@ export default function Home (){
      * @param {*} isAdmin boolean representing if the user is an admin of the group
      */
     async function handleLeaveGroup(UIGroupID, isAdmin){
-        const id = UIGroupID;
+    
 
-        await axios.delete("http://cs431-01.cs.rutgers.edu:8080/group/leave", {params: {userID: sessionStorage.getItem("userID"), groupID:id.group?.groupID}})
+        await axios.delete("http://cs431-01.cs.rutgers.edu:8080/group/leave", {params: 
+            {
+                userID: sessionStorage.getItem("userID"), 
+                groupID: UIGroupID
+            }
+        }
+        )
         .then((response) => {
             if (isAdmin){
                 const newAdminGroups = adminGroups.filter(group => group.uigroupID !== UIGroupID);
@@ -114,7 +120,7 @@ export default function Home (){
     async function handleJoinGroup(groupID){
         const userID = sessionStorage.getItem("userID");
 
-        await axios.put("http://cs431-01.cs.rutgers.edu:8080/group/join", null, {params: {groupID, userID}})
+        await axios.put("http://cs431-01.cs.rutgers.edu:8080/group/join", null, {params: {groupID: groupID, userID: userID}})
         .then((response) => {
             const message = response.data;
             if (message !== "Success!"){
@@ -189,7 +195,7 @@ export default function Home (){
                             <Link to={'/groupdetails/' + (group.group?.groupID || '')} className="homeGroupName">
                             {group.group?.name || ''}</Link>
                             <Link to={'/admin/tasks/' + (group.group?.groupID || '')}>Go to Admin Tasks</Link>
-                            <Button onClick = {() => handleLeaveGroup(group.uigroupID, true)} size = "sm" className = "btn-danger">Leave Group</Button>
+                           
                         </div>
                     )
                 }) 
@@ -202,7 +208,7 @@ export default function Home (){
                         <div key={group.group?.groupID} className = "homePageGroupDiv">
                             <Link to={'/chores/' + (group.group?.groupID || '')} className="homeGroupName">
         {group.group?.name || ''}</Link>
-                            <Button size = "sm" className = "btn-danger" onClick = {() => handleLeaveGroup(group?.uigroupID, false)}>Leave Group</Button>
+                            <Button size = "sm" className = "btn-danger" onClick = {() => handleLeaveGroup(group?.group.groupID, false)}>Leave Group</Button>
                         </div>
                     )
                 })}
