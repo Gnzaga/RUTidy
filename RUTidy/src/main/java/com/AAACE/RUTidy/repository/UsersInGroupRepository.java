@@ -13,7 +13,10 @@ import java.util.Optional;
 @EnableJpaRepositories
 @Repository
 public interface UsersInGroupRepository extends JpaRepository<UsersInGroup, Integer> {
+    //List of all userInGroup relations from a group ID
     List<UsersInGroup> findByGroupGroupID(int groupID);
+    //List of all userInGroup relations from a userID
     List<UsersInGroup> findByUserUserID(int userID);
+    //List of all userInGroup relations from a userID and groupID
     Optional<UsersInGroup> findByGroupGroupIDAndUserUserID(int groupID, int userID);
 }

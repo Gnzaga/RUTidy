@@ -1,3 +1,4 @@
+
 import React, {useState} from "react";
 import {useNavigate} from "react-router-dom";
 import { useParams } from 'react-router-dom';
@@ -25,7 +26,7 @@ export default function CreateNSTask(props){
     const navigate = useNavigate();
 
 
-    
+    //when the create task button is click this creates the task
     const handleCreateTaskClick = (event) => {
         event.preventDefault();
         handleCreateTask();
@@ -33,12 +34,14 @@ export default function CreateNSTask(props){
 
 
     async function handleCreateTask(){
+        //checks if these fields are empty
         if (taskName === "" | taskDescription === "") { 
             setError("Please enter all fields!");
             return;
         }
         const isoDueDate = taskDueDate.toISOString();
         setTaskPriority("N/A");
+        //post send to the backend
         axios.post("http://cs431-01.cs.rutgers.edu:8080/task/create", 
         {"name":taskName, "description":taskDescription, "dueDate":isoDueDate,
         "priority":taskPriority, "status":initialStatus,"userID":userID, "groupID":groupID})
@@ -46,7 +49,7 @@ export default function CreateNSTask(props){
             const {message} = response.data;
             if (message !== "Task created successfully"){
                 setError(message);
-                
+                //return;
             }
             //navigate("/");
         })
@@ -56,12 +59,7 @@ export default function CreateNSTask(props){
         })
         
     }
-
-    //npm install react-datepicker date-fns
-    const handleDateChange = (date) => {
-        setTaskDueDate(date);
-    };
-
+    //html and css 
     return (
         <div className = "createTaskPage">
             <div className = "createTaskForm">

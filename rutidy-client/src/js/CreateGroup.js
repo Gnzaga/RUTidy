@@ -13,12 +13,15 @@ export default function Create(props){
 
     const navigate = useNavigate();
 
+    //after create group button is clicked, this function creates the group
     async function handleCreateGroup(){
+        //checks if name field is empty
         if (name === "") { 
             setError("Please enter a name for your server!");
             return;
         }
         const userID = sessionStorage.getItem("userID");
+        // post sent to the back end
         axios.post("http://cs431-01.cs.rutgers.edu:8080/group/create", {"name":name, "ownerID": userID})
         .then((response) => { 
             const {message} = response.data;
@@ -26,7 +29,7 @@ export default function Create(props){
                 setError(message);
                 return;
             }
-            //navigate("");
+            //navigate("/");
         })
         .catch((error) => { 
             setError("An unexpected error occured!");
@@ -35,6 +38,7 @@ export default function Create(props){
         
     }
 
+    //html and css
     return (
         <div className = "createGroupPage">
             <div className = "createGroupForm">
